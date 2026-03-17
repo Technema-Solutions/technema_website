@@ -1,0 +1,407 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// AUTH
+// ============================================================
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ============================================================
+// SITE SETTINGS (Singleton)
+// ============================================================
+
+model SiteSettings {
+  id               String  @id @default("default")
+  siteName         String  @default("Technema Solutions")
+  siteDescription  String  @default("")
+  siteUrl          String  @default("https://technema.com")
+  logo             String  @default("/logo_technema.svg")
+  contactPhone     String  @default("")
+  contactEmail     String  @default("")
+  contactAddress   String  @default("")
+  contactMapEmbed  String  @default("")
+  // Hero section
+  heroHeading      String  @default("")
+  heroSubheading   String  @default("")
+  heroTypingWords  Json    @default("[]") // string[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// ============================================================
+// PRODUCTS
+// ============================================================
+
+model Product {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  tagline     String
+  description String   @default("")
+  icon        String   @default("")
+  logo        String?
+  heroImage   String?
+  category    String   @default("") // pos, analytics, document-management, ai
+  features    Json     @default("[]") // string[]
+  isPublished Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  // SEO fields
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  // Relations
+  featureHighlights ProductFeatureHighlight[]
+  capabilities      ProductCapability[]
+  steps             ProductStep[]
+  useCases          ProductUseCase[]
+  stats             ProductStat[]
+  pricingPlans      ProductPricingPlan[]
+  testimonials      ProductTestimonial[]
+  integrations      ProductIntegration[]
+  faqs              ProductFaq[]
+  relatedSlugs      Json    @default("[]") // string[]
+  clientLogos       Json    @default("[]") // string[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ProductFeatureHighlight {
+  id          String  @id @default(cuid())
+  productId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  icon        String
+  title       String
+  description String
+  image       String?
+  sortOrder   Int     @default(0)
+}
+
+model ProductCapability {
+  id          String  @id @default(cuid())
+  productId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  icon        String
+  title       String
+  description String
+  sortOrder   Int     @default(0)
+}
+
+model ProductStep {
+  id          String  @id @default(cuid())
+  productId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  step        Int
+  icon        String
+  title       String
+  description String
+  sortOrder   Int     @default(0)
+}
+
+model ProductUseCase {
+  id          String  @id @default(cuid())
+  productId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  icon        String
+  title       String
+  description String
+  sortOrder   Int     @default(0)
+}
+
+model ProductStat {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  value     String
+  label     String
+  sortOrder Int     @default(0)
+}
+
+model ProductPricingPlan {
+  id          String  @id @default(cuid())
+  productId   String
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name        String
+  price       String? // null = "Hubungi Kami"
+  currency    String  @default("Rp")
+  period      String  @default("/bulan")
+  description String
+  features    Json    @default("[]") // string[]
+  isPopular   Boolean @default(false)
+  ctaLabel    String  @default("Mulai Sekarang")
+  ctaHref     String  @default("/kontak")
+  sortOrder   Int     @default(0)
+}
+
+model ProductTestimonial {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name      String
+  role      String
+  company   String
+  avatar    String?
+  content   String
+  sortOrder Int     @default(0)
+}
+
+model ProductIntegration {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name      String
+  logo      String?
+  icon      String?
+  sortOrder Int     @default(0)
+}
+
+model ProductFaq {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  question  String
+  answer    String
+  sortOrder Int     @default(0)
+}
+
+// ============================================================
+// BLOG
+// ============================================================
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  category    String
+  image       String   @default("")
+  author      String
+  authorRole  String?
+  readTime    String   @default("")
+  body        Json     @default("[]") // ArticleSection[]
+  isPublished Boolean  @default(false)
+  publishedAt DateTime?
+  // SEO fields
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// ============================================================
+// SERVICES
+// ============================================================
+
+model Service {
+  id          String @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  sortOrder   Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================================
+// TESTIMONIALS (Homepage)
+// ============================================================
+
+model Testimonial {
+  id        String @id @default(cuid())
+  name      String
+  role      String
+  company   String
+  avatar    String @default("")
+  content   String
+  rating    Int    @default(5)
+  sortOrder Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// PROJECTS (Portfolio)
+// ============================================================
+
+model Project {
+  id          String @id @default(cuid())
+  title       String
+  category    String
+  image       String @default("")
+  description String
+  sortOrder   Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================================
+// CLIENTS (Logo marquee)
+// ============================================================
+
+model Client {
+  id        String @id @default(cuid())
+  name      String
+  icon      String @default("")
+  logo      String?
+  sortOrder Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// STATISTICS
+// ============================================================
+
+model Stat {
+  id        String @id @default(cuid())
+  value     Float
+  suffix    String
+  label     String
+  icon      String
+  sortOrder Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// FAQ
+// ============================================================
+
+model FaqItem {
+  id        String @id @default(cuid())
+  question  String
+  answer    String
+  sortOrder Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// WHY CHOOSE US
+// ============================================================
+
+model WhyChooseItem {
+  id          String @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  sortOrder   Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================================
+// WORKING PROCESS
+// ============================================================
+
+model ProcessStep {
+  id          String @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  sortOrder   Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+
+model NavigationLink {
+  id        String  @id @default(cuid())
+  label     String
+  href      String
+  megaMenu  String? // "products" | "industries" | null
+  sortOrder Int     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Industry {
+  id        String @id @default(cuid())
+  name      String
+  icon      String
+  href      String @default("#industries")
+  sortOrder Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// FOOTER
+// ============================================================
+
+model FooterColumn {
+  id        String       @id @default(cuid())
+  title     String
+  links     FooterLink[]
+  sortOrder Int          @default(0)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model FooterLink {
+  id        String       @id @default(cuid())
+  columnId  String
+  column    FooterColumn @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  label     String
+  href      String
+  sortOrder Int          @default(0)
+}
+
+model SocialLink {
+  id        String @id @default(cuid())
+  platform  String
+  href      String
+  icon      String
+  sortOrder Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// MEDIA
+// ============================================================
+
+model MediaFile {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String
+  mimeType  String
+  size      Int
+  width     Int?
+  height    Int?
+  alt       String   @default("")
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// CONTACT FORM SUBMISSIONS
+// ============================================================
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String   @default("")
+  subject   String   @default("")
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
