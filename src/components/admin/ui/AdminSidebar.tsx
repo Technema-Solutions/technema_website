@@ -21,7 +21,6 @@ import {
   Image,
   Mail,
   ChevronLeft,
-  Menu,
   X,
   Layers,
 } from "lucide-react";
@@ -70,10 +69,15 @@ const sidebarSections = [
   },
 ];
 
-export default function AdminSidebar() {
+export default function AdminSidebar({
+  mobileOpen,
+  setMobileOpen,
+}: {
+  mobileOpen: boolean;
+  setMobileOpen: (open: boolean) => void;
+}) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const isActive = (href: string) => {
     if (href === "/admin") return pathname === "/admin";
@@ -148,14 +152,6 @@ export default function AdminSidebar() {
 
   return (
     <>
-      {/* Mobile Toggle */}
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="fixed top-4 left-4 z-50 rounded-lg bg-[#0C2D48] p-2 text-white shadow-lg md:hidden"
-      >
-        <Menu className="h-5 w-5" />
-      </button>
-
       {/* Mobile Overlay */}
       {mobileOpen && (
         <div

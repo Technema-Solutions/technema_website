@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { LogOut, ChevronRight } from "lucide-react";
+import { LogOut, ChevronRight, Menu } from "lucide-react";
 
 const routeLabels: Record<string, string> = {
   "/admin": "Dashboard",
@@ -23,7 +23,7 @@ const routeLabels: Record<string, string> = {
   "/admin/pesan": "Pesan Kontak",
 };
 
-export default function AdminTopBar() {
+export default function AdminTopBar({ onMenuClick }: { onMenuClick: () => void }) {
   const pathname = usePathname();
 
   const getBreadcrumb = () => {
@@ -50,9 +50,18 @@ export default function AdminTopBar() {
   const crumbs = getBreadcrumb();
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-4 md:px-6">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-1.5 text-sm pl-10 md:pl-0">
+    <header className="flex h-14 items-center justify-between border-b border-gray-200 bg-white px-4 md:px-6">
+      <div className="flex items-center gap-3">
+        {/* Mobile hamburger */}
+        <button
+          onClick={onMenuClick}
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-600 transition hover:bg-gray-100 md:hidden"
+          aria-label="Buka menu"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-1.5 text-sm">
         {crumbs.map((crumb, i) => (
           <span key={i} className="flex items-center gap-1.5">
             {i > 0 && <ChevronRight className="h-3.5 w-3.5 text-gray-400" />}
@@ -67,6 +76,7 @@ export default function AdminTopBar() {
             </span>
           </span>
         ))}
+        </div>
       </div>
 
       {/* User Actions */}
