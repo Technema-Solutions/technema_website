@@ -2,8 +2,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import slugify from "slugify";
-import type { Prisma } from "@prisma/client";
 
 export async function getAdminBlogPosts() {
   return prisma.blogPost.findMany({
@@ -33,7 +33,7 @@ export async function createBlogPost(data: {
   author: string;
   authorRole?: string;
   readTime: string;
-  body: Prisma.InputJsonValue;
+  body: string;
   isPublished: boolean;
   publishedAt?: Date;
   metaTitle?: string | null;
@@ -48,7 +48,8 @@ export async function createBlogPost(data: {
       publishedAt: data.publishedAt ?? (data.isPublished ? new Date() : null),
     },
   });
-  revalidateTag("blog-posts", "page");
+  revalidateTag("blog-posts", "max");
+  revalidatePath("/", "layout");
   return post;
 }
 
@@ -62,7 +63,7 @@ export async function updateBlogPost(
     author?: string;
     authorRole?: string;
     readTime?: string;
-    body?: Prisma.InputJsonValue;
+    body?: string;
     isPublished?: boolean;
     publishedAt?: Date | null;
     metaTitle?: string | null;
@@ -73,13 +74,16 @@ export async function updateBlogPost(
   if (data.title) {
     updateData.slug = slugify(data.title, { lower: true, strict: true });
   }
-  await prisma.blogPost.update({ where: { id }, data: updateData });
-  revalidateTag("blog-posts", "page");
+  const post = await prisma.blogPost.update({ where: { id }, data: updateData });
+  revalidateTag("blog-posts", "max");
+  revalidatePath("/", "layout");
+  return post;
 }
 
 export async function deleteBlogPost(id: string) {
   await prisma.blogPost.delete({ where: { id } });
-  revalidateTag("blog-posts", "page");
+  revalidateTag("blog-posts", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function toggleBlogPostPublish(id: string, isPublished: boolean) {
@@ -90,5 +94,6 @@ export async function toggleBlogPostPublish(id: string, isPublished: boolean) {
       publishedAt: isPublished ? new Date() : undefined,
     },
   });
-  revalidateTag("blog-posts", "page");
+  revalidateTag("blog-posts", "max");
+  revalidatePath("/", "layout");
 }

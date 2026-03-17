@@ -96,7 +96,7 @@ export default function ArtikelEditClient({
         image,
         author: form.get("author") as string,
         readTime: calcReadTime(bodyHtml),
-        body: bodyHtml as unknown as Parameters<typeof updateBlogPost>[1]["body"],
+        body: bodyHtml,
         isPublished: form.get("isPublished") === "on",
         metaTitle: (form.get("metaTitle") as string) || undefined,
         metaDescription: (form.get("metaDescription") as string) || undefined,

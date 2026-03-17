@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function getAdminFaqItems() {
   return prisma.faqItem.findMany({
@@ -20,7 +21,8 @@ export async function createFaqItem(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("faq", "page");
+  revalidateTag("faq", "max");
+  revalidatePath("/", "layout");
   return item;
 }
 
@@ -32,12 +34,14 @@ export async function updateFaqItem(
   }
 ) {
   await prisma.faqItem.update({ where: { id }, data });
-  revalidateTag("faq", "page");
+  revalidateTag("faq", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteFaqItem(id: string) {
   await prisma.faqItem.delete({ where: { id } });
-  revalidateTag("faq", "page");
+  revalidateTag("faq", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function reorderFaqItems(ids: string[]) {
@@ -47,5 +51,6 @@ export async function reorderFaqItems(ids: string[]) {
       data: { sortOrder: i },
     });
   }
-  revalidateTag("faq", "page");
+  revalidateTag("faq", "max");
+  revalidatePath("/", "layout");
 }

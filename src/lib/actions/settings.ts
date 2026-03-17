@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function getAdminSiteSettings() {
   return prisma.siteSettings.findFirst({
@@ -30,5 +31,6 @@ export async function updateSiteSettings(data: {
       ...data,
     },
   });
-  revalidateTag("site-settings", "page");
+  revalidateTag("site-settings", "max");
+  revalidatePath("/", "layout");
 }

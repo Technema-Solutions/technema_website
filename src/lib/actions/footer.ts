@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 // ── Footer Columns ──
 
@@ -24,13 +25,15 @@ export async function createFooterColumn(data: { title: string }) {
       sortOrder: count,
     },
   });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
   return column;
 }
 
 export async function deleteFooterColumn(id: string) {
   await prisma.footerColumn.delete({ where: { id } });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
 }
 
 // ── Footer Links ──
@@ -49,7 +52,8 @@ export async function createFooterLink(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
   return link;
 }
 
@@ -61,12 +65,14 @@ export async function updateFooterLink(
   }
 ) {
   await prisma.footerLink.update({ where: { id }, data });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteFooterLink(id: string) {
   await prisma.footerLink.delete({ where: { id } });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
 }
 
 // ── Social Links ──
@@ -89,7 +95,8 @@ export async function createSocialLink(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
   return link;
 }
 
@@ -102,10 +109,12 @@ export async function updateSocialLink(
   }
 ) {
   await prisma.socialLink.update({ where: { id }, data });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteSocialLink(id: string) {
   await prisma.socialLink.delete({ where: { id } });
-  revalidateTag("footer", "page");
+  revalidateTag("footer", "max");
+  revalidatePath("/", "layout");
 }

@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function getAdminTestimonials() {
   return prisma.testimonial.findMany({
@@ -24,7 +25,8 @@ export async function createTestimonial(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("testimonials", "page");
+  revalidateTag("testimonials", "max");
+  revalidatePath("/", "layout");
   return testimonial;
 }
 
@@ -40,10 +42,12 @@ export async function updateTestimonial(
   }
 ) {
   await prisma.testimonial.update({ where: { id }, data });
-  revalidateTag("testimonials", "page");
+  revalidateTag("testimonials", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteTestimonial(id: string) {
   await prisma.testimonial.delete({ where: { id } });
-  revalidateTag("testimonials", "page");
+  revalidateTag("testimonials", "max");
+  revalidatePath("/", "layout");
 }

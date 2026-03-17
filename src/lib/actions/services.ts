@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function getAdminServices() {
   return prisma.service.findMany({
@@ -21,7 +22,8 @@ export async function createService(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("services", "page");
+  revalidateTag("services", "max");
+  revalidatePath("/", "layout");
   return service;
 }
 
@@ -34,12 +36,14 @@ export async function updateService(
   }
 ) {
   await prisma.service.update({ where: { id }, data });
-  revalidateTag("services", "page");
+  revalidateTag("services", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteService(id: string) {
   await prisma.service.delete({ where: { id } });
-  revalidateTag("services", "page");
+  revalidateTag("services", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function reorderServices(ids: string[]) {
@@ -49,5 +53,6 @@ export async function reorderServices(ids: string[]) {
       data: { sortOrder: i },
     });
   }
-  revalidateTag("services", "page");
+  revalidateTag("services", "max");
+  revalidatePath("/", "layout");
 }

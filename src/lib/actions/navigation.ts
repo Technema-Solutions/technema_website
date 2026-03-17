@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 // ── Navigation Links ──
 
@@ -23,7 +24,8 @@ export async function createNavigationLink(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
   return link;
 }
 
@@ -36,12 +38,14 @@ export async function updateNavigationLink(
   }
 ) {
   await prisma.navigationLink.update({ where: { id }, data });
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteNavigationLink(id: string) {
   await prisma.navigationLink.delete({ where: { id } });
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function reorderNavigationLinks(ids: string[]) {
@@ -51,7 +55,8 @@ export async function reorderNavigationLinks(ids: string[]) {
       data: { sortOrder: i },
     });
   }
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
 }
 
 // ── Industries ──
@@ -74,7 +79,8 @@ export async function createIndustry(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
   return industry;
 }
 
@@ -87,12 +93,14 @@ export async function updateIndustry(
   }
 ) {
   await prisma.industry.update({ where: { id }, data });
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteIndustry(id: string) {
   await prisma.industry.delete({ where: { id } });
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function reorderIndustries(ids: string[]) {
@@ -102,5 +110,6 @@ export async function reorderIndustries(ids: string[]) {
       data: { sortOrder: i },
     });
   }
-  revalidateTag("navigation", "page");
+  revalidateTag("navigation", "max");
+  revalidatePath("/", "layout");
 }

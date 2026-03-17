@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import slugify from "slugify";
 
 export async function getAdminProducts() {
@@ -41,12 +42,14 @@ export async function toggleProductPublish(id: string, isPublished: boolean) {
     where: { id },
     data: { isPublished },
   });
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteProduct(id: string) {
   await prisma.product.delete({ where: { id } });
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function createProduct(data: {
@@ -67,7 +70,8 @@ export async function createProduct(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
   return product;
 }
 
@@ -88,7 +92,8 @@ export async function updateProduct(
   }
 ) {
   await prisma.product.update({ where: { id }, data });
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 // ── Product Sub-entities CRUD ──
@@ -103,7 +108,8 @@ export async function saveProductFeatureHighlights(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductCapabilities(
@@ -116,7 +122,8 @@ export async function saveProductCapabilities(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductSteps(
@@ -129,7 +136,8 @@ export async function saveProductSteps(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductUseCases(
@@ -142,7 +150,8 @@ export async function saveProductUseCases(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductStats(
@@ -155,7 +164,8 @@ export async function saveProductStats(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductPricingPlans(
@@ -178,7 +188,8 @@ export async function saveProductPricingPlans(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductTestimonials(
@@ -197,7 +208,8 @@ export async function saveProductTestimonials(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductIntegrations(
@@ -210,7 +222,8 @@ export async function saveProductIntegrations(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }
 
 export async function saveProductFaqs(
@@ -223,5 +236,6 @@ export async function saveProductFaqs(
       data: { ...items[i], productId, sortOrder: i },
     });
   }
-  revalidateTag("products", "page");
+  revalidateTag("products", "max");
+  revalidatePath("/", "layout");
 }

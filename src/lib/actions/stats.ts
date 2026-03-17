@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function getAdminStats() {
   return prisma.stat.findMany();
@@ -17,5 +18,6 @@ export async function updateStat(
   }
 ) {
   await prisma.stat.update({ where: { id }, data });
-  revalidateTag("stats", "page");
+  revalidateTag("stats", "max");
+  revalidatePath("/", "layout");
 }
