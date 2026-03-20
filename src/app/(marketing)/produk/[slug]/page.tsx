@@ -26,19 +26,32 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = await getProductBySlug(slug);
   if (!product) return { title: "Produk Tidak Ditemukan" };
 
+  const title = product.metaTitle || `${product.name} — ${product.tagline} | ${SITE_NAME}`;
+  const description = product.metaDescription || product.description;
+  const ogTitle = product.metaTitle || `${product.name} — ${product.tagline}`;
+  const images = product.ogImage
+    ? [product.ogImage]
+    : product.heroImage
+      ? [product.heroImage]
+      : product.logo
+        ? [product.logo]
+        : [];
+
   return {
-    title: product.metaTitle || `${product.name} — ${product.tagline} | ${SITE_NAME}`,
-    description: product.metaDescription || product.description,
+    title,
+    description,
+    alternates: { canonical: `${SITE_URL}/produk/${product.slug}` },
     openGraph: {
-      title: `${product.name} — ${product.tagline}`,
-      description: product.description,
-      images: product.ogImage
-        ? [product.ogImage]
-        : product.heroImage
-          ? [product.heroImage]
-          : product.logo
-            ? [product.logo]
-            : [],
+      title: ogTitle,
+      description,
+      images,
+      url: `${SITE_URL}/produk/${product.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images,
     },
   };
 }

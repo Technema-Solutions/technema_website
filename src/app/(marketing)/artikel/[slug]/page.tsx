@@ -35,13 +35,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Artikel Tidak Ditemukan" };
 
+  const title = post.metaTitle || `${post.title} — ${SITE_NAME}`;
+  const description = post.metaDescription || post.excerpt;
+  const ogTitle = post.metaTitle || post.title;
+  const images = post.ogImage ? [post.ogImage] : [post.image];
+
   return {
-    title: post.metaTitle || `${post.title} — ${SITE_NAME}`,
-    description: post.metaDescription || post.excerpt,
+    title,
+    description,
+    alternates: { canonical: `${SITE_URL}/artikel/${post.slug}` },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image],
+      type: "article",
+      title: ogTitle,
+      description,
+      images,
+      url: `${SITE_URL}/artikel/${post.slug}`,
+      publishedTime: post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined,
+      authors: [post.author],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images,
     },
   };
 }
