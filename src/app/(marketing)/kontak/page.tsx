@@ -22,7 +22,7 @@ export default async function KontakPage() {
         email={siteSettings?.contactEmail || ""}
         address={siteSettings?.contactAddress || ""}
       />
-      <ContactForm />
+      <ContactForm mapEmbedUrl={siteSettings?.contactMapEmbed || ""} />
       <CtaBanner />
     </>
   );

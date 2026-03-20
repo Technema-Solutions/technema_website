@@ -10,9 +10,9 @@ export default function CtaBanner() {
         style={{ borderRadius: "40px 40px 0 0" }}
       >
         <Container>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 text-left">
             {/* Left - Icon + Heading */}
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3 sm:gap-5">
               {/* Customer service icon */}
               <div className="w-[55px] h-[55px] bg-white/15 rounded-full flex items-center justify-center flex-shrink-0">
                 <svg
@@ -35,7 +35,7 @@ export default function CtaBanner() {
                   <path d="M12 18v3" />
                 </svg>
               </div>
-              <h3 className="font-heading text-[20px] sm:text-[24px] font-bold text-white m-0">
+              <h3 className="font-heading text-[16px] sm:text-[24px] font-bold text-white m-0">
                 Meningkatkan Pengalaman Pelanggan.
               </h3>
             </div>

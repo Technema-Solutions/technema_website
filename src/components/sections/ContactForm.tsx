@@ -10,7 +10,7 @@ import { submitContactForm } from "@/lib/actions/contact-public";
 const inputClass =
   "w-full px-5 py-4 rounded-[12px] border border-border-gray bg-gray-bg text-[15px] outline-none transition-colors duration-200 focus:border-brand placeholder:text-text-gray";
 
-export default function ContactForm() {
+export default function ContactForm({ mapEmbedUrl }: { mapEmbedUrl?: string }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -152,7 +152,7 @@ export default function ContactForm() {
           <FadeIn delay={0.15} direction="left" className="w-full lg:w-1/2">
             <div className="h-full min-h-[400px] lg:min-h-0 rounded-2xl overflow-hidden shadow-lg">
               <iframe
-                src={CONTACT_MAP_EMBED}
+                src={mapEmbedUrl || CONTACT_MAP_EMBED}
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: 400 }}
