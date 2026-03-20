@@ -82,6 +82,7 @@ export default function ProductEditClient({
   const [activeTab, setActiveTab] = useState(0);
   const [saving, setSaving] = useState(false);
   const [logo, setLogo] = useState(product.logo || "");
+  const [heroImage, setHeroImage] = useState(product.heroImage || "");
   const [icon, setIcon] = useState(product.icon);
 
   // Item counts for tab badges
@@ -109,11 +110,8 @@ export default function ProductEditClient({
         description: form.get("description") as string,
         icon: form.get("icon") as string,
         logo: logo || undefined,
+        heroImage: heroImage || null,
         category: form.get("category") as string,
-        features: (form.get("features") as string)
-          .split("\n")
-          .map((f) => f.trim())
-          .filter(Boolean),
         isPublished: form.get("isPublished") === "on",
         metaTitle: (form.get("metaTitle") as string) || null,
         metaDescription: (form.get("metaDescription") as string) || null,
@@ -203,13 +201,8 @@ export default function ProductEditClient({
             <ImageUpload value={logo} onChange={setLogo} label="Upload logo produk" />
           </FormField>
 
-          <FormField label="Fitur (satu per baris)">
-            <textarea
-              name="features"
-              defaultValue={(product.features as string[]).join("\n")}
-              rows={3}
-              className={inputClass}
-            />
+          <FormField label="Hero Image">
+            <ImageUpload value={heroImage} onChange={setHeroImage} label="Upload gambar hero (ditampilkan di sisi kanan halaman produk)" />
           </FormField>
 
           <FormField label="Related Product Slugs (pisahkan koma)">

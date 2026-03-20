@@ -12,9 +12,11 @@ const ALLOWED_TYPES = [
   "image/gif",
   "image/webp",
   "image/svg+xml",
+  "video/mp4",
+  "video/webm",
 ];
 
-const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_SIZE = 20 * 1024 * 1024; // 20MB
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,7 +35,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error:
-            "Invalid file type. Allowed: jpg, jpeg, png, gif, webp, svg",
+            "Invalid file type. Allowed: jpg, jpeg, png, gif, webp, svg, mp4, webm",
         },
         { status: 400 }
       );
@@ -42,7 +44,7 @@ export async function POST(request: NextRequest) {
     // Validate file size
     if (file.size > MAX_SIZE) {
       return NextResponse.json(
-        { error: "File too large. Maximum size is 5MB" },
+        { error: "File too large. Maximum size is 20MB" },
         { status: 400 }
       );
     }
@@ -74,11 +76,11 @@ export async function POST(request: NextRequest) {
     const filePath = path.join(uploadDir, uniqueFilename);
     await writeFile(filePath, buffer);
 
-    // Get image dimensions (skip for SVG)
+    // Get image dimensions (skip for SVG and video)
     let width: number | undefined;
     let height: number | undefined;
 
-    if (file.type !== "image/svg+xml") {
+    if (file.type !== "image/svg+xml" && !file.type.startsWith("video/")) {
       try {
         const metadata = await sharp(buffer).metadata();
         width = metadata.width;

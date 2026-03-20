@@ -20,7 +20,7 @@ function getIcon(name: string) {
 
 export default function ProductFeatures({ features, productName }: ProductFeaturesProps) {
   return (
-    <section className="relative overflow-hidden bg-white py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-white py-24 sm:py-32 rounded-t-[1rem] sm:rounded-t-[1.5rem] -mt-8 z-10">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-gray to-transparent" />
       <div className="absolute top-1/4 -right-64 w-96 h-96 bg-brand/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -87,7 +87,9 @@ export default function ProductFeatures({ features, productName }: ProductFeatur
                       {feature.image ? (
                         /* CMS Image */
                         <div className={`relative aspect-[16/10] rounded-3xl bg-white border border-border-gray shadow-xl overflow-hidden transform transition-all duration-700 ease-out ${isReversed ? 'hover:rotate-y-[2deg]' : 'hover:rotate-y-[-2deg]'}`}>
-                          {feature.image.toLowerCase().endsWith(".svg") ? (
+                          {/\.(mp4|webm)$/i.test(feature.image) ? (
+                            <video src={feature.image} autoPlay loop muted playsInline className="w-full h-full object-contain p-6" />
+                          ) : /\.(svg|gif)$/i.test(feature.image) ? (
                             /* eslint-disable-next-line @next/next/no-img-element */
                             <img
                               src={feature.image}

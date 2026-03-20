@@ -10,6 +10,8 @@ interface ImageUploadProps {
   label?: string;
 }
 
+const isVideo = (url: string) => /\.(mp4|webm)$/i.test(url);
+
 export default function ImageUpload({ value, onChange, label }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -49,7 +51,7 @@ export default function ImageUpload({ value, onChange, label }: ImageUploadProps
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/*"
+        accept="image/*,video/mp4,video/webm"
         onChange={handleFileChange}
         className="hidden"
       />
@@ -74,11 +76,22 @@ export default function ImageUpload({ value, onChange, label }: ImageUploadProps
 
       {value && !uploading && (
         <div className="relative inline-block">
-          <img
-            src={value}
-            alt="Preview"
-            className="h-32 w-auto rounded-lg border border-gray-200 object-cover"
-          />
+          {isVideo(value) ? (
+            <video
+              src={value}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-32 w-auto rounded-lg border border-gray-200 object-cover"
+            />
+          ) : (
+            <img
+              src={value}
+              alt="Preview"
+              className="h-32 w-auto rounded-lg border border-gray-200 object-cover"
+            />
+          )}
           <div className="mt-2 flex gap-2">
             <button
               type="button"

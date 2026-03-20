@@ -44,7 +44,7 @@ export default function ProductIntegrations({ integrations }: ProductIntegration
                   
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f4f7f9] to-white border border-border-gray shadow-sm flex items-center justify-center group-hover:scale-110 group-hover:border-brand/20 group-hover:shadow-md transition-all duration-300 relative z-10 overflow-hidden">
                     {integration.logo ? (
-                      integration.logo.toLowerCase().endsWith(".svg") ? (
+                      integration.logo.toLowerCase().endsWith(".svg") || integration.logo.toLowerCase().endsWith(".gif") ? (
                         /* eslint-disable-next-line @next/next/no-img-element */
                         <img src={integration.logo} alt={integration.name} className="w-full h-full object-cover rounded-2xl" />
                       ) : (

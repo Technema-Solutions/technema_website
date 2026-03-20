@@ -12,6 +12,7 @@ export default function NewProductPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [logo, setLogo] = useState("");
+  const [heroImage, setHeroImage] = useState("");
   const [icon, setIcon] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -26,11 +27,8 @@ export default function NewProductPage() {
         description: form.get("description") as string,
         icon: form.get("icon") as string,
         category: form.get("category") as string,
-        features: (form.get("features") as string)
-          .split("\n")
-          .map((f) => f.trim())
-          .filter(Boolean),
         logo: logo || undefined,
+        heroImage: heroImage || undefined,
       });
       toast.success("Produk berhasil dibuat");
       router.push(`/admin/produk/${product.id}`);
@@ -97,14 +95,8 @@ export default function NewProductPage() {
           <ImageUpload value={logo} onChange={setLogo} label="Upload logo produk" />
         </FormField>
 
-        <FormField label="Fitur (satu per baris)" required>
-          <textarea
-            name="features"
-            required
-            rows={3}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#3D7EAA] focus:outline-none focus:ring-1 focus:ring-[#3D7EAA]"
-            placeholder={"Fitur 1\nFitur 2\nFitur 3"}
-          />
+        <FormField label="Hero Image">
+          <ImageUpload value={heroImage} onChange={setHeroImage} label="Upload gambar hero (ditampilkan di sisi kanan halaman produk)" />
         </FormField>
 
         <div className="flex justify-end gap-3 pt-4">

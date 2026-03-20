@@ -4,6 +4,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import { CircuitPatternDark, DotGrid } from "@/components/ui/SvgDecorations";
+import { CONTACT_PHONE } from "@/lib/constants";
 import type { ProductDetail } from "@/types";
 
 interface BreadcrumbItem {
@@ -102,12 +103,12 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
                 {product.description}
               </p>
 
-              {/* Actions - Modernized */}
+              {/* Actions */}
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
-                <Button 
-                  href="/kontak" 
-                  variant="primary" 
-                  size="lg" 
+                <Button
+                  href={`https://wa.me/${CONTACT_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(`Halo Technema, saya tertarik dengan produk ${product.name}. Boleh minta demo?`)}`}
+                  variant="primary"
+                  size="lg"
                   className="shadow-lg shadow-brand/25 group relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
@@ -117,24 +118,6 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
                     </svg>
                   </span>
                 </Button>
-                <Button 
-                  href="/kontak" 
-                  variant="outline" 
-                  size="lg" 
-                  className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 hover:border-white/20 text-white"
-                >
-                  Hubungi Sales
-                </Button>
-              </div>
-
-              {/* Trust Indicators (Optional placeholder) */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-center gap-6 opacity-60">
-                <p className="text-xs uppercase tracking-wider text-white/50 font-semibold">Dipercaya oleh</p>
-                <div className="flex gap-4">
-                  <div className="w-6 h-6 rounded bg-white/20" />
-                  <div className="w-6 h-6 rounded bg-white/20" />
-                  <div className="w-6 h-6 rounded bg-white/20" />
-                </div>
               </div>
 
             </div>
@@ -165,12 +148,19 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
                 {/* Content Area */}
                 <div className="relative w-full h-[calc(100%-2rem)] bg-dark/50 p-1 flex mt-0">
                   {product.heroImage ? (
-                    <Image
-                      src={product.heroImage}
-                      alt={`${product.name} interface`}
-                      fill
-                      className="object-cover object-top rounded-b-xl"
-                    />
+                    /\.(mp4|webm)$/i.test(product.heroImage) ? (
+                      <video src={product.heroImage} autoPlay loop muted playsInline className="w-full h-full object-cover object-top rounded-b-xl" />
+                    ) : /\.(svg|gif)$/i.test(product.heroImage) ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={product.heroImage} alt={`${product.name} interface`} className="w-full h-full object-cover object-top rounded-b-xl" />
+                    ) : (
+                      <Image
+                        src={product.heroImage}
+                        alt={`${product.name} interface`}
+                        fill
+                        className="object-cover object-top rounded-b-xl"
+                      />
+                    )
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0c1a2c] to-[#0A192F] opacity-90 relative overflow-hidden rounded-xl">
                        <CircuitPatternDark className="absolute opacity-5 size-full" />
@@ -196,23 +186,27 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
               </div>
               
               {/* Floating decorative UI elements */}
-              <div className="absolute -right-8 top-1/4 w-32 h-20 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl z-20 transform translate-z-10 animate-float-slow hidden xl:flex items-center justify-center p-4">
-                <div className="w-full space-y-2">
-                  <div className="w-full h-2 bg-brand/30 rounded-full overflow-hidden">
-                    <div className="h-full bg-brand w-3/4 rounded-full" />
-                  </div>
-                  <div className="flex justify-between text-[10px] text-white/50 font-mono">
-                    <span>Performance</span>
-                    <span className="text-brand-light">Optimized</span>
-                  </div>
+              <div className="absolute -right-8 top-1/4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl z-20 animate-float-slow hidden xl:flex items-center gap-2.5 px-4 py-3">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[11px] font-semibold text-white/90">Secure & Verified</div>
+                  <div className="text-[9px] text-white/40 font-mono">Enterprise-grade</div>
                 </div>
               </div>
-              
-              <div className="absolute -left-10 bottom-1/4 w-24 h-24 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-20 transform translate-z-10 animate-float-slower hidden xl:flex items-center justify-center p-4">
-                 <div className="text-center">
-                    <div className="text-2xl font-bold text-white mb-1">99<span className="text-sm text-brand-light">%</span></div>
-                    <div className="text-[9px] text-white/40 uppercase tracking-wider">Uptime</div>
-                 </div>
+
+              <div className="absolute -left-10 bottom-1/4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl z-20 animate-float-slower hidden xl:flex items-center gap-2.5 px-4 py-3">
+                <div className="relative flex items-center justify-center w-8 h-8">
+                  <span className="absolute w-3 h-3 rounded-full bg-emerald-400 animate-ping opacity-40" />
+                  <span className="relative w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/50" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-semibold text-white/90">Live System</div>
+                  <div className="text-[9px] text-white/40 font-mono">Always running</div>
+                </div>
               </div>
 
             </div>

@@ -95,26 +95,6 @@ function CircuitDots() {
   );
 }
 
-/* Arrow icon */
-function ArrowUpRight({ className }: { className?: string }) {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M7 17L17 7" />
-      <path d="M7 7h10v10" />
-    </svg>
-  );
-}
-
 export default function ProjectsGallery({ projects }: { projects: ProjectItem[] }) {
   const swiperRef = useRef<SwiperClass | null>(null);
 
@@ -196,15 +176,15 @@ export default function ProjectsGallery({ projects }: { projects: ProjectItem[] 
             loop={true}
             onSwiper={(swiper) => { swiperRef.current = swiper; }}
             breakpoints={{
-              768: { slidesPerView: 2 },
+              768: { slidesPerView: 1.5 },
               1024: { slidesPerView: 2.3 },
             }}
           >
             {projects.map((project) => (
               <SwiperSlide key={project.id}>
-                <div className="group cursor-pointer flex flex-col sm:flex-row rounded-2xl bg-[#0E3452] overflow-hidden h-auto sm:h-[280px] transition-transform duration-300 hover:-translate-y-1">
+                <div className="group flex flex-col rounded-2xl bg-[#0E3452] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
                   {/* Image area */}
-                  <div className="relative w-full sm:w-[45%] h-[220px] sm:h-full flex-shrink-0 overflow-hidden">
+                  <div className="relative w-full aspect-square overflow-hidden">
                     {/* Brand accent bar */}
                     <div className="absolute top-0 left-6 z-10 w-[50px] h-[4px] bg-brand rounded-b-sm" />
 
@@ -212,16 +192,16 @@ export default function ProjectsGallery({ projects }: { projects: ProjectItem[] 
                       src={project.image}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 640px) 100vw, 45vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                      className="object-contain transition-all duration-700 ease-out group-hover:brightness-110"
                     />
 
                     {/* Hover gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
 
                   {/* Info panel */}
-                  <div className="flex-1 p-5 lg:p-7 flex flex-col">
+                  <div className="h-[200px] p-5 lg:p-7 flex flex-col">
                     {/* Category badge */}
                     <span className="self-start rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-light">
                       {project.category}
@@ -236,14 +216,9 @@ export default function ProjectsGallery({ projects }: { projects: ProjectItem[] 
                     </h3>
 
                     {/* Description */}
-                    <p className="mt-2 text-sm leading-relaxed text-gray-400 line-clamp-3">
+                    <p className="mt-2 text-sm leading-relaxed text-gray-400 line-clamp-5">
                       {project.description}
                     </p>
-
-                    {/* Arrow button */}
-                    <span className="mt-auto self-end flex h-[36px] w-[36px] flex-shrink-0 items-center justify-center rounded-full bg-[#153A56] border border-[#1E4A68] text-brand-light transition-all duration-300 group-hover:bg-brand group-hover:text-white group-hover:border-brand">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </span>
                   </div>
                 </div>
               </SwiperSlide>

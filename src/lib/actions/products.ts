@@ -58,8 +58,8 @@ export async function createProduct(data: {
   description: string;
   icon: string;
   category: string;
-  features: string[];
   logo?: string;
+  heroImage?: string;
 }) {
   const slug = slugify(data.name, { lower: true, strict: true });
   const count = await prisma.product.count();
@@ -83,8 +83,8 @@ export async function updateProduct(
     description?: string;
     icon?: string;
     logo?: string;
+    heroImage?: string | null;
     category?: string;
-    features?: string[];
     isPublished?: boolean;
     metaTitle?: string | null;
     metaDescription?: string | null;
