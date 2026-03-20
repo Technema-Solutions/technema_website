@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, Save, X } from "lucide-react";
 import { toast } from "sonner";
 import ConfirmDialog from "@/components/admin/ui/ConfirmDialog";
+import IconPicker from "@/components/admin/ui/IconPicker";
 import {
   createFooterColumn,
   deleteFooterColumn,
@@ -426,14 +427,10 @@ export default function FooterClient({
                 }
                 className={inputClass}
               />
-              <input
-                type="text"
-                placeholder="Nama ikon (Lucide)"
+              <IconPicker
                 value={addSocialForm.icon}
-                onChange={(e) =>
-                  setAddSocialForm({ ...addSocialForm, icon: e.target.value })
-                }
-                className={inputClass}
+                onChange={(icon) => setAddSocialForm({ ...addSocialForm, icon })}
+                placeholder="Pilih ikon"
               />
             </div>
             <div className="mt-3 flex gap-2">
@@ -491,13 +488,9 @@ export default function FooterClient({
                         />
                       </td>
                       <td className="px-4 py-3">
-                        <input
-                          type="text"
+                        <IconPicker
                           value={editSocialForm.icon}
-                          onChange={(e) =>
-                            setEditSocialForm({ ...editSocialForm, icon: e.target.value })
-                          }
-                          className={inputClass}
+                          onChange={(icon) => setEditSocialForm({ ...editSocialForm, icon })}
                         />
                       </td>
                       <td className="px-4 py-3 text-right">

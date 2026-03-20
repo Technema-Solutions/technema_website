@@ -17,6 +17,7 @@ import {
 } from "@/lib/actions/products";
 import FormField from "@/components/admin/ui/FormField";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
+import IconPicker from "@/components/admin/ui/IconPicker";
 import SubEntityEditor from "@/components/admin/ui/SubEntityEditor";
 import type { Prisma } from "@prisma/client";
 
@@ -81,6 +82,7 @@ export default function ProductEditClient({
   const [activeTab, setActiveTab] = useState(0);
   const [saving, setSaving] = useState(false);
   const [logo, setLogo] = useState(product.logo || "");
+  const [icon, setIcon] = useState(product.icon);
 
   // Item counts for tab badges
   const counts = [
@@ -185,7 +187,7 @@ export default function ProductEditClient({
 
           <div className="grid gap-4 sm:grid-cols-2">
             <FormField label="Icon (Lucide)" required>
-              <input name="icon" defaultValue={product.icon} required className={inputClass} />
+              <IconPicker value={icon} onChange={setIcon} name="icon" required />
             </FormField>
             <FormField label="Kategori" required>
               <select name="category" defaultValue={product.category} required className={inputClass}>
@@ -282,7 +284,7 @@ export default function ProductEditClient({
             <>
               <div className="grid gap-4 sm:grid-cols-2">
                 <FormField label="Icon (Lucide)" required>
-                  <input value={item.icon} onChange={(e) => onChange("icon", e.target.value)} className={inputClass} placeholder="Star" />
+                  <IconPicker value={item.icon} onChange={(v) => onChange("icon", v)} />
                 </FormField>
                 <FormField label="Judul" required>
                   <input value={item.title} onChange={(e) => onChange("title", e.target.value)} className={inputClass} placeholder="Judul fitur" />
@@ -327,7 +329,7 @@ export default function ProductEditClient({
             <>
               <div className="grid gap-4 sm:grid-cols-2">
                 <FormField label="Icon (Lucide)" required>
-                  <input value={item.icon} onChange={(e) => onChange("icon", e.target.value)} className={inputClass} placeholder="Zap" />
+                  <IconPicker value={item.icon} onChange={(v) => onChange("icon", v)} />
                 </FormField>
                 <FormField label="Judul" required>
                   <input value={item.title} onChange={(e) => onChange("title", e.target.value)} className={inputClass} placeholder="Judul kapabilitas" />
@@ -371,7 +373,7 @@ export default function ProductEditClient({
             <>
               <div className="grid gap-4 sm:grid-cols-2">
                 <FormField label="Icon (Lucide)" required>
-                  <input value={item.icon} onChange={(e) => onChange("icon", e.target.value)} className={inputClass} placeholder="Settings" />
+                  <IconPicker value={item.icon} onChange={(v) => onChange("icon", v)} />
                 </FormField>
                 <FormField label="Judul" required>
                   <input value={item.title} onChange={(e) => onChange("title", e.target.value)} className={inputClass} placeholder="Judul langkah" />
@@ -414,7 +416,7 @@ export default function ProductEditClient({
             <>
               <div className="grid gap-4 sm:grid-cols-2">
                 <FormField label="Icon (Lucide)" required>
-                  <input value={item.icon} onChange={(e) => onChange("icon", e.target.value)} className={inputClass} placeholder="Briefcase" />
+                  <IconPicker value={item.icon} onChange={(v) => onChange("icon", v)} />
                 </FormField>
                 <FormField label="Judul" required>
                   <input value={item.title} onChange={(e) => onChange("title", e.target.value)} className={inputClass} placeholder="Judul use case" />
@@ -445,7 +447,7 @@ export default function ProductEditClient({
           onSave={async (items) => {
             await saveProductPricingPlans(
               product.id,
-              items.map((i) => ({ ...i, price: i.price || null }))
+              items.map((i) => ({ ...i, price: i.price || null, features: i.features.map((f) => f.trim()).filter(Boolean) }))
             );
             toast.success("Paket harga berhasil disimpan");
             router.refresh();
@@ -505,7 +507,7 @@ export default function ProductEditClient({
                   onChange={(e) =>
                     onChange(
                       "features",
-                      e.target.value.split("\n").map((f) => f.trim()).filter(Boolean)
+                      e.target.value.split("\n")
                     )
                   }
                   rows={4}
@@ -655,7 +657,7 @@ export default function ProductEditClient({
                   <input value={item.name} onChange={(e) => onChange("name", e.target.value)} className={inputClass} placeholder="Slack" />
                 </FormField>
                 <FormField label="Icon (Lucide)">
-                  <input value={item.icon} onChange={(e) => onChange("icon", e.target.value)} className={inputClass} placeholder="MessageSquare" />
+                  <IconPicker value={item.icon} onChange={(v) => onChange("icon", v)} />
                 </FormField>
               </div>
               <FormField label="Logo (opsional)">

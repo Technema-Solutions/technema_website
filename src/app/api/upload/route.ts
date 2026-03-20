@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
+import { writeFile, mkdir, unlink } from "fs/promises";
 import path from "path";
 import sharp from "sharp";
 import { createMediaRecord } from "@/lib/actions/media";
+import { prisma } from "@/lib/prisma";
 
 const ALLOWED_TYPES = [
   "image/jpeg",
@@ -108,6 +109,46 @@ export async function POST(request: NextRequest) {
     console.error("Upload error:", error);
     return NextResponse.json(
       { error: "Internal server error during upload" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { url } = await request.json();
+
+    if (!url || typeof url !== "string") {
+      return NextResponse.json(
+        { error: "URL is required" },
+        { status: 400 }
+      );
+    }
+
+    // Only allow deleting files from /uploads/
+    if (!url.startsWith("/uploads/")) {
+      return NextResponse.json(
+        { error: "Invalid file URL" },
+        { status: 400 }
+      );
+    }
+
+    // Delete file from disk
+    const filePath = path.join(process.cwd(), "public", url);
+    try {
+      await unlink(filePath);
+    } catch {
+      // File may already be deleted, continue with DB cleanup
+    }
+
+    // Delete database record
+    await prisma.mediaFile.deleteMany({ where: { url } });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return NextResponse.json(
+      { error: "Internal server error during delete" },
       { status: 500 }
     );
   }

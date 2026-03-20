@@ -6,11 +6,13 @@ import { toast } from "sonner";
 import { createProduct } from "@/lib/actions/products";
 import FormField from "@/components/admin/ui/FormField";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
+import IconPicker from "@/components/admin/ui/IconPicker";
 
 export default function NewProductPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [logo, setLogo] = useState("");
+  const [icon, setIcon] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -73,12 +75,7 @@ export default function NewProductPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <FormField label="Icon (Lucide)" required>
-            <input
-              name="icon"
-              required
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#3D7EAA] focus:outline-none focus:ring-1 focus:ring-[#3D7EAA]"
-              placeholder="FolderOpen"
-            />
+            <IconPicker value={icon} onChange={setIcon} name="icon" required />
           </FormField>
 
           <FormField label="Kategori" required>

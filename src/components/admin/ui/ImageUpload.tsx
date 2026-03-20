@@ -12,6 +12,7 @@ interface ImageUploadProps {
 
 export default function ImageUpload({ value, onChange, label }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,11 +90,29 @@ export default function ImageUpload({ value, onChange, label }: ImageUploadProps
             </button>
             <button
               type="button"
-              onClick={() => onChange("")}
-              className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-1.5 text-xs font-medium text-red-600 transition hover:bg-red-50"
+              disabled={deleting}
+              onClick={async () => {
+                if (value.startsWith("/uploads/")) {
+                  setDeleting(true);
+                  try {
+                    const res = await fetch("/api/upload", {
+                      method: "DELETE",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ url: value }),
+                    });
+                    if (!res.ok) throw new Error("Gagal menghapus file");
+                    toast.success("File berhasil dihapus");
+                  } catch {
+                    toast.error("Gagal menghapus file dari server");
+                  }
+                  setDeleting(false);
+                }
+                onChange("");
+              }}
+              className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-1.5 text-xs font-medium text-red-600 transition hover:bg-red-50 disabled:opacity-50"
             >
-              <X className="h-3 w-3" />
-              Hapus
+              {deleting ? <Loader2 className="h-3 w-3 animate-spin" /> : <X className="h-3 w-3" />}
+              {deleting ? "Menghapus..." : "Hapus"}
             </button>
           </div>
         </div>

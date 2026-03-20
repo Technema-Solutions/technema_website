@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import DataTable from "@/components/admin/ui/DataTable";
 import ConfirmDialog from "@/components/admin/ui/ConfirmDialog";
 import CollapseTransition from "@/components/admin/ui/CollapseTransition";
+import IconPicker from "@/components/admin/ui/IconPicker";
 import { createService, updateService, deleteService } from "@/lib/actions/services";
 
 type Service = {
@@ -106,12 +107,10 @@ export default function ServiceListClient({
         <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4">
           <h3 className="mb-3 text-sm font-semibold text-gray-700">Tambah Layanan Baru</h3>
           <div className="grid gap-3 sm:grid-cols-3">
-            <input
-              type="text"
-              placeholder="Nama ikon (Lucide)"
+            <IconPicker
               value={addForm.icon}
-              onChange={(e) => setAddForm({ ...addForm, icon: e.target.value })}
-              className={inputClass}
+              onChange={(icon) => setAddForm({ ...addForm, icon })}
+              placeholder="Pilih ikon"
             />
             <input
               type="text"
@@ -157,11 +156,9 @@ export default function ServiceListClient({
             label: "Ikon",
             render: (item) =>
               editId === item.id ? (
-                <input
-                  type="text"
+                <IconPicker
                   value={editForm.icon}
-                  onChange={(e) => setEditForm({ ...editForm, icon: e.target.value })}
-                  className={inputClass}
+                  onChange={(icon) => setEditForm({ ...editForm, icon })}
                 />
               ) : (
                 <span className="font-mono text-xs text-gray-600">{item.icon}</span>

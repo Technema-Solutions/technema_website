@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import DataTable from "@/components/admin/ui/DataTable";
 import Badge from "@/components/admin/ui/Badge";
 import ConfirmDialog from "@/components/admin/ui/ConfirmDialog";
+import IconPicker from "@/components/admin/ui/IconPicker";
 import {
   createNavigationLink,
   updateNavigationLink,
@@ -365,12 +366,10 @@ export default function NavigationClient({
                 onChange={(e) => setAddIndForm({ ...addIndForm, name: e.target.value })}
                 className={inputClass}
               />
-              <input
-                type="text"
-                placeholder="Nama ikon (Lucide)"
+              <IconPicker
                 value={addIndForm.icon}
-                onChange={(e) => setAddIndForm({ ...addIndForm, icon: e.target.value })}
-                className={inputClass}
+                onChange={(icon) => setAddIndForm({ ...addIndForm, icon })}
+                placeholder="Pilih ikon"
               />
               <input
                 type="text"
@@ -425,11 +424,9 @@ export default function NavigationClient({
               label: "Ikon",
               render: (item) =>
                 editIndId === item.id ? (
-                  <input
-                    type="text"
+                  <IconPicker
                     value={editIndForm.icon}
-                    onChange={(e) => setEditIndForm({ ...editIndForm, icon: e.target.value })}
-                    className={inputClass}
+                    onChange={(icon) => setEditIndForm({ ...editIndForm, icon })}
                   />
                 ) : (
                   <span className="font-mono text-xs text-gray-500">{item.icon}</span>

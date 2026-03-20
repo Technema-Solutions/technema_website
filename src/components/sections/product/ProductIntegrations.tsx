@@ -1,6 +1,7 @@
 "use client";
 
 import * as LucideIcons from "lucide-react";
+import Image from "next/image";
 import FadeIn from "@/components/ui/FadeIn";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -41,8 +42,17 @@ export default function ProductIntegrations({ integrations }: ProductIntegration
                   {/* Subtle inner glow on hover */}
                   <div className="absolute inset-0 bg-gradient-to-b from-brand/[0.02] to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300 pointer-events-none" />
                   
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f4f7f9] to-white border border-border-gray shadow-sm flex items-center justify-center group-hover:scale-110 group-hover:border-brand/20 group-hover:shadow-md transition-all duration-300 relative z-10">
-                    <Icon className="w-6 h-6 text-brand/70 group-hover:text-brand transition-colors duration-300" strokeWidth={1.5} />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f4f7f9] to-white border border-border-gray shadow-sm flex items-center justify-center group-hover:scale-110 group-hover:border-brand/20 group-hover:shadow-md transition-all duration-300 relative z-10 overflow-hidden">
+                    {integration.logo ? (
+                      integration.logo.toLowerCase().endsWith(".svg") ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={integration.logo} alt={integration.name} className="w-full h-full object-cover rounded-2xl" />
+                      ) : (
+                        <Image src={integration.logo} alt={integration.name} fill className="object-cover rounded-2xl" sizes="56px" />
+                      )
+                    ) : (
+                      <Icon className="w-6 h-6 text-brand/70 group-hover:text-brand transition-colors duration-300" strokeWidth={1.5} />
+                    )}
                   </div>
                   <span className="font-heading text-[15px] font-semibold text-dark/90 group-hover:text-brand transition-colors duration-300 relative z-10">
                     {integration.name}

@@ -6,6 +6,7 @@ import { Plus, Edit, Trash2, Save, X } from "lucide-react";
 import { toast } from "sonner";
 import ConfirmDialog from "@/components/admin/ui/ConfirmDialog";
 import CollapseTransition from "@/components/admin/ui/CollapseTransition";
+import IconPicker from "@/components/admin/ui/IconPicker";
 import {
   createWhyChooseItem,
   updateWhyChooseItem,
@@ -117,12 +118,10 @@ export default function WhyChooseListClient({
         <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4">
           <h3 className="mb-3 text-sm font-semibold text-gray-700">Tambah Item Baru</h3>
           <div className="grid gap-3 sm:grid-cols-2">
-            <input
-              type="text"
-              placeholder="Nama ikon (Lucide)"
+            <IconPicker
               value={addForm.icon}
-              onChange={(e) => setAddForm({ ...addForm, icon: e.target.value })}
-              className={inputClass}
+              onChange={(icon) => setAddForm({ ...addForm, icon })}
+              placeholder="Pilih ikon"
             />
             <input
               type="text"
@@ -170,14 +169,9 @@ export default function WhyChooseListClient({
           >
             {editId === item.id ? (
               <div className="space-y-3">
-                <input
-                  type="text"
+                <IconPicker
                   value={editForm.icon}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, icon: e.target.value })
-                  }
-                  className={inputClass}
-                  placeholder="Nama ikon (Lucide)"
+                  onChange={(icon) => setEditForm({ ...editForm, icon })}
                 />
                 <input
                   type="text"

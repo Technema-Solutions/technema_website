@@ -1,6 +1,7 @@
 "use client";
 
 import * as LucideIcons from "lucide-react";
+import Image from "next/image";
 import FadeIn from "@/components/ui/FadeIn";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -82,55 +83,73 @@ export default function ProductFeatures({ features, productName }: ProductFeatur
                     <div className="relative group perspective-1000">
                       {/* Glow behind image container */}
                       <div className="absolute -inset-4 bg-gradient-to-tr from-brand/10 to-transparent opacity-0 group-hover:opacity-100 rounded-[2.5rem] blur-2xl transition-all duration-700 -z-10" />
-                      
-                      <div className={`relative aspect-[16/10] rounded-3xl bg-white border border-border-gray shadow-xl flex flex-col overflow-hidden transform transition-all duration-700 ease-out ${isReversed ? 'hover:rotate-y-[2deg]' : 'hover:rotate-y-[-2deg]'}`}>
-                        
-                        {/* Fake UI Header */}
-                        <div className="h-10 bg-light-brand border-b border-border-gray flex items-center px-4 justify-between">
-                           <div className="flex gap-1.5 opacity-60">
-                             <div className="w-2.5 h-2.5 rounded-full bg-border-gray" />
-                             <div className="w-2.5 h-2.5 rounded-full bg-border-gray" />
-                             <div className="w-2.5 h-2.5 rounded-full bg-border-gray" />
-                           </div>
-                           <div className="hidden sm:flex h-4 w-32 bg-white rounded shadow-sm border border-border-gray" />
+
+                      {feature.image ? (
+                        /* CMS Image */
+                        <div className={`relative aspect-[16/10] rounded-3xl bg-white border border-border-gray shadow-xl overflow-hidden transform transition-all duration-700 ease-out ${isReversed ? 'hover:rotate-y-[2deg]' : 'hover:rotate-y-[-2deg]'}`}>
+                          {feature.image.toLowerCase().endsWith(".svg") ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={feature.image}
+                              alt={feature.title}
+                              className="w-full h-full object-contain p-6"
+                            />
+                          ) : (
+                            <Image
+                              src={feature.image}
+                              alt={feature.title}
+                              fill
+                              className="object-contain p-6"
+                              sizes="(max-width: 1024px) 100vw, 58vw"
+                            />
+                          )}
                         </div>
-
-                        {/* Fake Content Area with subtle animations */}
-                        <div className="flex-1 bg-gradient-to-br from-light-brand/30 via-white to-light-brand/50 relative overflow-hidden flex items-center justify-center p-8">
-                          
-                          {/* Grid lines background */}
-                          <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <defs>
-                              <pattern id={`grid-${index}`} width="10" height="10" patternUnits="userSpaceOnUse">
-                                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#3D7EAA" strokeWidth="0.5" />
-                              </pattern>
-                            </defs>
-                            <rect width="100%" height="100%" fill={`url(#grid-${index})`} />
-                          </svg>
-
-                          {/* Floating UI cards simulation */}
-                          <div className="relative w-full max-w-sm">
-                            <div className="w-20 h-20 mx-auto rounded-3xl bg-white shadow-2xl border border-brand/5 flex items-center justify-center transform group-hover:-translate-y-4 group-hover:scale-105 transition-all duration-700 ease-out z-20 relative">
-                               <Icon className="w-8 h-8 text-brand drop-shadow-sm" strokeWidth={1.5} />
+                      ) : (
+                        /* Fallback: Mock UI */
+                        <div className={`relative aspect-[16/10] rounded-3xl bg-white border border-border-gray shadow-xl flex flex-col overflow-hidden transform transition-all duration-700 ease-out ${isReversed ? 'hover:rotate-y-[2deg]' : 'hover:rotate-y-[-2deg]'}`}>
+                          {/* Fake UI Header */}
+                          <div className="h-10 bg-light-brand border-b border-border-gray flex items-center px-4 justify-between">
+                            <div className="flex gap-1.5 opacity-60">
+                              <div className="w-2.5 h-2.5 rounded-full bg-border-gray" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-border-gray" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-border-gray" />
                             </div>
-                            
-                            <div className="absolute -left-4 top-10 w-24 h-16 bg-white/80 backdrop-blur border border-white rounded-xl shadow-lg transform -rotate-6 group-hover:-rotate-12 group-hover:-translate-x-2 transition-all duration-700 ease-out z-10 flex flex-col justify-center p-3">
-                               <div className="w-full h-2 bg-light-brand rounded mb-2" />
-                               <div className="w-2/3 h-2 bg-light-brand rounded" />
-                            </div>
-
-                            <div className="absolute -right-6 top-4 w-32 h-20 bg-white/80 backdrop-blur border border-white rounded-xl shadow-lg transform rotate-3 group-hover:rotate-6 group-hover:translate-x-4 transition-all duration-700 ease-out z-10 flex flex-col justify-center p-3 opacity-90">
-                              <div className="flex items-center gap-2 mb-3">
-                                <div className="w-4 h-4 rounded-full bg-brand/20" />
-                                <div className="w-12 h-2 bg-border-gray rounded" />
-                              </div>
-                              <div className="w-full h-1.5 bg-brand-light/20 rounded mb-1.5" />
-                              <div className="w-4/5 h-1.5 bg-brand-light/20 rounded" />
-                            </div>
+                            <div className="hidden sm:flex h-4 w-32 bg-white rounded shadow-sm border border-border-gray" />
                           </div>
 
+                          {/* Fake Content Area with subtle animations */}
+                          <div className="flex-1 bg-gradient-to-br from-light-brand/30 via-white to-light-brand/50 relative overflow-hidden flex items-center justify-center p-8">
+                            <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                              <defs>
+                                <pattern id={`grid-${index}`} width="10" height="10" patternUnits="userSpaceOnUse">
+                                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#3D7EAA" strokeWidth="0.5" />
+                                </pattern>
+                              </defs>
+                              <rect width="100%" height="100%" fill={`url(#grid-${index})`} />
+                            </svg>
+
+                            <div className="relative w-full max-w-sm">
+                              <div className="w-20 h-20 mx-auto rounded-3xl bg-white shadow-2xl border border-brand/5 flex items-center justify-center transform group-hover:-translate-y-4 group-hover:scale-105 transition-all duration-700 ease-out z-20 relative">
+                                <Icon className="w-8 h-8 text-brand drop-shadow-sm" strokeWidth={1.5} />
+                              </div>
+
+                              <div className="absolute -left-4 top-10 w-24 h-16 bg-white/80 backdrop-blur border border-white rounded-xl shadow-lg transform -rotate-6 group-hover:-rotate-12 group-hover:-translate-x-2 transition-all duration-700 ease-out z-10 flex flex-col justify-center p-3">
+                                <div className="w-full h-2 bg-light-brand rounded mb-2" />
+                                <div className="w-2/3 h-2 bg-light-brand rounded" />
+                              </div>
+
+                              <div className="absolute -right-6 top-4 w-32 h-20 bg-white/80 backdrop-blur border border-white rounded-xl shadow-lg transform rotate-3 group-hover:rotate-6 group-hover:translate-x-4 transition-all duration-700 ease-out z-10 flex flex-col justify-center p-3 opacity-90">
+                                <div className="flex items-center gap-2 mb-3">
+                                  <div className="w-4 h-4 rounded-full bg-brand/20" />
+                                  <div className="w-12 h-2 bg-border-gray rounded" />
+                                </div>
+                                <div className="w-full h-1.5 bg-brand-light/20 rounded mb-1.5" />
+                                <div className="w-4/5 h-1.5 bg-brand-light/20 rounded" />
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>

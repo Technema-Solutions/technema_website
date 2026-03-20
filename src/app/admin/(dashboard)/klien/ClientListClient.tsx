@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import ConfirmDialog from "@/components/admin/ui/ConfirmDialog";
 import CollapseTransition from "@/components/admin/ui/CollapseTransition";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
+import IconPicker from "@/components/admin/ui/IconPicker";
 import { createClient, updateClient, deleteClient } from "@/lib/actions/clients";
 
 type ClientItem = {
@@ -123,12 +124,10 @@ export default function ClientListClient({
               onChange={(e) => setAddForm({ ...addForm, name: e.target.value })}
               className={inputClass}
             />
-            <input
-              type="text"
-              placeholder="Nama ikon (Lucide)"
+            <IconPicker
               value={addForm.icon}
-              onChange={(e) => setAddForm({ ...addForm, icon: e.target.value })}
-              className={inputClass}
+              onChange={(icon) => setAddForm({ ...addForm, icon })}
+              placeholder="Pilih ikon"
             />
             <div className="sm:col-span-2">
               <ImageUpload
@@ -172,12 +171,9 @@ export default function ClientListClient({
                   className={inputClass}
                   placeholder="Nama klien"
                 />
-                <input
-                  type="text"
+                <IconPicker
                   value={editForm.icon}
-                  onChange={(e) => setEditForm({ ...editForm, icon: e.target.value })}
-                  className={inputClass}
-                  placeholder="Nama ikon (Lucide)"
+                  onChange={(icon) => setEditForm({ ...editForm, icon })}
                 />
                 <ImageUpload
                   value={editForm.logo}
