@@ -21,6 +21,7 @@ type SiteSettings = {
   heroHeading: string;
   heroSubheading: string;
   heroTypingWords: string[] | unknown;
+  heroVideoUrl: string;
   createdAt: Date;
   updatedAt: Date;
 } | null;
@@ -55,6 +56,7 @@ export default function SettingsClient({
     heroHeading: settings?.heroHeading ?? "",
     heroSubheading: settings?.heroSubheading ?? "",
     heroTypingWords: typingWords.join(", "),
+    heroVideoUrl: settings?.heroVideoUrl ?? "",
   });
 
   const update = (key: string, value: string) => {
@@ -81,6 +83,7 @@ export default function SettingsClient({
         heroHeading: form.heroHeading,
         heroSubheading: form.heroSubheading,
         heroTypingWords: typingWordsArray,
+        heroVideoUrl: form.heroVideoUrl,
       });
       toast.success("Pengaturan berhasil disimpan");
       router.refresh();
@@ -239,6 +242,20 @@ export default function SettingsClient({
               </FormField>
               <p className="mt-1 text-xs text-gray-400">
                 Contoh: Solusi Digital, Website Modern, Aplikasi Bisnis
+              </p>
+            </div>
+            <div className="sm:col-span-2">
+              <FormField label="Link Video YouTube">
+                <input
+                  type="text"
+                  value={form.heroVideoUrl}
+                  onChange={(e) => update("heroVideoUrl", e.target.value)}
+                  className={inputClass}
+                  placeholder="https://www.youtube.com/watch?v=..."
+                />
+              </FormField>
+              <p className="mt-1 text-xs text-gray-400">
+                URL video YouTube untuk tombol &quot;Tonton Video&quot; di Hero
               </p>
             </div>
           </div>

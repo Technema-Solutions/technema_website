@@ -62,6 +62,7 @@ export default async function Home() {
             ? (siteSettings.heroTypingWords as string[])
             : undefined
         }
+        heroVideoUrl={siteSettings?.heroVideoUrl || undefined}
       />
       <ServicesStrip services={services} />
       <ClientLogos clients={clients} />

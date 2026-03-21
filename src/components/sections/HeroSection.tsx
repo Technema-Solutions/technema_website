@@ -2,12 +2,14 @@ import FadeIn from "@/components/ui/FadeIn";
 import SectionTag from "@/components/ui/SectionTag";
 import TypingText from "@/components/ui/TypingText";
 import HeroVisual from "@/components/sections/HeroVisual";
+import HeroCta from "@/components/sections/HeroCta";
 import { cn } from "@/lib/utils";
 
 interface HeroSectionProps {
     heading?: string;
     subheading?: string;
     typingWords?: string[];
+    heroVideoUrl?: string;
 }
 
 const DEFAULT_HEADING_PREFIX = "Bantu Bisnis";
@@ -20,6 +22,7 @@ export default function HeroSection({
     heading,
     subheading,
     typingWords,
+    heroVideoUrl,
 }: HeroSectionProps) {
     const words = typingWords && typingWords.length > 0 ? typingWords : DEFAULT_TYPING_WORDS;
     const description = subheading || DEFAULT_SUBHEADING;
@@ -190,28 +193,7 @@ export default function HeroSection({
                         </p>
 
                         {/* CTA row */}
-                        <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
-                            <button className="bg-brand text-white rounded-full py-[17px] px-[28px] text-[14px] font-bold uppercase tracking-[1px] cursor-pointer transition-all duration-300 shadow-[0_8px_30px_rgba(61,126,170,0.25)] hover:-translate-y-[2px] hover:shadow-[0_12px_40px_rgba(61,126,170,0.4)]">
-                                JELAJAHI LEBIH LANJUT
-                            </button>
-
-                            <div className="flex items-center gap-4 cursor-pointer group">
-                                {/* Play button with outer ring */}
-                                <div className="relative flex items-center justify-center">
-                                    {/* Outer ring */}
-                                    <div className="absolute w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] rounded-full border-2 border-[#2A6080]" />
-                                    {/* Inner blue circle */}
-                                    <div className="w-[44px] h-[44px] sm:w-[55px] sm:h-[55px] rounded-full bg-brand flex items-center justify-center shadow-[0_4px_20px_rgba(61,126,170,0.3)] group-hover:scale-110 transition-transform">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                                            <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <span className="text-white/90 text-[15px] font-semibold uppercase tracking-[0.5px]">
-                                    TONTON VIDEO
-                                </span>
-                            </div>
-                        </div>
+                        <HeroCta heroVideoUrl={heroVideoUrl} />
                     </FadeIn>
 
                     {/* Right side: man image */}

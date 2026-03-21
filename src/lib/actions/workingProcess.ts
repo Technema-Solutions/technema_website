@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { revalidateTag } from "next/cache";
 import { revalidatePath } from "next/cache";
 
 export async function getAdminProcessSteps() {
@@ -22,7 +21,6 @@ export async function createProcessStep(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("process-steps", "max");
   revalidatePath("/", "layout");
   return step;
 }
@@ -36,13 +34,11 @@ export async function updateProcessStep(
   }
 ) {
   await prisma.processStep.update({ where: { id }, data });
-  revalidateTag("process-steps", "max");
   revalidatePath("/", "layout");
 }
 
 export async function deleteProcessStep(id: string) {
   await prisma.processStep.delete({ where: { id } });
-  revalidateTag("process-steps", "max");
   revalidatePath("/", "layout");
 }
 
@@ -53,6 +49,5 @@ export async function reorderProcessSteps(ids: string[]) {
       data: { sortOrder: i },
     });
   }
-  revalidateTag("process-steps", "max");
   revalidatePath("/", "layout");
 }

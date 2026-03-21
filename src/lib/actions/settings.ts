@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { revalidateTag } from "next/cache";
 import { revalidatePath } from "next/cache";
 
 export async function getAdminSiteSettings() {
@@ -22,6 +21,7 @@ export async function updateSiteSettings(data: {
   heroHeading?: string;
   heroSubheading?: string;
   heroTypingWords?: string[];
+  heroVideoUrl?: string;
 }) {
   await prisma.siteSettings.upsert({
     where: { id: "default" },
@@ -31,6 +31,5 @@ export async function updateSiteSettings(data: {
       ...data,
     },
   });
-  revalidateTag("site-settings", "max");
   revalidatePath("/", "layout");
 }

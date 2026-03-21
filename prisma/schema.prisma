@@ -39,6 +39,7 @@ model SiteSettings {
   heroHeading      String  @default("")
   heroSubheading   String  @default("")
   heroTypingWords  Json    @default("[]") // string[]
+  heroVideoUrl     String  @default("")
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }

@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { revalidateTag } from "next/cache";
 import { revalidatePath } from "next/cache";
 
 export async function getAdminWhyChooseItems() {
@@ -22,7 +21,6 @@ export async function createWhyChooseItem(data: {
       sortOrder: count,
     },
   });
-  revalidateTag("why-choose", "max");
   revalidatePath("/", "layout");
   return item;
 }
@@ -36,13 +34,11 @@ export async function updateWhyChooseItem(
   }
 ) {
   await prisma.whyChooseItem.update({ where: { id }, data });
-  revalidateTag("why-choose", "max");
   revalidatePath("/", "layout");
 }
 
 export async function deleteWhyChooseItem(id: string) {
   await prisma.whyChooseItem.delete({ where: { id } });
-  revalidateTag("why-choose", "max");
   revalidatePath("/", "layout");
 }
 
@@ -53,6 +49,5 @@ export async function reorderWhyChooseItems(ids: string[]) {
       data: { sortOrder: i },
     });
   }
-  revalidateTag("why-choose", "max");
   revalidatePath("/", "layout");
 }

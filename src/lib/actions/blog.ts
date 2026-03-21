@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { revalidateTag } from "next/cache";
 import { revalidatePath } from "next/cache";
 import slugify from "slugify";
 
@@ -48,7 +47,6 @@ export async function createBlogPost(data: {
       publishedAt: data.publishedAt ?? (data.isPublished ? new Date() : null),
     },
   });
-  revalidateTag("blog-posts", "max");
   revalidatePath("/", "layout");
   return post;
 }
@@ -75,14 +73,12 @@ export async function updateBlogPost(
     updateData.slug = slugify(data.title, { lower: true, strict: true });
   }
   const post = await prisma.blogPost.update({ where: { id }, data: updateData });
-  revalidateTag("blog-posts", "max");
   revalidatePath("/", "layout");
   return post;
 }
 
 export async function deleteBlogPost(id: string) {
   await prisma.blogPost.delete({ where: { id } });
-  revalidateTag("blog-posts", "max");
   revalidatePath("/", "layout");
 }
 
@@ -94,6 +90,5 @@ export async function toggleBlogPostPublish(id: string, isPublished: boolean) {
       publishedAt: isPublished ? new Date() : undefined,
     },
   });
-  revalidateTag("blog-posts", "max");
   revalidatePath("/", "layout");
 }

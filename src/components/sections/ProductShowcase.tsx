@@ -16,7 +16,7 @@ interface ProductItem {
 
 export default function ProductShowcase({ products }: { products: ProductItem[] }) {
   return (
-    <section className="bg-white py-24">
+    <section id="products" className="bg-white py-24">
       <Container>
         {/* Header */}
         <FadeIn className="text-center mb-14">
