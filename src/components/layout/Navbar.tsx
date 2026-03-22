@@ -213,10 +213,10 @@ function ProductsMegaMenu({ products, contactPhone }: { products: MegaMenuProduc
             <a
               key={product.name}
               href={`/produk/${product.slug}`}
-              className="group flex items-start gap-4 p-4 rounded-[12px] transition-colors duration-200 hover:bg-light-brand"
+              className="group flex items-start gap-4 p-4 rounded-[12px] border border-transparent transition-all duration-200 hover:bg-light-brand hover:border-brand/10 hover:shadow-sm"
             >
               {product.logo && (
-                <Image src={product.logo} alt={product.name} width={40} height={40} className="w-[40px] h-[40px] object-contain rounded-[10px] flex-shrink-0" />
+                <Image src={product.logo} alt={product.name} width={48} height={48} className="w-[48px] h-[48px] object-contain rounded-[12px] flex-shrink-0" />
               )}
               <div className="min-w-0">
                 <p className="text-[15px] font-heading font-bold text-dark mb-1">
@@ -254,25 +254,51 @@ function ProductsMegaMenu({ products, contactPhone }: { products: MegaMenuProduc
   );
 }
 
+const industryTaglines: Record<string, string> = {
+  Kesehatan: "Rumah sakit & klinik digital",
+  Pendidikan: "Sekolah & universitas modern",
+  UMKM: "Toko & usaha kecil menengah",
+  Pemerintahan: "Digitalisasi dokumen dengan Arsip Pintar",
+};
+
+const industrySlugs: Record<string, string> = {
+  Kesehatan: "kesehatan",
+  Pendidikan: "pendidikan",
+  UMKM: "umkm",
+  Pemerintahan: "pemerintahan",
+};
+
 function IndustriesMegaMenu({ industries }: { industries: IndustryItem[] }) {
   return (
     <div className="flex gap-8">
       {/* Industries Grid */}
-      <div className="flex-1 grid grid-cols-4 gap-3">
+      <div className="flex-1 grid grid-cols-2 gap-3">
         {industries.map((industry) => {
           const Icon = iconMap[industry.icon];
+          const tagline = industryTaglines[industry.name];
+          const slug = industrySlugs[industry.name];
           return (
             <a
               key={industry.name}
-              href={industry.href}
-              className="group flex items-center gap-3 p-4 rounded-[12px] transition-colors duration-200 hover:bg-light-brand"
+              href={slug ? `/industri/${slug}` : industry.href}
+              className="group flex items-start gap-4 p-4 rounded-[12px] border border-transparent transition-all duration-200 hover:bg-light-brand hover:border-brand/10 hover:shadow-sm"
             >
-              <div className="w-[40px] h-[40px] rounded-[10px] bg-light-brand flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:bg-brand/15">
-                {Icon && <Icon className="w-[20px] h-[20px] text-brand" />}
+              <div className="w-[48px] h-[48px] rounded-[12px] bg-light-brand flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:bg-brand/15">
+                {Icon && <Icon className="w-[22px] h-[22px] text-brand" />}
               </div>
-              <p className="text-[14px] font-heading font-semibold text-dark group-hover:text-brand transition-colors duration-200">
-                {industry.name}
-              </p>
+              <div className="min-w-0">
+                <p className="text-[15px] font-heading font-bold text-dark group-hover:text-brand transition-colors duration-200">
+                  {industry.name}
+                </p>
+                {tagline && (
+                  <p className="text-[13px] text-text-gray leading-[1.5] mt-0.5">
+                    {tagline}
+                  </p>
+                )}
+                <span className="inline-flex items-center gap-1 mt-2 text-[12px] font-semibold text-brand uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  Selengkapnya <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
             </a>
           );
         })}
