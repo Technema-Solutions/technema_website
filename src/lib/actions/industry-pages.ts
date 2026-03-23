@@ -29,6 +29,7 @@ export async function getAdminIndustryPage(id: string) {
       features: { orderBy: { sortOrder: "asc" } },
       stats: { orderBy: { sortOrder: "asc" } },
       faqs: { orderBy: { sortOrder: "asc" } },
+      testimonials: { orderBy: { sortOrder: "asc" } },
     },
   });
 }
@@ -87,11 +88,6 @@ export async function updateIndustryPage(
     caseStudyNarrative?: string | null;
     caseStudyVideoUrl?: string | null;
     caseStudyResults?: { value: string; label: string }[];
-    // Testimonial fields
-    testimonialContent?: string | null;
-    testimonialName?: string | null;
-    testimonialRole?: string | null;
-    testimonialCompany?: string | null;
   }
 ) {
   await prisma.industryPage.update({ where: { id }, data });
@@ -180,6 +176,19 @@ export async function saveIndustryFaqs(
   await prisma.industryFaqItem.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industryFaqItem.create({
+      data: { ...items[i], industryPageId, sortOrder: i },
+    });
+  }
+  revalidatePath("/", "layout");
+}
+
+export async function saveIndustryTestimonials(
+  industryPageId: string,
+  items: { name: string; role: string; company: string; content: string }[]
+) {
+  await prisma.industryTestimonial.deleteMany({ where: { industryPageId } });
+  for (let i = 0; i < items.length; i++) {
+    await prisma.industryTestimonial.create({
       data: { ...items[i], industryPageId, sortOrder: i },
     });
   }

@@ -11,6 +11,7 @@ import {
   saveIndustryFeatures,
   saveIndustryStats,
   saveIndustryFaqs,
+  saveIndustryTestimonials,
 } from "@/lib/actions/industry-pages";
 import FormField from "@/components/admin/ui/FormField";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
@@ -26,6 +27,7 @@ type FullIndustryPage = Prisma.IndustryPageGetPayload<{
     features: true;
     stats: true;
     faqs: true;
+    testimonials: true;
   };
 }>;
 
@@ -36,6 +38,7 @@ type ProcessItem = { icon: string; title: string; description: string };
 type FeatureItem = { icon: string; title: string; description: string };
 type StatItem = { value: number; suffix: string; label: string; icon: string };
 type FaqItem = { question: string; answer: string };
+type TestimonialItem = { name: string; role: string; company: string; content: string };
 type CaseStudyResult = { value: string; label: string };
 
 const inputClass =
@@ -77,7 +80,7 @@ export default function IndustryEditClient({
     page.process.length,
     page.features.length,
     page.stats.length,
-    null, // Testimoni (single)
+    page.testimonials.length,
     page.faqs.length,
   ];
 
@@ -120,25 +123,6 @@ export default function IndustryEditClient({
         caseStudyResults: csResults.filter((r) => r.value && r.label),
       });
       toast.success("Studi kasus berhasil disimpan");
-      router.refresh();
-    } catch {
-      toast.error("Gagal menyimpan");
-    }
-    setSaving(false);
-  }
-
-  async function handleSaveTestimonial(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSaving(true);
-    const form = new FormData(e.currentTarget);
-    try {
-      await updateIndustryPage(page.id, {
-        testimonialContent: (form.get("testimonialContent") as string) || null,
-        testimonialName: (form.get("testimonialName") as string) || null,
-        testimonialRole: (form.get("testimonialRole") as string) || null,
-        testimonialCompany: (form.get("testimonialCompany") as string) || null,
-      });
-      toast.success("Testimoni berhasil disimpan");
       router.refresh();
     } catch {
       toast.error("Gagal menyimpan");
@@ -587,38 +571,46 @@ export default function IndustryEditClient({
 
       {/* ═══ Tab 7: Testimoni ═══ */}
       {activeTab === 7 && (
-        <form
-          onSubmit={handleSaveTestimonial}
-          className="space-y-5 rounded-xl border border-gray-200 bg-white p-4 sm:p-6"
-        >
-          <p className="text-sm text-gray-500">Testimoni bersifat opsional. Kosongkan semua field jika tidak ada testimoni.</p>
-
-          <FormField label="Konten Testimoni">
-            <textarea name="testimonialContent" defaultValue={page.testimonialContent || ""} rows={4} className={inputClass} placeholder="Isi testimoni" />
-          </FormField>
-
-          <div className="grid gap-4 sm:grid-cols-3">
-            <FormField label="Nama">
-              <input name="testimonialName" defaultValue={page.testimonialName || ""} className={inputClass} placeholder="Nama" />
-            </FormField>
-            <FormField label="Jabatan">
-              <input name="testimonialRole" defaultValue={page.testimonialRole || ""} className={inputClass} placeholder="Jabatan" />
-            </FormField>
-            <FormField label="Perusahaan/Instansi">
-              <input name="testimonialCompany" defaultValue={page.testimonialCompany || ""} className={inputClass} placeholder="Perusahaan" />
-            </FormField>
-          </div>
-
-          <div className="flex justify-end pt-4">
-            <button
-              type="submit"
-              disabled={saving}
-              className="min-h-[44px] rounded-lg bg-[#3D7EAA] px-6 py-2 text-sm font-medium text-white hover:bg-[#2D6890] disabled:opacity-50"
-            >
-              {saving ? "Menyimpan..." : "Simpan"}
-            </button>
-          </div>
-        </form>
+        <SubEntityEditor<TestimonialItem>
+          items={page.testimonials.map((t) => ({
+            name: t.name,
+            role: t.role,
+            company: t.company,
+            content: t.content,
+          }))}
+          onSave={async (items) => {
+            await saveIndustryTestimonials(page.id, items);
+            toast.success("Testimoni berhasil disimpan");
+            router.refresh();
+          }}
+          createEmpty={() => ({ name: "", role: "", company: "", content: "" })}
+          addLabel="Tambah Testimoni"
+          emptyLabel="Belum ada testimoni"
+          renderPreview={(item) => (
+            <div className="min-w-0">
+              <p className="truncate text-sm font-medium text-gray-900">{item.name || "Tanpa nama"}</p>
+              <p className="truncate text-xs text-gray-500">{item.role} — {item.company}</p>
+            </div>
+          )}
+          renderForm={(item, onChange) => (
+            <>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <FormField label="Nama" required>
+                  <input value={item.name} onChange={(e) => onChange("name", e.target.value)} className={inputClass} placeholder="Nama" />
+                </FormField>
+                <FormField label="Jabatan" required>
+                  <input value={item.role} onChange={(e) => onChange("role", e.target.value)} className={inputClass} placeholder="Jabatan" />
+                </FormField>
+                <FormField label="Perusahaan/Instansi" required>
+                  <input value={item.company} onChange={(e) => onChange("company", e.target.value)} className={inputClass} placeholder="Perusahaan" />
+                </FormField>
+              </div>
+              <FormField label="Konten Testimoni" required>
+                <textarea value={item.content} onChange={(e) => onChange("content", e.target.value)} rows={3} className={inputClass} placeholder="Isi testimoni" />
+              </FormField>
+            </>
+          )}
+        />
       )}
 
       {/* ═══ Tab 8: FAQ ═══ */}

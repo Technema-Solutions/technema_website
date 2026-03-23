@@ -1024,11 +1024,16 @@ async function seedIndustryPages() {
         caseStudyNarrative: ind.caseStudy?.narrative || null,
         caseStudyVideoUrl: ind.caseStudy?.videoUrl || null,
         caseStudyResults: ind.caseStudy?.results || [],
-        // Testimonial
-        testimonialContent: ind.testimonial?.content || null,
-        testimonialName: ind.testimonial?.name || null,
-        testimonialRole: ind.testimonial?.role || null,
-        testimonialCompany: ind.testimonial?.company || null,
+        // Testimonials
+        testimonials: {
+          create: ind.testimonials.map((t, i) => ({
+            name: t.name,
+            role: t.role,
+            company: t.company,
+            content: t.content,
+            sortOrder: i,
+          })),
+        },
         // Child relations
         challenges: {
           create: ind.challenges.map((c, i) => ({

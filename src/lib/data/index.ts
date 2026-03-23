@@ -257,6 +257,7 @@ export const getIndustryPageBySlug = unstable_cache(
         features: { orderBy: { sortOrder: "asc" } },
         stats: { orderBy: { sortOrder: "asc" } },
         faqs: { orderBy: { sortOrder: "asc" } },
+        testimonials: { orderBy: { sortOrder: "asc" } },
       },
     });
   },

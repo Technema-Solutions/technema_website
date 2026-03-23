@@ -65,16 +65,13 @@ export default async function IndustryDetailPage({ params }: PageProps) {
         }
       : null;
 
-  // Map testimonial from flat fields to object (or null)
-  const testimonial =
-    industry.testimonialContent && industry.testimonialName
-      ? {
-          content: industry.testimonialContent,
-          name: industry.testimonialName,
-          role: industry.testimonialRole || "",
-          company: industry.testimonialCompany || "",
-        }
-      : null;
+  // Map testimonials from relation
+  const testimonials = industry.testimonials.map((t) => ({
+    content: t.content,
+    name: t.name,
+    role: t.role,
+    company: t.company,
+  }));
 
   // Map solutions: features from Json[] to string[]
   const solutions = industry.solutions.map((s) => ({
@@ -126,8 +123,8 @@ export default async function IndustryDetailPage({ params }: PageProps) {
 
       <IndustryStats stats={industry.stats} />
 
-      {testimonial && (
-        <IndustryTestimonial testimonial={testimonial} />
+      {testimonials.length > 0 && (
+        <IndustryTestimonial testimonials={testimonials} />
       )}
 
       <IndustryFaq faqs={industry.faqs} />

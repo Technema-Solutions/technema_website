@@ -172,34 +172,49 @@ export default function IndustrySolutions({ industryName, solutions }: Props) {
 
                     {activeSolution.image ? (
                       /* Image/Video from CMS */
-                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/[0.04] border border-white/10">
-                        {/\.(mp4|webm)$/i.test(activeSolution.image) ? (
-                          <video
-                            key={activeSolution.image}
-                            src={activeSolution.image}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                          />
-                        ) : /\.(svg|gif)$/i.test(activeSolution.image) ? (
-                          /* eslint-disable-next-line @next/next/no-img-element */
-                          <img
-                            src={activeSolution.image}
-                            alt={activeSolution.title}
-                            className="w-full h-full object-contain p-6"
-                          />
-                        ) : (
-                          <Image
-                            src={activeSolution.image}
-                            alt={activeSolution.title}
-                            fill
-                            className="object-contain p-6"
-                            sizes="(max-width: 1024px) 100vw, 50vw"
-                          />
-                        )}
-                      </div>
+                      /\.(mp4|webm)$/i.test(activeSolution.image) ? (
+                        /* Video — browser mockup frame */
+                        <div className="relative w-full h-full flex items-center justify-center p-4">
+                          <div className="w-full rounded-xl overflow-hidden shadow-2xl shadow-black/30 border border-white/10">
+                            {/* Browser title bar */}
+                            <div className="flex items-center gap-2 px-4 h-8 bg-[#1e1e2e] border-b border-white/[0.06]">
+                              <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                            </div>
+                            {/* Video */}
+                            <video
+                              key={activeSolution.image}
+                              src={activeSolution.image}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-auto block"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        /* Static image */
+                        <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/[0.04] border border-white/10">
+                          {/\.(svg|gif)$/i.test(activeSolution.image) ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={activeSolution.image}
+                              alt={activeSolution.title}
+                              className="w-full h-full object-contain p-6"
+                            />
+                          ) : (
+                            <Image
+                              src={activeSolution.image}
+                              alt={activeSolution.title}
+                              fill
+                              className="object-contain p-6"
+                              sizes="(max-width: 1024px) 100vw, 50vw"
+                            />
+                          )}
+                        </div>
+                      )
                     ) : (
                       /* Fallback: Icon + Title + Tags */
                       <>

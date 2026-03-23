@@ -371,19 +371,14 @@ model IndustryPage {
   caseStudyVideoUrl    String?
   caseStudyResults     Json[]
 
-  // Testimonial (single instance — stored as flat fields)
-  testimonialContent String? @db.Text
-  testimonialName    String?
-  testimonialRole    String?
-  testimonialCompany String?
-
   // Relations
-  challenges IndustryChallenge[]
-  solutions  IndustrySolutionItem[]
-  process    IndustryProcessStep[]
-  features   IndustryFeatureItem[]
-  stats      IndustryStatItem[]
-  faqs       IndustryFaqItem[]
+  challenges   IndustryChallenge[]
+  solutions    IndustrySolutionItem[]
+  process      IndustryProcessStep[]
+  features     IndustryFeatureItem[]
+  stats        IndustryStatItem[]
+  faqs         IndustryFaqItem[]
+  testimonials IndustryTestimonial[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -446,6 +441,17 @@ model IndustryFaqItem {
   id             String       @id @default(cuid())
   question       String
   answer         String       @db.Text
+  sortOrder      Int          @default(0)
+  industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
+  industryPageId String
+}
+
+model IndustryTestimonial {
+  id             String       @id @default(cuid())
+  name           String
+  role           String
+  company        String
+  content        String       @db.Text
   sortOrder      Int          @default(0)
   industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
   industryPageId String

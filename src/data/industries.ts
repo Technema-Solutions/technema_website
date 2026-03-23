@@ -70,7 +70,7 @@ export interface IndustryDetail {
   process: IndustryProcessStep[];
   features: IndustryFeature[];
   stats: IndustryStat[];
-  testimonial: IndustryTestimonialData | null;
+  testimonials: IndustryTestimonialData[];
   faqs: IndustryFaqItem[];
 }
 
@@ -259,13 +259,13 @@ export const industries: IndustryDetail[] = [
       { value: 24, suffix: "/7", label: "Dukungan Teknis", icon: "Headphones" },
     ],
 
-    testimonial: {
+    testimonials: [{
       content:
         "Sejak menggunakan solusi integrasi data dari Technema dan Synchro, kami berhasil menghubungkan 12 sistem yang sebelumnya terpisah. Waktu pelaporan berkurang drastis dari 3 hari menjadi real-time, dan manajemen kini dapat mengambil keputusan berdasarkan data yang akurat dan terkini.",
       name: "Dr. Arief Prasetyo",
       role: "Direktur Transformasi Digital",
       company: "Jaringan RS Harapan Medika",
-    },
+    }],
 
     faqs: [
       {
@@ -471,13 +471,13 @@ export const industries: IndustryDetail[] = [
       { value: 24, suffix: "/7", label: "Dukungan Teknis", icon: "Headphones" },
     ],
 
-    testimonial: {
+    testimonials: [{
       content:
         "Sejak menggunakan sistem digital dari Technema, administrasi sekolah kami jauh lebih efisien. Guru tidak lagi pusing mengurus nilai di spreadsheet, orangtua bisa langsung melihat perkembangan anak mereka, dan kami sebagai manajemen punya data yang jelas untuk mengambil keputusan. Transformasi digital yang benar-benar terasa dampaknya.",
       name: "Hj. Siti Nurhaliza, M.Pd.",
       role: "Kepala Sekolah",
       company: "SMA Negeri 1 Makassar",
-    },
+    }],
 
     faqs: [
       {
@@ -683,13 +683,13 @@ export const industries: IndustryDetail[] = [
       { value: 30, suffix: " Menit", label: "Setup & Siap Pakai", icon: "Clock" },
     ],
 
-    testimonial: {
+    testimonials: [{
       content:
         "Dulu saya catat semua penjualan di buku, sering lupa dan bingung sendiri saat hitung untung rugi di akhir bulan. Sejak pakai sistem dari Technema, semua tercatat otomatis. Saya jadi tahu produk mana yang paling laku, kapan harus restock, dan omzet bulanan naik sekitar 35%. Penggunaannya juga gampang, karyawan saya yang baru pun cepat bisa.",
       name: "Ibu Ratna Dewi",
       role: "Pemilik",
       company: "Toko Sembako Berkah Jaya",
-    },
+    }],
 
     faqs: [
       {
@@ -908,13 +908,13 @@ export const industries: IndustryDetail[] = [
       { value: 24, suffix: "/7", label: "Akses Dari Mana Saja", icon: "Globe2" },
     ],
 
-    testimonial: {
+    testimonials: [{
       content:
         "Yang paling membuat kami kagum adalah fitur AI Chat-nya. Dulu, kalau ada audit mendadak, kami harus bongkar lemari arsip berhari-hari untuk mencari dokumen yang diminta. Sekarang, cukup ketik pertanyaan di Arsip Pintar — misalnya 'cari dokumen hibah aset tahun 2023' — dan jawabannya langsung muncul lengkap dengan dokumennya. Bahkan pegawai baru yang belum hafal sistem kearsipan kami bisa langsung produktif karena tinggal tanya ke AI.",
       name: "H. Ahmad Fauzi, S.E., M.M.",
       role: "Kepala Bidang Aset",
       company: "BKAD Kabupaten Berau",
-    },
+    }],
 
     faqs: [
       {
