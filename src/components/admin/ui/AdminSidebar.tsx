@@ -25,6 +25,7 @@ import {
   X,
   Layers,
   LineChart,
+  Scale,
 } from "lucide-react";
 
 const sidebarSections = [
@@ -63,6 +64,7 @@ const sidebarSections = [
       { label: "Footer", href: "/admin/footer", icon: PanelBottom },
       { label: "Pengaturan", href: "/admin/pengaturan", icon: Settings },
       { label: "Media", href: "/admin/media", icon: Image },
+      { label: "Legal", href: "/admin/legal", icon: Scale },
     ],
   },
   {

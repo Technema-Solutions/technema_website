@@ -466,6 +466,24 @@ async function main() {
   }
   console.log("✅ Footer seeded");
 
+  // ── Legal Pages ──
+  await prisma.legalPage.deleteMany();
+  await prisma.legalPage.createMany({
+    data: [
+      {
+        slug: "syarat-ketentuan",
+        title: "Syarat & Ketentuan",
+        body: "<h2 id=\"pendahuluan\">Pendahuluan</h2><p>Selamat datang di website Technema Solutions. Dengan mengakses dan menggunakan layanan kami, Anda menyetujui untuk terikat oleh syarat dan ketentuan berikut.</p><h2 id=\"penggunaan-layanan\">Penggunaan Layanan</h2><p>Anda setuju untuk menggunakan layanan kami hanya untuk tujuan yang sah dan sesuai dengan hukum yang berlaku di Republik Indonesia.</p><h2 id=\"hak-kekayaan-intelektual\">Hak Kekayaan Intelektual</h2><p>Seluruh konten di website ini, termasuk teks, grafis, logo, dan perangkat lunak, merupakan milik Technema Solutions dan dilindungi oleh undang-undang hak cipta.</p><h2 id=\"batasan-tanggung-jawab\">Batasan Tanggung Jawab</h2><p>Technema Solutions tidak bertanggung jawab atas kerugian yang timbul akibat penggunaan layanan kami di luar kendali kami.</p><h2 id=\"perubahan-syarat\">Perubahan Syarat</h2><p>Kami berhak mengubah syarat dan ketentuan ini sewaktu-waktu. Perubahan akan berlaku efektif setelah dipublikasikan di halaman ini.</p><h2 id=\"kontak\">Kontak</h2><p>Jika Anda memiliki pertanyaan tentang syarat dan ketentuan ini, silakan hubungi kami melalui halaman kontak.</p>",
+      },
+      {
+        slug: "kebijakan-privasi",
+        title: "Kebijakan Privasi",
+        body: "<h2 id=\"pendahuluan\">Pendahuluan</h2><p>Technema Solutions berkomitmen untuk melindungi privasi Anda. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda.</p><h2 id=\"informasi-yang-dikumpulkan\">Informasi yang Dikumpulkan</h2><p>Kami mengumpulkan informasi yang Anda berikan secara sukarela melalui formulir kontak, termasuk nama, email, nomor telepon, dan pesan. Kami juga mengumpulkan data analitik anonim melalui Google Analytics untuk meningkatkan pengalaman pengguna.</p><h2 id=\"penggunaan-informasi\">Penggunaan Informasi</h2><p>Informasi yang dikumpulkan digunakan untuk merespons pertanyaan Anda, meningkatkan layanan kami, dan menganalisis pola penggunaan website secara agregat.</p><h2 id=\"perlindungan-data\">Perlindungan Data</h2><p>Kami menerapkan langkah-langkah keamanan teknis dan organisasi yang sesuai untuk melindungi data pribadi Anda dari akses, penggunaan, atau pengungkapan yang tidak sah.</p><h2 id=\"cookie\">Cookie</h2><p>Website kami menggunakan cookie untuk meningkatkan pengalaman browsing. Anda dapat mengatur preferensi cookie melalui banner cookie consent yang muncul saat pertama kali mengunjungi website.</p><h2 id=\"hak-anda\">Hak Anda</h2><p>Anda berhak untuk mengakses, memperbaiki, atau menghapus data pribadi Anda. Hubungi kami melalui halaman kontak untuk mengajukan permintaan terkait data Anda.</p><h2 id=\"perubahan-kebijakan\">Perubahan Kebijakan</h2><p>Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Perubahan akan dipublikasikan di halaman ini dengan tanggal pembaruan terbaru.</p>",
+      },
+    ],
+  });
+  console.log("✅ Legal pages seeded");
+
   // ── Products (with all details) ──
   await seedProducts();
   console.log("✅ Products seeded");

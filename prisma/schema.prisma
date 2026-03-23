@@ -510,6 +510,19 @@ model MediaFile {
 }
 
 // ============================================================
+// LEGAL PAGES (Terms, Privacy Policy)
+// ============================================================
+
+model LegalPage {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  body      String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
 // CONTACT FORM SUBMISSIONS
 // ============================================================
 

@@ -139,11 +139,11 @@ export default function Footer({ siteName, companyTagline, footerColumns, social
             &copy; {new Date().getFullYear()} {siteName}. Hak cipta dilindungi.
           </span>
           <div className="flex gap-5 flex-wrap justify-center">
-            <a href="#" className="text-white/40 no-underline text-[13px] hover:text-white transition-colors">
-              Kebijakan Privasi
+            <a href="/syarat-ketentuan" className="text-white/40 no-underline text-[13px] hover:text-white transition-colors">
+              Syarat &amp; Ketentuan
             </a>
-            <a href="#" className="text-white/40 no-underline text-[13px] hover:text-white transition-colors">
-              Dukungan
+            <a href="/kebijakan-privasi" className="text-white/40 no-underline text-[13px] hover:text-white transition-colors">
+              Kebijakan Privasi
             </a>
           </div>
         </div>

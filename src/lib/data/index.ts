@@ -324,3 +324,16 @@ export const getSocialLinks = unstable_cache(
   ["social-links"],
   { tags: ["footer"] }
 );
+
+// ── Legal Pages ──
+export const getLegalPageBySlug = unstable_cache(
+  async (slug: string) => {
+    try {
+      return await prisma.legalPage.findUnique({ where: { slug } });
+    } catch {
+      return null;
+    }
+  },
+  ["legal-page-by-slug"],
+  { tags: ["legal-pages"] }
+);
