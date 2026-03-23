@@ -77,7 +77,7 @@ export default function BlogArticles({ blogPosts }: { blogPosts: BlogPostItem[] 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Large card - left */}
           <FadeIn className="h-full">
-            <div className="bg-white rounded-[16px] overflow-hidden transition-transform duration-300 cursor-pointer hover:-translate-y-1 group h-full flex flex-col">
+            <Link href={`/artikel/${featured.slug}`} className="bg-white rounded-[16px] overflow-hidden transition-transform duration-300 cursor-pointer hover:-translate-y-1 group h-full flex flex-col no-underline">
               <div className="relative overflow-hidden">
                 <Image
                   src={featured.image}
@@ -104,21 +104,18 @@ export default function BlogArticles({ blogPosts }: { blogPosts: BlogPostItem[] 
                 <p className="text-[15px] text-text-gray leading-[1.625] mb-5">
                   {featured.excerpt}
                 </p>
-                <Link
-                  href={`/artikel/${featured.slug}`}
-                  className="inline-flex items-center gap-2 text-[#0A2540] text-[14px] font-bold uppercase tracking-wider no-underline mt-auto"
-                >
+                <span className="inline-flex items-center gap-2 text-[#0A2540] text-[14px] font-bold uppercase tracking-wider mt-auto">
                   BACA SELENGKAPNYA {Icons.arrow}
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           </FadeIn>
 
           {/* Right - 2 stacked cards */}
           <div className="flex flex-col gap-6">
             {sidePosts.map((p, i) => (
               <FadeIn className="flex-1" key={p.id} delay={(i + 1) * 0.1}>
-                <div className="bg-white rounded-[16px] overflow-hidden transition-transform duration-300 cursor-pointer hover:-translate-y-1 group flex flex-col sm:flex-row h-full">
+                <Link href={`/artikel/${p.slug}`} className="bg-white rounded-[16px] overflow-hidden transition-transform duration-300 cursor-pointer hover:-translate-y-1 group flex flex-col sm:flex-row h-full no-underline">
                   <div className="overflow-hidden sm:w-[220px] md:w-[260px] flex-shrink-0">
                     <Image
                       src={p.image}
@@ -144,14 +141,11 @@ export default function BlogArticles({ blogPosts }: { blogPosts: BlogPostItem[] 
                     <p className="text-[15px] text-text-gray leading-[1.625] mb-4">
                       {p.excerpt}
                     </p>
-                    <Link
-                      href={`/artikel/${p.slug}`}
-                      className="inline-flex items-center gap-2 text-[#0A2540] text-[14px] font-bold uppercase tracking-wider no-underline"
-                    >
+                    <span className="inline-flex items-center gap-2 text-[#0A2540] text-[14px] font-bold uppercase tracking-wider">
                       BACA SELENGKAPNYA {Icons.arrow}
-                    </Link>
+                    </span>
                   </div>
-                </div>
+                </Link>
               </FadeIn>
             ))}
           </div>
