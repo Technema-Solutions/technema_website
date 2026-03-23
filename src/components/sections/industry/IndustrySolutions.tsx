@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeIn from "@/components/ui/FadeIn";
@@ -162,40 +163,72 @@ export default function IndustrySolutions({ industryName, solutions }: Props) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="relative z-10 flex flex-col items-center justify-center h-full p-8"
+                    className="relative z-10 flex flex-col items-center justify-center h-full p-6"
                   >
                     {/* Number watermark */}
                     <span className="absolute top-6 right-8 font-heading text-[80px] font-bold leading-none text-white/[0.03] select-none pointer-events-none">
                       {String(activeIndex + 1).padStart(2, "0")}
                     </span>
 
-                    {/* Icon */}
-                    <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center shadow-[0_8px_40px_rgba(61,126,170,0.35)] mb-6">
-                      {ActiveIcon && <ActiveIcon className="w-12 h-12 text-white" strokeWidth={1.5} />}
-                    </div>
+                    {activeSolution.image ? (
+                      /* Image/Video from CMS */
+                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/[0.04] border border-white/10">
+                        {/\.(mp4|webm)$/i.test(activeSolution.image) ? (
+                          <video
+                            key={activeSolution.image}
+                            src={activeSolution.image}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                          />
+                        ) : /\.(svg|gif)$/i.test(activeSolution.image) ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={activeSolution.image}
+                            alt={activeSolution.title}
+                            className="w-full h-full object-contain p-6"
+                          />
+                        ) : (
+                          <Image
+                            src={activeSolution.image}
+                            alt={activeSolution.title}
+                            fill
+                            className="object-contain p-6"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                          />
+                        )}
+                      </div>
+                    ) : (
+                      /* Fallback: Icon + Title + Tags */
+                      <>
+                        <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center shadow-[0_8px_40px_rgba(61,126,170,0.35)] mb-6">
+                          {ActiveIcon && <ActiveIcon className="w-12 h-12 text-white" strokeWidth={1.5} />}
+                        </div>
 
-                    {/* Title */}
-                    <h4 className="text-[20px] font-heading font-bold text-white text-center mb-4">
-                      {activeSolution.title}
-                    </h4>
+                        <h4 className="text-[20px] font-heading font-bold text-white text-center mb-4">
+                          {activeSolution.title}
+                        </h4>
 
-                    {/* Feature tags */}
-                    <div className="flex flex-wrap justify-center gap-2 max-w-[360px]">
-                      {activeSolution.features.slice(0, 3).map((feat) => {
-                        const shortLabel = feat.length > 35 ? feat.slice(0, 35) + "…" : feat;
-                        return (
-                          <span
-                            key={feat}
-                            className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/[0.08] border border-white/10 text-[12px] text-white/70 font-medium"
-                          >
-                            {shortLabel}
-                          </span>
-                        );
-                      })}
-                    </div>
+                        <div className="flex flex-wrap justify-center gap-2 max-w-[360px]">
+                          {activeSolution.features.slice(0, 3).map((feat) => {
+                            const shortLabel = feat.length > 35 ? feat.slice(0, 35) + "…" : feat;
+                            return (
+                              <span
+                                key={feat}
+                                className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/[0.08] border border-white/10 text-[12px] text-white/70 font-medium"
+                              >
+                                {shortLabel}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </>
+                    )}
 
                     {/* Decorative dots */}
-                    <div className="absolute bottom-8 left-8 flex gap-1.5">
+                    <div className="absolute bottom-6 left-6 flex gap-1.5">
                       {solutions.map((_, i) => (
                         <div
                           key={i}

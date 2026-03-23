@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getIndustryBySlug, getAllIndustrySlugs } from "@/data/industries";
+import { getIndustryPageBySlug, getAllIndustryPageSlugs } from "@/lib/data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 
 import IndustryHero from "@/components/sections/industry/IndustryHero";
@@ -21,7 +21,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const industry = getIndustryBySlug(slug);
+  const industry = await getIndustryPageBySlug(slug);
   if (!industry) return { title: "Industri Tidak Ditemukan" };
 
   return {
@@ -41,18 +41,60 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export function generateStaticParams() {
-  return getAllIndustrySlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const slugs = await getAllIndustryPageSlugs();
+  return slugs.map((s) => ({ slug: s.slug }));
 }
 
 export default async function IndustryDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const industry = getIndustryBySlug(slug);
-  if (!industry) notFound();
+  const industry = await getIndustryPageBySlug(slug);
+  if (!industry || !industry.isPublished) notFound();
+
+  // Map case study from flat fields to object (or null)
+  const caseStudy =
+    industry.caseStudyTitle && industry.caseStudyNarrative
+      ? {
+          tag: industry.caseStudyTag || "Studi Kasus",
+          title: industry.caseStudyTitle,
+          partnerName: industry.caseStudyPartnerName || "",
+          partnerLogo: industry.caseStudyPartnerLogo || "",
+          narrative: industry.caseStudyNarrative,
+          videoUrl: industry.caseStudyVideoUrl || undefined,
+          results: (industry.caseStudyResults as { value: string; label: string }[]) || [],
+        }
+      : null;
+
+  // Map testimonial from flat fields to object (or null)
+  const testimonial =
+    industry.testimonialContent && industry.testimonialName
+      ? {
+          content: industry.testimonialContent,
+          name: industry.testimonialName,
+          role: industry.testimonialRole || "",
+          company: industry.testimonialCompany || "",
+        }
+      : null;
+
+  // Map solutions: features from Json[] to string[]
+  const solutions = industry.solutions.map((s) => ({
+    icon: s.icon,
+    title: s.title,
+    description: s.description,
+    features: (s.features as string[]) || [],
+    image: s.image || undefined,
+  }));
+
+  // Map process steps
+  const process = industry.process.map((p, i) => ({
+    step: i + 1,
+    icon: p.icon,
+    title: p.title,
+    description: p.description,
+  }));
 
   return (
     <>
-      {/* 1. Hero */}
       <IndustryHero
         name={industry.name}
         icon={industry.icon}
@@ -61,47 +103,37 @@ export default async function IndustryDetailPage({ params }: PageProps) {
         description={industry.heroDescription}
       />
 
-      {/* 2. Challenges */}
       <IndustryChallenges
         industryName={industry.name}
         challenges={industry.challenges}
       />
 
-      {/* 3. Solutions */}
       <IndustrySolutions
         industryName={industry.name}
-        solutions={industry.solutions}
+        solutions={solutions}
       />
 
-      {/* 4. Case Study */}
-      {industry.caseStudy && (
+      {caseStudy && (
         <IndustryCaseStudy
           industryName={industry.name}
-          caseStudy={industry.caseStudy}
+          caseStudy={caseStudy}
         />
       )}
 
-      {/* 5. Process */}
-      <IndustryProcess steps={industry.process} />
+      <IndustryProcess steps={process} />
 
-      {/* 6. Features */}
       <IndustryFeatures features={industry.features} />
 
-      {/* 7. Stats */}
       <IndustryStats stats={industry.stats} />
 
-      {/* 8. Testimonial */}
-      {industry.testimonial && (
-        <IndustryTestimonial testimonial={industry.testimonial} />
+      {testimonial && (
+        <IndustryTestimonial testimonial={testimonial} />
       )}
 
-      {/* 9. FAQ */}
       <IndustryFaq faqs={industry.faqs} />
 
-      {/* 10. CTA */}
       <IndustryCta industryName={industry.name} />
 
-      {/* 11. Related */}
       <RelatedIndustries currentSlug={industry.slug} />
     </>
   );

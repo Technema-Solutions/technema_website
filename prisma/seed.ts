@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcryptjs";
+import { industries } from "../src/data/industries";
 
 const prisma = new PrismaClient();
 
@@ -78,6 +79,7 @@ async function main() {
         "Dapatkan pendampingan strategis dari tim ahli kami untuk merancang solusi teknologi yang tepat sesuai kebutuhan dan tujuan bisnis Anda.",
     },
   ];
+  await prisma.service.deleteMany();
   for (let i = 0; i < servicesData.length; i++) {
     await prisma.service.create({
       data: { ...servicesData[i], sortOrder: i },
@@ -94,6 +96,7 @@ async function main() {
     { name: "FLAVOUR", icon: "Star" },
     { name: "NEXTRA", icon: "Hexagon" },
   ];
+  await prisma.client.deleteMany();
   for (let i = 0; i < clientsData.length; i++) {
     await prisma.client.create({
       data: { ...clientsData[i], sortOrder: i },
@@ -108,6 +111,7 @@ async function main() {
     { value: 5, suffix: "+", label: "Tahun Pengalaman", icon: "Award" },
     { value: 99.9, suffix: "%", label: "Uptime Layanan", icon: "ShieldCheck" },
   ];
+  await prisma.stat.deleteMany();
   for (let i = 0; i < statsData.length; i++) {
     await prisma.stat.create({
       data: { ...statsData[i], sortOrder: i },
@@ -142,6 +146,7 @@ async function main() {
         "Menerapkan standar keamanan data tingkat enterprise untuk melindungi aset digital bisnis Anda.",
     },
   ];
+  await prisma.whyChooseItem.deleteMany();
   for (let i = 0; i < whyChooseData.length; i++) {
     await prisma.whyChooseItem.create({
       data: { ...whyChooseData[i], sortOrder: i },
@@ -176,6 +181,7 @@ async function main() {
         "Mengubah desain menjadi solusi yang tangguh, skalabel, dan berkinerja tinggi.",
     },
   ];
+  await prisma.processStep.deleteMany();
   for (let i = 0; i < processData.length; i++) {
     await prisma.processStep.create({
       data: { ...processData[i], sortOrder: i },
@@ -219,6 +225,7 @@ async function main() {
         "Tentu! Odoo adalah platform ERP modular yang sangat fleksibel. Kami dapat mengkustomisasi modul sesuai kebutuhan bisnis Anda, mulai dari inventaris, keuangan, SDM, hingga CRM. Setiap implementasi disesuaikan agar selaras dengan proses bisnis yang sudah ada.",
     },
   ];
+  await prisma.faqItem.deleteMany();
   for (let i = 0; i < faqData.length; i++) {
     await prisma.faqItem.create({
       data: { ...faqData[i], sortOrder: i },
@@ -319,6 +326,7 @@ async function main() {
       rating: 5,
     },
   ];
+  await prisma.testimonial.deleteMany();
   for (let i = 0; i < testimonialsData.length; i++) {
     await prisma.testimonial.create({
       data: { ...testimonialsData[i], sortOrder: i },
@@ -369,6 +377,7 @@ async function main() {
         "Aplikasi mobile lintas platform dengan pengalaman pengguna yang mulus.",
     },
   ];
+  await prisma.project.deleteMany();
   for (let i = 0; i < projectsData.length; i++) {
     await prisma.project.create({
       data: { ...projectsData[i], sortOrder: i },
@@ -384,12 +393,14 @@ async function main() {
     { label: "Artikel", href: "/artikel", megaMenu: null },
     { label: "Kontak", href: "/kontak", megaMenu: null },
   ];
+  await prisma.navigationLink.deleteMany();
   for (let i = 0; i < navData.length; i++) {
     await prisma.navigationLink.create({
       data: { ...navData[i], sortOrder: i },
     });
   }
 
+  await prisma.industry.deleteMany();
   const industriesData = [
     { name: "Kesehatan", icon: "HeartPulse" },
     { name: "Keuangan & Perbankan", icon: "Landmark" },
@@ -408,6 +419,9 @@ async function main() {
   console.log("✅ Navigation seeded");
 
   // ── Footer ──
+  await prisma.footerLink.deleteMany();
+  await prisma.footerColumn.deleteMany();
+  await prisma.socialLink.deleteMany();
   const col1 = await prisma.footerColumn.create({
     data: { title: "Tautan Berguna", sortOrder: 0 },
   });
@@ -464,6 +478,18 @@ async function main() {
 }
 
 async function seedProducts() {
+  // Clear existing products and all child entities (cascade)
+  await prisma.productFeatureHighlight.deleteMany();
+  await prisma.productCapability.deleteMany();
+  await prisma.productStep.deleteMany();
+  await prisma.productUseCase.deleteMany();
+  await prisma.productStat.deleteMany();
+  await prisma.productPricingPlan.deleteMany();
+  await prisma.productTestimonial.deleteMany();
+  await prisma.productIntegration.deleteMany();
+  await prisma.productFaq.deleteMany();
+  await prisma.product.deleteMany();
+
   // ── Arsip Pintar ──
   const arsipPintar = await prisma.product.create({
     data: {
@@ -947,6 +973,7 @@ async function seedProducts() {
 }
 
 async function seedBlogPosts() {
+  await prisma.blogPost.deleteMany();
   const posts = [
     { slug: "memanfaatkan-solusi-deskriptif-untuk-pertumbuhan-bisnis", title: "Memanfaatkan Solusi Deskriptif untuk Pertumbuhan Bisnis.", excerpt: "Pelajari bagaimana solusi teknologi inovatif dapat membantu bisnis Anda berkembang di era digital yang kompetitif dan terus berubah.", category: "Bisnis", image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop", author: "James Wilson", authorRole: "Business Consultant", readTime: "5 menit baca", isPublished: true, publishedAt: new Date("2024-06-20"), body: [{ id: "pentingnya-solusi-deskriptif", heading: "Pentingnya Solusi Deskriptif di Era Digital", content: "Di era digital yang berkembang pesat, perusahaan membutuhkan pendekatan berbasis data untuk mengambil keputusan strategis. Solusi deskriptif memungkinkan bisnis memahami apa yang telah terjadi melalui analisis data historis, memberikan gambaran jelas tentang performa operasional.\n\nDengan memanfaatkan teknologi analitik modern, perusahaan dapat mengidentifikasi pola dan tren yang sebelumnya tidak terlihat. Hal ini menjadi fondasi penting untuk strategi pertumbuhan yang berkelanjutan." }, { id: "implementasi-dalam-bisnis", heading: "Implementasi dalam Bisnis Modern", content: "Implementasi solusi deskriptif dimulai dari pengumpulan data yang terstruktur. Setiap titik data dari operasional harian, interaksi pelanggan, hingga performa keuangan perlu dikumpulkan dan diorganisir dengan baik.\n\nDashboard interaktif dan laporan otomatis memungkinkan pemangku kepentingan untuk memantau KPI secara real-time. Visualisasi data yang efektif membantu tim manajemen memahami kondisi bisnis tanpa harus mendalami detail teknis." }, { id: "studi-kasus-pertumbuhan", heading: "Studi Kasus: Pertumbuhan Melalui Data", content: "Sebuah perusahaan ritel menengah di Indonesia berhasil meningkatkan penjualan sebesar 35% setelah mengimplementasikan solusi analitik deskriptif. Mereka menganalisis pola pembelian pelanggan untuk mengoptimalkan stok dan strategi promosi.\n\nPerusahaan logistik lainnya mengurangi biaya operasional hingga 20% dengan memantau dan menganalisis data pengiriman secara deskriptif, mengidentifikasi rute yang tidak efisien dan waktu tunggu yang berlebihan." }, { id: "teknologi-pendukung", heading: "Teknologi Pendukung yang Direkomendasikan", content: "Beberapa teknologi utama yang mendukung solusi deskriptif meliputi platform Business Intelligence seperti Power BI dan Tableau, serta tools data warehousing modern seperti BigQuery dan Snowflake.\n\nIntegrasi dengan sistem ERP dan CRM yang sudah ada menjadi kunci keberhasilan implementasi. API dan middleware modern memungkinkan aliran data yang seamless antar sistem." }, { id: "langkah-memulai", heading: "Langkah Memulai Transformasi", content: "Mulailah dengan audit data yang komprehensif untuk memahami sumber data apa saja yang tersedia. Identifikasi pertanyaan bisnis kunci yang ingin dijawab, lalu pilih tools yang sesuai dengan skala dan kebutuhan organisasi Anda.\n\nPenting untuk membangun budaya data-driven di seluruh organisasi. Pelatihan tim dan penetapan data governance yang jelas akan memastikan keberhasilan jangka panjang dari investasi teknologi ini." }] },
     { slug: "cara-membuat-situs-web-modern-untuk-bisnis-anda", title: "Cara Membuat Situs Web Modern untuk Bisnis Anda.", excerpt: "Panduan lengkap membangun situs web yang responsif, cepat, dan menarik untuk meningkatkan kehadiran digital bisnis Anda.", category: "Teknologi", image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop", author: "Sarah Johnson", authorRole: "Frontend Engineer", readTime: "4 menit baca", isPublished: true, publishedAt: new Date("2024-06-20"), body: [{ id: "mengapa-situs-web-modern", heading: "Mengapa Situs Web Modern Penting?", content: "Situs web adalah wajah digital bisnis Anda. Di era di mana 80% konsumen mencari informasi secara online sebelum membeli, memiliki situs web yang modern dan profesional bukan lagi pilihan melainkan keharusan.\n\nSitus web modern tidak hanya tentang tampilan yang menarik, tetapi juga performa, aksesibilitas, dan pengalaman pengguna yang optimal di semua perangkat." }, { id: "memilih-teknologi-tepat", heading: "Memilih Teknologi yang Tepat", content: "Framework modern seperti Next.js, Nuxt, dan Remix menawarkan performa luar biasa dengan fitur seperti server-side rendering dan static site generation. Pemilihan teknologi harus disesuaikan dengan kebutuhan spesifik bisnis Anda.\n\nUntuk bisnis yang membutuhkan update konten berkala, headless CMS seperti Strapi atau Contentful menjadi pilihan ideal yang memisahkan backend dari frontend." }, { id: "desain-responsif", heading: "Prinsip Desain Responsif", content: "Pendekatan mobile-first memastikan situs web Anda terlihat sempurna di semua ukuran layar. Gunakan CSS modern seperti Flexbox dan Grid untuk layout yang fleksibel.\n\nPerhatikan tipografi, whitespace, dan hierarki visual untuk menciptakan pengalaman baca yang nyaman. Konsistensi desain di seluruh halaman membangun kepercayaan dan profesionalisme." }, { id: "optimasi-performa", heading: "Optimasi Performa Web", content: "Core Web Vitals dari Google menjadi standar pengukuran performa website. Fokus pada Largest Contentful Paint (LCP), First Input Delay (FID), dan Cumulative Layout Shift (CLS).\n\nOptimasi gambar, lazy loading, code splitting, dan caching yang tepat dapat meningkatkan kecepatan loading secara signifikan. Tools seperti Lighthouse membantu mengidentifikasi area yang perlu ditingkatkan." }] },
@@ -961,6 +988,101 @@ async function seedBlogPosts() {
 
   for (const post of posts) {
     await prisma.blogPost.create({ data: post });
+  }
+
+  // ── Industry Pages ──
+  await seedIndustryPages();
+}
+
+async function seedIndustryPages() {
+  for (let idx = 0; idx < industries.length; idx++) {
+    const ind = industries[idx];
+    const existing = await prisma.industryPage.findUnique({ where: { slug: ind.slug } });
+    if (existing) {
+      console.log(`⏭️  IndustryPage "${ind.name}" already exists, skipping`);
+      continue;
+    }
+
+    await prisma.industryPage.create({
+      data: {
+        slug: ind.slug,
+        name: ind.name,
+        icon: ind.icon,
+        tagline: ind.tagline,
+        heroHeading: ind.heroHeading,
+        heroHighlight: ind.heroHighlight,
+        heroDescription: ind.heroDescription,
+        metaTitle: ind.metaTitle || null,
+        metaDescription: ind.metaDescription || null,
+        isPublished: true,
+        sortOrder: idx,
+        // Case Study
+        caseStudyTag: ind.caseStudy?.tag || null,
+        caseStudyTitle: ind.caseStudy?.title || null,
+        caseStudyPartnerName: ind.caseStudy?.partnerName || null,
+        caseStudyPartnerLogo: ind.caseStudy?.partnerLogo || null,
+        caseStudyNarrative: ind.caseStudy?.narrative || null,
+        caseStudyVideoUrl: ind.caseStudy?.videoUrl || null,
+        caseStudyResults: ind.caseStudy?.results || [],
+        // Testimonial
+        testimonialContent: ind.testimonial?.content || null,
+        testimonialName: ind.testimonial?.name || null,
+        testimonialRole: ind.testimonial?.role || null,
+        testimonialCompany: ind.testimonial?.company || null,
+        // Child relations
+        challenges: {
+          create: ind.challenges.map((c, i) => ({
+            icon: c.icon,
+            title: c.title,
+            description: c.description,
+            sortOrder: i,
+          })),
+        },
+        solutions: {
+          create: ind.solutions.map((s, i) => ({
+            icon: s.icon,
+            title: s.title,
+            description: s.description,
+            features: s.features,
+            image: s.image || null,
+            sortOrder: i,
+          })),
+        },
+        process: {
+          create: ind.process.map((p, i) => ({
+            icon: p.icon,
+            title: p.title,
+            description: p.description,
+            sortOrder: i,
+          })),
+        },
+        features: {
+          create: ind.features.map((f, i) => ({
+            icon: f.icon,
+            title: f.title,
+            description: f.description,
+            sortOrder: i,
+          })),
+        },
+        stats: {
+          create: ind.stats.map((s, i) => ({
+            value: s.value,
+            suffix: s.suffix,
+            label: s.label,
+            icon: s.icon,
+            sortOrder: i,
+          })),
+        },
+        faqs: {
+          create: ind.faqs.map((f, i) => ({
+            question: f.question,
+            answer: f.answer,
+            sortOrder: i,
+          })),
+        },
+      },
+    });
+    console.log(`✅ IndustryPage "${ind.name}" seeded`);
   }
 }
 

@@ -9,6 +9,7 @@ export interface IndustrySolution {
   title: string;
   description: string;
   features: string[];
+  image?: string;
 }
 
 export interface IndustryCaseStudyData {

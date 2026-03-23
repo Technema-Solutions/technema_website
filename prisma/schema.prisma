@@ -345,6 +345,113 @@ model Industry {
 }
 
 // ============================================================
+// INDUSTRY PAGES (Detail pages for each industry)
+// ============================================================
+
+model IndustryPage {
+  id              String  @id @default(cuid())
+  slug            String  @unique
+  name            String
+  icon            String
+  tagline         String
+  heroHeading     String
+  heroHighlight   String
+  heroDescription String  @db.Text
+  metaTitle       String?
+  metaDescription String? @db.Text
+  isPublished     Boolean @default(false)
+  sortOrder       Int     @default(0)
+
+  // Case Study (single instance — stored as flat fields)
+  caseStudyTag         String?
+  caseStudyTitle       String?
+  caseStudyPartnerName String?
+  caseStudyPartnerLogo String?
+  caseStudyNarrative   String? @db.Text
+  caseStudyVideoUrl    String?
+  caseStudyResults     Json[]
+
+  // Testimonial (single instance — stored as flat fields)
+  testimonialContent String? @db.Text
+  testimonialName    String?
+  testimonialRole    String?
+  testimonialCompany String?
+
+  // Relations
+  challenges IndustryChallenge[]
+  solutions  IndustrySolutionItem[]
+  process    IndustryProcessStep[]
+  features   IndustryFeatureItem[]
+  stats      IndustryStatItem[]
+  faqs       IndustryFaqItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model IndustryChallenge {
+  id             String       @id @default(cuid())
+  icon           String
+  title          String
+  description    String       @db.Text
+  sortOrder      Int          @default(0)
+  industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
+  industryPageId String
+}
+
+model IndustrySolutionItem {
+  id             String       @id @default(cuid())
+  icon           String
+  title          String
+  description    String       @db.Text
+  features       Json[]
+  image          String?
+  sortOrder      Int          @default(0)
+  industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
+  industryPageId String
+}
+
+model IndustryProcessStep {
+  id             String       @id @default(cuid())
+  icon           String
+  title          String
+  description    String       @db.Text
+  sortOrder      Int          @default(0)
+  industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
+  industryPageId String
+}
+
+model IndustryFeatureItem {
+  id             String       @id @default(cuid())
+  icon           String
+  title          String
+  description    String       @db.Text
+  sortOrder      Int          @default(0)
+  industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
+  industryPageId String
+}
+
+model IndustryStatItem {
+  id             String       @id @default(cuid())
+  value          Float
+  suffix         String
+  label          String
+  icon           String
+  sortOrder      Int          @default(0)
+  industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
+  industryPageId String
+}
+
+model IndustryFaqItem {
+  id             String       @id @default(cuid())
+  question       String
+  answer         String       @db.Text
+  sortOrder      Int          @default(0)
+  industryPage   IndustryPage @relation(fields: [industryPageId], references: [id], onDelete: Cascade)
+  industryPageId String
+}
+
+// ============================================================
 // FOOTER
 // ============================================================
 

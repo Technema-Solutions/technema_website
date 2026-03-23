@@ -1,20 +1,21 @@
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeIn from "@/components/ui/FadeIn";
-import { ArrowRight, HeartPulse, GraduationCap, ShoppingCart, Landmark } from "lucide-react";
+import { ArrowRight, HeartPulse, GraduationCap, ShoppingCart, Landmark, Factory, Building2, Truck, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { industries } from "@/data/industries";
+import { getIndustryPages } from "@/lib/data";
 
 const iconMap: Record<string, LucideIcon> = {
-  HeartPulse, GraduationCap, ShoppingCart, Landmark,
+  HeartPulse, GraduationCap, ShoppingCart, Landmark, Factory, Building2, Truck, Zap,
 };
 
 interface Props {
   currentSlug: string;
 }
 
-export default function RelatedIndustries({ currentSlug }: Props) {
-  const others = industries.filter((i) => i.slug !== currentSlug);
+export default async function RelatedIndustries({ currentSlug }: Props) {
+  const allPages = await getIndustryPages();
+  const others = allPages.filter((i) => i.slug !== currentSlug);
 
   if (others.length === 0) return null;
 

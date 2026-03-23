@@ -228,6 +228,53 @@ export const getIndustries = unstable_cache(
   { tags: ["navigation"] }
 );
 
+// ── Industry Pages ──
+export const getIndustryPages = unstable_cache(
+  async () => {
+    return prisma.industryPage.findMany({
+      where: { isPublished: true },
+      orderBy: { sortOrder: "asc" },
+      select: {
+        slug: true,
+        name: true,
+        icon: true,
+        tagline: true,
+      },
+    });
+  },
+  ["industry-pages"],
+  { tags: ["industry-pages"] }
+);
+
+export const getIndustryPageBySlug = unstable_cache(
+  async (slug: string) => {
+    return prisma.industryPage.findUnique({
+      where: { slug },
+      include: {
+        challenges: { orderBy: { sortOrder: "asc" } },
+        solutions: { orderBy: { sortOrder: "asc" } },
+        process: { orderBy: { sortOrder: "asc" } },
+        features: { orderBy: { sortOrder: "asc" } },
+        stats: { orderBy: { sortOrder: "asc" } },
+        faqs: { orderBy: { sortOrder: "asc" } },
+      },
+    });
+  },
+  ["industry-page-by-slug"],
+  { tags: ["industry-pages"] }
+);
+
+export const getAllIndustryPageSlugs = unstable_cache(
+  async () => {
+    return prisma.industryPage.findMany({
+      where: { isPublished: true },
+      select: { slug: true },
+    });
+  },
+  ["industry-page-slugs"],
+  { tags: ["industry-pages"] }
+);
+
 // ── Footer ──
 export const getFooterColumns = unstable_cache(
   async () => {

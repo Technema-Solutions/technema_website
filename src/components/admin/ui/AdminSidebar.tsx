@@ -8,6 +8,7 @@ import {
   Package,
   FileText,
   FolderKanban,
+  Building2,
   Wrench,
   MessageSquareQuote,
   Users,
@@ -38,6 +39,7 @@ const sidebarSections = [
       { label: "Produk", href: "/admin/produk", icon: Package },
       { label: "Artikel", href: "/admin/artikel", icon: FileText },
       { label: "Proyek", href: "/admin/proyek", icon: FolderKanban },
+      { label: "Industri", href: "/admin/industri", icon: Building2 },
     ],
   },
   {
