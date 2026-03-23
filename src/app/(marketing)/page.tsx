@@ -1,16 +1,7 @@
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesStrip from "@/components/sections/ServicesStrip";
 import ClientLogos from "@/components/sections/ClientLogos";
-import StatsCounter from "@/components/sections/StatsCounter";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
-import ProductShowcase from "@/components/sections/ProductShowcase";
-import WorkingProcess from "@/components/sections/WorkingProcess";
-import ProjectsGallery from "@/components/sections/ProjectsGallery";
-import FaqGuideSection from "@/components/sections/FaqGuideSection";
-import Testimonials from "@/components/sections/Testimonials";
-import AppointmentBooking from "@/components/sections/AppointmentBooking";
-import BlogArticles from "@/components/sections/BlogArticles";
-import CtaBanner from "@/components/sections/CtaBanner";
 import {
   getServices,
   getClients,
@@ -24,6 +15,18 @@ import {
   getBlogPosts,
   getSiteSettings,
 } from "@/lib/data";
+
+// Below-fold sections — lazy loaded for faster initial page load
+const ProductShowcase = dynamic(() => import("@/components/sections/ProductShowcase"));
+const StatsCounter = dynamic(() => import("@/components/sections/StatsCounter"));
+const WhyChooseUs = dynamic(() => import("@/components/sections/WhyChooseUs"));
+const WorkingProcess = dynamic(() => import("@/components/sections/WorkingProcess"));
+const ProjectsGallery = dynamic(() => import("@/components/sections/ProjectsGallery"));
+const FaqGuideSection = dynamic(() => import("@/components/sections/FaqGuideSection"));
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials"));
+const AppointmentBooking = dynamic(() => import("@/components/sections/AppointmentBooking"));
+const BlogArticles = dynamic(() => import("@/components/sections/BlogArticles"));
+const CtaBanner = dynamic(() => import("@/components/sections/CtaBanner"));
 
 export default async function Home() {
   const [

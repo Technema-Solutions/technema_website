@@ -1,19 +1,22 @@
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { getIndustryPageBySlug, getAllIndustryPageSlugs } from "@/lib/data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 
 import IndustryHero from "@/components/sections/industry/IndustryHero";
-import IndustryChallenges from "@/components/sections/industry/IndustryChallenges";
-import IndustrySolutions from "@/components/sections/industry/IndustrySolutions";
-import IndustryCaseStudy from "@/components/sections/industry/IndustryCaseStudy";
-import IndustryProcess from "@/components/sections/industry/IndustryProcess";
-import IndustryFeatures from "@/components/sections/industry/IndustryFeatures";
-import IndustryStats from "@/components/sections/industry/IndustryStats";
-import IndustryTestimonial from "@/components/sections/industry/IndustryTestimonial";
-import IndustryFaq from "@/components/sections/industry/IndustryFaq";
-import IndustryCta from "@/components/sections/industry/IndustryCta";
-import RelatedIndustries from "@/components/sections/industry/RelatedIndustries";
+
+// Below-fold sections — lazy loaded
+const IndustryChallenges = dynamic(() => import("@/components/sections/industry/IndustryChallenges"));
+const IndustrySolutions = dynamic(() => import("@/components/sections/industry/IndustrySolutions"));
+const IndustryCaseStudy = dynamic(() => import("@/components/sections/industry/IndustryCaseStudy"));
+const IndustryProcess = dynamic(() => import("@/components/sections/industry/IndustryProcess"));
+const IndustryFeatures = dynamic(() => import("@/components/sections/industry/IndustryFeatures"));
+const IndustryStats = dynamic(() => import("@/components/sections/industry/IndustryStats"));
+const IndustryTestimonial = dynamic(() => import("@/components/sections/industry/IndustryTestimonial"));
+const IndustryFaq = dynamic(() => import("@/components/sections/industry/IndustryFaq"));
+const IndustryCta = dynamic(() => import("@/components/sections/industry/IndustryCta"));
+const RelatedIndustries = dynamic(() => import("@/components/sections/industry/RelatedIndustries"));
 
 interface PageProps {
   params: Promise<{ slug: string }>;

@@ -1,21 +1,24 @@
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { getProductBySlug, getAllProductSlugs, getProducts } from "@/lib/data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 import ProductHero from "@/components/sections/product/ProductHero";
-import ProductFeatures from "@/components/sections/product/ProductFeatures";
-import ProductCapabilities from "@/components/sections/product/ProductCapabilities";
-import ProductHowItWorks from "@/components/sections/product/ProductHowItWorks";
-import ProductUseCases from "@/components/sections/product/ProductUseCases";
-import ProductImpactStats from "@/components/sections/product/ProductImpactStats";
-import ProductPricing from "@/components/sections/product/ProductPricing";
-import ProductTestimonials from "@/components/sections/product/ProductTestimonials";
-import ProductIntegrations from "@/components/sections/product/ProductIntegrations";
-import ProductFaqs from "@/components/sections/product/ProductFaqs";
-import ProductCta from "@/components/sections/product/ProductCta";
-import RelatedProducts from "@/components/sections/product/RelatedProducts";
+
+// Below-fold sections — lazy loaded
+const ProductFeatures = dynamic(() => import("@/components/sections/product/ProductFeatures"));
+const ProductCapabilities = dynamic(() => import("@/components/sections/product/ProductCapabilities"));
+const ProductHowItWorks = dynamic(() => import("@/components/sections/product/ProductHowItWorks"));
+const ProductUseCases = dynamic(() => import("@/components/sections/product/ProductUseCases"));
+const ProductImpactStats = dynamic(() => import("@/components/sections/product/ProductImpactStats"));
+const ProductPricing = dynamic(() => import("@/components/sections/product/ProductPricing"));
+const ProductTestimonials = dynamic(() => import("@/components/sections/product/ProductTestimonials"));
+const ProductIntegrations = dynamic(() => import("@/components/sections/product/ProductIntegrations"));
+const ProductFaqs = dynamic(() => import("@/components/sections/product/ProductFaqs"));
+const ProductCta = dynamic(() => import("@/components/sections/product/ProductCta"));
+const RelatedProducts = dynamic(() => import("@/components/sections/product/RelatedProducts"));
 
 interface PageProps {
   params: Promise<{ slug: string }>;

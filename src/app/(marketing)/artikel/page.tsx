@@ -49,6 +49,8 @@ export default async function ArtikelPage() {
                 src={featuredPost.image}
                 alt={featuredPost.title}
                 fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 66vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               {/* Gradient overlay */}
@@ -88,6 +90,7 @@ export default async function ArtikelPage() {
                         src={post.image}
                         alt={post.title}
                         fill
+                        sizes="56px"
                         className="object-cover"
                       />
                     </div>

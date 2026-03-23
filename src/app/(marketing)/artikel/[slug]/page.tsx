@@ -184,6 +184,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                 alt={post.title}
                 fill
                 priority
+                sizes="(max-width: 1024px) 100vw, 720px"
                 className="object-cover"
               />
             </div>

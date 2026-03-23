@@ -63,6 +63,18 @@ export const getBlogPosts = unstable_cache(
     return prisma.blogPost.findMany({
       where: { isPublished: true },
       orderBy: { publishedAt: "desc" },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        excerpt: true,
+        category: true,
+        image: true,
+        author: true,
+        readTime: true,
+        publishedAt: true,
+        ogImage: true,
+      },
     });
   },
   ["blog-posts"],
@@ -133,6 +145,14 @@ export const getProjects = unstable_cache(
   async () => {
     return prisma.project.findMany({
       orderBy: { sortOrder: "asc" },
+      select: {
+        id: true,
+        title: true,
+        category: true,
+        image: true,
+        description: true,
+        sortOrder: true,
+      },
     });
   },
   ["projects"],
@@ -144,6 +164,13 @@ export const getClients = unstable_cache(
   async () => {
     return prisma.client.findMany({
       orderBy: { sortOrder: "asc" },
+      select: {
+        id: true,
+        name: true,
+        icon: true,
+        logo: true,
+        sortOrder: true,
+      },
     });
   },
   ["clients"],

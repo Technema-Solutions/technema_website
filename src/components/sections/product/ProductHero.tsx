@@ -178,11 +178,12 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
                         className="relative w-full h-full group cursor-pointer rounded-b-xl overflow-hidden"
                       >
                         {/* YouTube Thumbnail */}
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                        <Image
                           src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
                           alt={`${product.name} video thumbnail`}
-                          className="w-full h-full object-cover"
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover"
                         />
                         {/* Dark overlay */}
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
@@ -205,6 +206,7 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
                         src={product.heroImage}
                         alt={`${product.name} interface`}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover object-top rounded-b-xl"
                       />
                     )

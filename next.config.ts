@@ -9,7 +9,19 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "img.youtube.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+      },
+      {
+        protocol: "https",
+        hostname: "technema.com",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
       },
     ],
   },
