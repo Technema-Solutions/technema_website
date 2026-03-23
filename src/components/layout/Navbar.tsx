@@ -35,6 +35,7 @@ interface IndustryItem {
   name: string;
   icon: string;
   href: string;
+  tagline: string;
 }
 
 interface NavbarProps {
@@ -87,14 +88,14 @@ export default function Navbar({ navLinks, megaMenuProducts, megaMenuIndustries,
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 px-[4%] h-[80px] flex items-center justify-between transition-all duration-300",
+      "fixed top-0 left-0 right-0 z-50 px-4 sm:px-[4%] h-[80px] flex items-center justify-between transition-all duration-300",
       scrolled ? "bg-white shadow-sm" : "bg-white"
     )}>
       {/* Logo */}
       <div className="flex items-center gap-[10px]">
         <Image src="/images/logo_technema.png" alt="Technema Solutions" width={34} height={34} className="w-[34px] h-[34px] object-contain" />
         <span className="font-heading text-[22px] font-bold tracking-[-0.5px]">
-          <span className="text-dark">Technema</span>
+          <span className="text-dark">Technema Solutions</span>
         </span>
       </div>
 
@@ -254,20 +255,6 @@ function ProductsMegaMenu({ products, contactPhone }: { products: MegaMenuProduc
   );
 }
 
-const industryTaglines: Record<string, string> = {
-  Kesehatan: "Rumah sakit & klinik digital",
-  Pendidikan: "Sekolah & universitas modern",
-  UMKM: "Toko & usaha kecil menengah",
-  Pemerintahan: "Digitalisasi dokumen dengan Arsip Pintar",
-};
-
-const industrySlugs: Record<string, string> = {
-  Kesehatan: "kesehatan",
-  Pendidikan: "pendidikan",
-  UMKM: "umkm",
-  Pemerintahan: "pemerintahan",
-};
-
 function IndustriesMegaMenu({ industries }: { industries: IndustryItem[] }) {
   return (
     <div className="flex gap-8">
@@ -275,12 +262,10 @@ function IndustriesMegaMenu({ industries }: { industries: IndustryItem[] }) {
       <div className="flex-1 grid grid-cols-2 gap-3">
         {industries.map((industry) => {
           const Icon = iconMap[industry.icon];
-          const tagline = industryTaglines[industry.name];
-          const slug = industrySlugs[industry.name];
           return (
             <a
               key={industry.name}
-              href={slug ? `/industri/${slug}` : industry.href}
+              href={industry.href}
               className="group flex items-start gap-4 p-4 rounded-[12px] border border-transparent transition-all duration-200 hover:bg-light-brand hover:border-brand/10 hover:shadow-sm"
             >
               <div className="w-[48px] h-[48px] rounded-[12px] bg-light-brand flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:bg-brand/15">
@@ -290,9 +275,9 @@ function IndustriesMegaMenu({ industries }: { industries: IndustryItem[] }) {
                 <p className="text-[15px] font-heading font-bold text-dark group-hover:text-brand transition-colors duration-200">
                   {industry.name}
                 </p>
-                {tagline && (
+                {industry.tagline && (
                   <p className="text-[13px] text-text-gray leading-[1.5] mt-0.5">
-                    {tagline}
+                    {industry.tagline}
                   </p>
                 )}
                 <span className="inline-flex items-center gap-1 mt-2 text-[12px] font-semibold text-brand uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-200">

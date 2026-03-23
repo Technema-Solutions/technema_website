@@ -57,10 +57,12 @@ export default function ServicesStrip({ services }: { services: ServiceItem[] })
   return (
     <section className="relative z-30 -mt-[30px] sm:-mt-[60px]">
       <Container>
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 scrollbar-hide md:grid md:grid-cols-3 lg:grid-cols-5 md:gap-4 md:overflow-visible md:pb-0">
-          {services.map((service, i) => (
-            <FadeIn key={i} delay={i * 0.08} className="snap-center flex-shrink-0 w-[70vw] sm:w-[260px] md:w-auto md:flex-shrink-[1]">
-              <div className="relative overflow-hidden bg-[#f4f4f4] rounded-[15px] border border-[#e1e1e1] p-4 sm:p-6 text-center h-[240px] sm:h-[258px] md:h-full md:min-h-[258px] flex flex-col items-center justify-center">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 md:gap-4">
+          {services.map((service, i) => {
+            const isLastOdd = services.length % 2 !== 0 && i === services.length - 1;
+            return (
+            <FadeIn key={i} delay={i * 0.08} className={isLastOdd ? "col-span-2 max-w-[50%] mx-auto md:col-span-1 md:max-w-none" : ""}>
+              <div className="relative overflow-hidden bg-[#f4f4f4] rounded-[15px] border border-[#e1e1e1] p-4 sm:p-6 text-center h-[280px] md:min-h-[258px] md:h-auto flex flex-col items-center justify-center">
                 {/* Circuit pattern background */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
                   <line x1="60%" y1="0" x2="100%" y2="60%" stroke="#ddd" strokeWidth="0.8" />
@@ -91,7 +93,8 @@ export default function ServicesStrip({ services }: { services: ServiceItem[] })
                 </p>
               </div>
             </FadeIn>
-          ))}
+            );
+          })}
         </div>
       </Container>
     </section>

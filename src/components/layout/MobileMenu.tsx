@@ -41,6 +41,7 @@ interface IndustryItem {
   name: string;
   icon: string;
   href: string;
+  tagline: string;
 }
 
 interface MobileMenuProps {
@@ -84,7 +85,7 @@ export default function MobileMenu({ isOpen, onClose, pathname, navLinks, megaMe
           >
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <span className="text-xl font-bold font-heading">
-                <span className="text-dark">Technema</span>
+                <span className="text-dark">Technema Solutions</span>
               </span>
               <button
                 onClick={handleClose}
@@ -172,7 +173,10 @@ export default function MobileMenu({ isOpen, onClose, pathname, navLinks, megaMe
                                     className="flex items-center gap-3 py-2 px-2 rounded-lg text-[14px] text-gray-500 hover:text-brand hover:bg-light-brand transition-colors"
                                   >
                                     {Icon && <Icon className="w-4 h-4 text-brand flex-shrink-0" />}
-                                    <span className="font-medium text-dark text-[13px]">{industry.name}</span>
+                                    <div>
+                                      <span className="font-semibold text-dark block text-[13px]">{industry.name}</span>
+                                      {industry.tagline && <span className="text-[11px] text-gray-400 leading-tight">{industry.tagline}</span>}
+                                    </div>
                                   </a>
                                 );
                               })}

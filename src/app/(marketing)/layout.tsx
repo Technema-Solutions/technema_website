@@ -7,7 +7,7 @@ import { SITE_NAME, CONTACT_PHONE } from "@/lib/constants";
 import {
   getNavigationLinks,
   getMegaMenuProducts,
-  getIndustries,
+  getIndustryPages,
   getFooterColumns,
   getSocialLinks,
   getSiteSettings,
@@ -18,11 +18,11 @@ export default async function MarketingLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [navLinks, megaMenuProducts, industries, footerColumns, socialLinks, siteSettings] =
+  const [navLinks, megaMenuProducts, industryPages, footerColumns, socialLinks, siteSettings] =
     await Promise.all([
       getNavigationLinks(),
       getMegaMenuProducts(),
-      getIndustries(),
+      getIndustryPages(),
       getFooterColumns(),
       getSocialLinks(),
       getSiteSettings(),
@@ -38,7 +38,7 @@ export default async function MarketingLayout({
       <Navbar
         navLinks={navLinks.map((l) => ({ label: l.label, href: l.href, megaMenu: l.megaMenu }))}
         megaMenuProducts={megaMenuProducts}
-        megaMenuIndustries={industries.map((i) => ({ name: i.name, icon: i.icon, href: i.href }))}
+        megaMenuIndustries={industryPages.map((i) => ({ name: i.name, icon: i.icon, href: `/industri/${i.slug}`, tagline: i.tagline }))}
         contactPhone={CONTACT_PHONE}
       />
       <main>{children}</main>

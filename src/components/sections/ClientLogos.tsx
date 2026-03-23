@@ -51,7 +51,7 @@ export default function ClientLogos({ clients }: { clients: ClientItem[] }) {
         Mitra Perusahaan Kami
       </p>
 
-      <div className="group relative flex">
+      <div className="group relative flex overflow-hidden">
         {/* Fade edges */}
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />

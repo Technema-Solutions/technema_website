@@ -208,10 +208,20 @@
 
 @media (max-width: 640px) {
   #cc-main .cm {
-    max-width: 100%;
-    margin: 0;
-    border-radius: 1.25rem 1.25rem 0 0;
-    border-bottom: none;
+    position: fixed !important;
+    bottom: 0.75rem !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(12, 45, 72, 0.08);
+  }
+
+  #cc-main .cm__body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   #cc-main .cm__btns {
@@ -231,14 +241,26 @@
   }
 
   #cc-main .pm {
-    margin: 0;
-    max-height: 90vh;
-    max-height: 90dvh;
-    border-radius: 1.25rem 1.25rem 0 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 50% !important;
+    bottom: auto !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    width: auto !important;
+    max-height: 85vh !important;
+    max-height: 85dvh !important;
+    max-width: none !important;
+    border-radius: 1.25rem !important;
+    margin: 0 !important;
+    transform: translateY(calc(-50% + 1.6em)) !important;
+  }
+
+  .show--preferences #cc-main .cc--anim .pm {
+    transform: translateY(-50%) !important;
+  }
+
+  #cc-main .pm__body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   #cc-main .pm__footer .pm__btn {

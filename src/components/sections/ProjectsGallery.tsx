@@ -102,7 +102,7 @@ export default function ProjectsGallery({ projects }: { projects: ProjectItem[] 
   const handleNext = () => swiperRef.current?.slideNext();
 
   return (
-    <div className="px-4 sm:px-6 lg:px-10 bg-[#f4f4f4] py-10">
+    <div className="overflow-hidden px-4 sm:px-6 lg:px-10 bg-[#f4f4f4] py-10">
     <section className="relative bg-[#0C2D48] py-20 lg:py-28 rounded-[2rem] lg:rounded-[3rem] overflow-clip">
       {/* Background decorations */}
       <CircuitDots />

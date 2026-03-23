@@ -4,7 +4,7 @@ import { CONTACT_PHONE } from "@/lib/constants";
 
 export default function CtaBanner() {
   return (
-    <section className="px-4 sm:px-8 lg:px-[50px]">
+    <section className="overflow-hidden px-4 sm:px-8 lg:px-[50px]">
       <div
         className="bg-brand py-8"
         style={{ borderRadius: "40px 40px 0 0" }}

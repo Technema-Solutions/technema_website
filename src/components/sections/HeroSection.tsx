@@ -27,7 +27,7 @@ export default function HeroSection({
     const words = typingWords && typingWords.length > 0 ? typingWords : DEFAULT_TYPING_WORDS;
     const description = subheading || DEFAULT_SUBHEADING;
     return (
-        <section className="relative px-[4%] pt-[80px]">
+        <section className="relative overflow-hidden px-[4%] pt-[80px]">
             {/* Dark hero container with rounded edges */}
             <div
                 className={cn(
