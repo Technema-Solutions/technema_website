@@ -1,0 +1,250 @@
+/* Base vanilla-cookieconsent styles */
+@import "vanilla-cookieconsent/dist/cookieconsent.css";
+
+/* ============================================================
+   Technema Solutions — Cookie Consent Theme
+   Brand: #3D7EAA (blue), #0C2D48 (dark), #6BB8D6 (light blue)
+   ============================================================ */
+
+:root {
+  /* Colors */
+  --cc-bg: #fff;
+  --cc-primary-color: #0C2D48;
+  --cc-secondary-color: #64748B;
+  --cc-btn-primary-bg: #3D7EAA;
+  --cc-btn-primary-color: #fff;
+  --cc-btn-primary-border-color: #3D7EAA;
+  --cc-btn-primary-hover-bg: #2D6890;
+  --cc-btn-primary-hover-color: #fff;
+  --cc-btn-primary-hover-border-color: #2D6890;
+  --cc-btn-secondary-bg: #EFF7FB;
+  --cc-btn-secondary-color: #0C2D48;
+  --cc-btn-secondary-border-color: #D4ECF5;
+  --cc-btn-secondary-hover-bg: #E0EFF6;
+  --cc-btn-secondary-hover-color: #0C2D48;
+  --cc-btn-secondary-hover-border-color: #A9D9EB;
+  --cc-separator-border-color: #E2E8F0;
+  --cc-toggle-on-bg: #3D7EAA;
+  --cc-toggle-off-bg: #CBD5E1;
+  --cc-toggle-readonly-bg: #3D7EAA;
+  --cc-link-color: #3D7EAA;
+  --cc-overlay-bg: rgba(12, 45, 72, 0.6);
+  --cc-font-family: var(--font-fira-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --cc-modal-border-radius: 1.25rem;
+  --cc-btn-border-radius: 9999px;
+  --cc-modal-margin: 1.25rem;
+}
+
+/* ── Consent Modal (Banner) ── */
+
+#cc-main .cm {
+  box-shadow:
+    0 -4px 6px -1px rgba(0, 0, 0, 0.03),
+    0 20px 60px -12px rgba(12, 45, 72, 0.25),
+    0 0 0 1px rgba(12, 45, 72, 0.06);
+  border: 1px solid rgba(12, 45, 72, 0.08);
+  max-width: 460px;
+}
+
+#cc-main .cm__title {
+  font-family: var(--font-poppins), var(--cc-font-family);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #0C2D48;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Cookie icon before title */
+#cc-main .cm__title::before {
+  content: "\1F36A";
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+#cc-main .cm__desc {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #64748B;
+}
+
+/* ── Buttons ── */
+
+#cc-main .cm__btn,
+#cc-main .pm__btn {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  transition: all 0.2s ease;
+  border-width: 2px;
+}
+
+#cc-main .cm__btn:first-child,
+#cc-main .pm__btn:first-child {
+  box-shadow: 0 4px 14px rgba(61, 126, 170, 0.3);
+}
+
+#cc-main .cm__btn:first-child:hover,
+#cc-main .pm__btn:first-child:hover {
+  box-shadow: 0 6px 20px rgba(61, 126, 170, 0.4);
+  transform: translateY(-1px);
+}
+
+/* "Kelola Preferensi" link style */
+#cc-main .cm__btn--secondary {
+  border-color: transparent;
+  background: transparent;
+  color: #3D7EAA;
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0.5rem 0;
+}
+
+#cc-main .cm__btn--secondary:hover {
+  background: transparent;
+  color: #2D6890;
+}
+
+/* Button group layout */
+#cc-main .cm__btns {
+  gap: 0.5rem;
+}
+
+/* ── Preferences Modal ── */
+
+#cc-main .pm {
+  box-shadow: 0 25px 80px -16px rgba(12, 45, 72, 0.35);
+  border: 1px solid rgba(12, 45, 72, 0.08);
+  border-radius: 1.25rem;
+  max-width: 640px;
+}
+
+#cc-main .pm__header {
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 1rem;
+}
+
+#cc-main .pm__title {
+  font-family: var(--font-poppins), var(--cc-font-family);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #0C2D48;
+}
+
+#cc-main .pm__section-title {
+  font-family: var(--font-poppins), var(--cc-font-family);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: #0C2D48;
+}
+
+#cc-main .pm__section-desc {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: #64748B;
+}
+
+#cc-main .pm__section {
+  border-bottom-color: #F1F5F9;
+}
+
+/* Close button */
+#cc-main .pm__close-btn {
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+#cc-main .pm__close-btn:hover {
+  background: #EFF7FB;
+}
+
+/* Toggle switch */
+#cc-main .pm__toggle .toggle__icon {
+  border-radius: 9999px;
+}
+
+/* Footer buttons in preferences */
+#cc-main .pm__footer {
+  border-top: 1px solid #E2E8F0;
+  padding-top: 1rem;
+}
+
+#cc-main .pm__footer .pm__btn {
+  min-width: 140px;
+  justify-content: center;
+}
+
+/* ── Overlay / Backdrop ── */
+
+#cc-main .pm__overlay {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ── Animation — slide up entrance ── */
+
+#cc-main .cm--bottom {
+  animation: cc-slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes cc-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Mobile Responsive ── */
+
+@media (max-width: 640px) {
+  #cc-main .cm {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 1.25rem 1.25rem 0 0;
+    border-bottom: none;
+  }
+
+  #cc-main .cm__btns {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #cc-main .cm__btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  #cc-main .cm__btn--secondary {
+    width: auto;
+    text-align: center;
+  }
+
+  #cc-main .pm {
+    margin: 0;
+    max-height: 90vh;
+    max-height: 90dvh;
+    border-radius: 1.25rem 1.25rem 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #cc-main .pm__footer .pm__btn {
+    min-width: unset;
+    flex: 1;
+    font-size: 0.75rem;
+    padding: 0.65rem 1rem;
+  }
+}

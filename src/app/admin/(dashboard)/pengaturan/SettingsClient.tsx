@@ -22,6 +22,8 @@ type SiteSettings = {
   heroSubheading: string;
   heroTypingWords: string[] | unknown;
   heroVideoUrl: string;
+  gaTrackingId: string;
+  gscSiteUrl: string;
   createdAt: Date;
   updatedAt: Date;
 } | null;
@@ -57,6 +59,8 @@ export default function SettingsClient({
     heroSubheading: settings?.heroSubheading ?? "",
     heroTypingWords: typingWords.join(", "),
     heroVideoUrl: settings?.heroVideoUrl ?? "",
+    gaTrackingId: settings?.gaTrackingId ?? "",
+    gscSiteUrl: settings?.gscSiteUrl ?? "",
   });
 
   const update = (key: string, value: string) => {
@@ -84,6 +88,8 @@ export default function SettingsClient({
         heroSubheading: form.heroSubheading,
         heroTypingWords: typingWordsArray,
         heroVideoUrl: form.heroVideoUrl,
+        gaTrackingId: form.gaTrackingId,
+        gscSiteUrl: form.gscSiteUrl,
       });
       toast.success("Pengaturan berhasil disimpan");
       router.refresh();
@@ -256,6 +262,38 @@ export default function SettingsClient({
               </FormField>
               <p className="mt-1 text-xs text-gray-400">
                 URL video YouTube untuk tombol &quot;Tonton Video&quot; di Hero
+              </p>
+            </div>
+          </div>
+        </section>
+        {/* Integrasi Analytics */}
+        <section className="rounded-lg border border-gray-200 bg-white p-6">
+          <h2 className="mb-4 text-lg font-semibold text-gray-900">
+            Integrasi Analytics
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <FormField label="Google Analytics 4 — Measurement ID">
+              <input
+                type="text"
+                value={form.gaTrackingId}
+                onChange={(e) => update("gaTrackingId", e.target.value)}
+                className={inputClass}
+                placeholder="G-XXXXXXXXXX"
+              />
+            </FormField>
+            <FormField label="Google Search Console — Site URL">
+              <input
+                type="text"
+                value={form.gscSiteUrl}
+                onChange={(e) => update("gscSiteUrl", e.target.value)}
+                className={inputClass}
+                placeholder="https://technema.com"
+              />
+            </FormField>
+            <div className="sm:col-span-2">
+              <p className="text-xs text-gray-400">
+                Masukkan Measurement ID dari Google Analytics 4 (format: G-XXXXXXXXXX) untuk mengaktifkan tracking pengunjung.
+                Cookie consent banner akan otomatis ditampilkan kepada pengunjung.
               </p>
             </div>
           </div>

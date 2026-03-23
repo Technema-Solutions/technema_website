@@ -24,6 +24,8 @@ export async function updateSiteSettings(data: {
   heroSubheading?: string;
   heroTypingWords?: string[];
   heroVideoUrl?: string;
+  gaTrackingId?: string;
+  gscSiteUrl?: string;
 }) {
   await requireAdmin();
   await prisma.siteSettings.upsert({

@@ -40,6 +40,9 @@ model SiteSettings {
   heroSubheading   String  @default("")
   heroTypingWords  Json    @default("[]") // string[]
   heroVideoUrl     String  @default("")
+  // Analytics integration
+  gaTrackingId     String  @default("")   // GA4 Measurement ID (G-XXXXXXX)
+  gscSiteUrl       String  @default("")   // Google Search Console verified site URL
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }

@@ -1,5 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import CookieConsentBanner from "@/components/CookieConsent";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { OrganizationJsonLd } from "@/components/seo/JsonLd";
 import { SITE_NAME, CONTACT_PHONE } from "@/lib/constants";
 import {
@@ -40,6 +42,10 @@ export default async function MarketingLayout({
         contactPhone={CONTACT_PHONE}
       />
       <main>{children}</main>
+      {siteSettings?.gaTrackingId && (
+        <GoogleAnalytics gaId={siteSettings.gaTrackingId} />
+      )}
+      <CookieConsentBanner />
       <Footer
         siteName={siteSettings?.siteName ?? SITE_NAME}
         companyTagline={companyTagline}

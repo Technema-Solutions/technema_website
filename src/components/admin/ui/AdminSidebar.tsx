@@ -24,6 +24,7 @@ import {
   ChevronLeft,
   X,
   Layers,
+  LineChart,
 } from "lucide-react";
 
 const sidebarSections = [
@@ -31,6 +32,7 @@ const sidebarSections = [
     title: null,
     items: [
       { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
+      { label: "Analitik", href: "/admin/analitik", icon: LineChart },
     ],
   },
   {
