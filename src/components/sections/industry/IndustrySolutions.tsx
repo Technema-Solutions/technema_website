@@ -144,16 +144,24 @@ export default function IndustrySolutions({ industryName, solutions }: Props) {
           {/* Right — Dynamic Visual Panel (desktop only) */}
           <FadeIn delay={0.2} direction="right" className="hidden lg:block flex-1 min-w-0">
             <div className="sticky top-[100px]">
-              <div className="relative rounded-2xl bg-gradient-to-br from-dark to-dark3 overflow-hidden aspect-[4/3]">
-                {/* Grid pattern */}
-                <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{
-                  backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-                  backgroundSize: "30px 30px",
-                }} />
+              <div className={`relative rounded-2xl bg-gradient-to-br from-dark to-dark3 overflow-hidden ${
+                activeSolution.image ? "aspect-video" : "aspect-[4/3]"
+              }`}>
+                {/* Grid pattern — only for fallback */}
+                {!activeSolution.image && (
+                  <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{
+                    backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
+                    backgroundSize: "30px 30px",
+                  }} />
+                )}
 
-                {/* Glow */}
-                <div className="absolute top-[15%] right-[15%] w-[200px] h-[200px] rounded-full bg-brand/10 blur-[80px] pointer-events-none" />
-                <div className="absolute bottom-[10%] left-[10%] w-[150px] h-[150px] rounded-full bg-brand-light/[0.07] blur-[60px] pointer-events-none" />
+                {/* Glow — only for fallback */}
+                {!activeSolution.image && (
+                  <>
+                    <div className="absolute top-[15%] right-[15%] w-[200px] h-[200px] rounded-full bg-brand/10 blur-[80px] pointer-events-none" />
+                    <div className="absolute bottom-[10%] left-[10%] w-[150px] h-[150px] rounded-full bg-brand-light/[0.07] blur-[60px] pointer-events-none" />
+                  </>
+                )}
 
                 {/* Content — animated on change */}
                 <AnimatePresence mode="wait">
@@ -163,61 +171,48 @@ export default function IndustrySolutions({ industryName, solutions }: Props) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="relative z-10 flex flex-col items-center justify-center h-full p-6"
+                    className={`relative z-10 h-full ${
+                      activeSolution.image
+                        ? "w-full"
+                        : "flex flex-col items-center justify-center p-6"
+                    }`}
                   >
-                    {/* Number watermark */}
-                    <span className="absolute top-6 right-8 font-heading text-[80px] font-bold leading-none text-white/[0.03] select-none pointer-events-none">
-                      {String(activeIndex + 1).padStart(2, "0")}
-                    </span>
-
                     {activeSolution.image ? (
-                      /* Image/Video from CMS */
+                      /* Image/Video from CMS — fills card edge-to-edge */
                       /\.(mp4|webm)$/i.test(activeSolution.image) ? (
-                        /* Video — browser mockup frame */
-                        <div className="relative w-full h-full flex items-center justify-center p-4">
-                          <div className="w-full rounded-xl overflow-hidden shadow-2xl shadow-black/30 border border-white/10">
-                            {/* Browser title bar */}
-                            <div className="flex items-center gap-2 px-4 h-8 bg-[#1e1e2e] border-b border-white/[0.06]">
-                              <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                              <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                              <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-                            </div>
-                            {/* Video */}
-                            <video
-                              key={activeSolution.image}
-                              src={activeSolution.image}
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              className="w-full h-auto block"
-                            />
-                          </div>
-                        </div>
+                        <video
+                          key={activeSolution.image}
+                          src={activeSolution.image}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                        />
+                      ) : /\.(svg|gif)$/i.test(activeSolution.image) ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={activeSolution.image}
+                          alt={activeSolution.title}
+                          className="w-full h-full object-cover"
+                        />
                       ) : (
-                        /* Static image */
-                        <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/[0.04] border border-white/10">
-                          {/\.(svg|gif)$/i.test(activeSolution.image) ? (
-                            /* eslint-disable-next-line @next/next/no-img-element */
-                            <img
-                              src={activeSolution.image}
-                              alt={activeSolution.title}
-                              className="w-full h-full object-contain p-6"
-                            />
-                          ) : (
-                            <Image
-                              src={activeSolution.image}
-                              alt={activeSolution.title}
-                              fill
-                              className="object-contain p-6"
-                              sizes="(max-width: 1024px) 100vw, 50vw"
-                            />
-                          )}
-                        </div>
+                        <Image
+                          src={activeSolution.image}
+                          alt={activeSolution.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                        />
                       )
                     ) : (
                       /* Fallback: Icon + Title + Tags */
                       <>
+                        {/* Number watermark */}
+                        <span className="absolute top-6 right-8 font-heading text-[80px] font-bold leading-none text-white/[0.03] select-none pointer-events-none">
+                          {String(activeIndex + 1).padStart(2, "0")}
+                        </span>
+
                         <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center shadow-[0_8px_40px_rgba(61,126,170,0.35)] mb-6">
                           {ActiveIcon && <ActiveIcon className="w-12 h-12 text-white" strokeWidth={1.5} />}
                         </div>
@@ -241,20 +236,22 @@ export default function IndustrySolutions({ industryName, solutions }: Props) {
                         </div>
                       </>
                     )}
-
-                    {/* Decorative dots */}
-                    <div className="absolute bottom-6 left-6 flex gap-1.5">
-                      {solutions.map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                            i === activeIndex ? "bg-brand-light" : "bg-white/20"
-                          }`}
-                        />
-                      ))}
-                    </div>
                   </motion.div>
                 </AnimatePresence>
+
+                {/* Decorative dots — only for fallback */}
+                {!activeSolution.image && (
+                  <div className="absolute bottom-6 left-6 z-20 flex gap-1.5">
+                    {solutions.map((_, i) => (
+                      <div
+                        key={i}
+                        className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                          i === activeIndex ? "bg-brand-light" : "bg-white/20"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </FadeIn>
