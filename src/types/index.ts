@@ -190,6 +190,7 @@ export interface ProductDetail extends Product {
   slug: string;
   description: string;
   heroImage?: string;
+  heroVideoUrl?: string;
   category: "pos" | "analytics" | "document-management" | "ai";
   clientLogos?: string[];
   featureHighlights?: ProductFeatureHighlight[];

@@ -80,6 +80,7 @@ export async function updateProduct(
     icon?: string;
     logo?: string;
     heroImage?: string | null;
+    heroVideoUrl?: string | null;
     category?: string;
     isPublished?: boolean;
     metaTitle?: string | null;

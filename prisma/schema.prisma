@@ -56,7 +56,8 @@ model Product {
   description String   @default("")
   icon        String   @default("")
   logo        String?
-  heroImage   String?
+  heroImage    String?
+  heroVideoUrl String?
   category    String   @default("") // pos, analytics, document-management, ai
   features    Json     @default("[]") // string[]
   isPublished Boolean  @default(false)

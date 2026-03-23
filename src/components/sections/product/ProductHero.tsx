@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -5,7 +8,15 @@ import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import { CircuitPatternDark, DotGrid } from "@/components/ui/SvgDecorations";
 import { CONTACT_PHONE } from "@/lib/constants";
+import { Play } from "lucide-react";
 import type { ProductDetail } from "@/types";
+
+function extractYouTubeId(url: string): string | null {
+  const match = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
+  return match ? match[1] : null;
+}
 
 interface BreadcrumbItem {
   label: string;
@@ -18,6 +29,9 @@ interface ProductHeroProps {
 }
 
 export default function ProductHero({ product, breadcrumbItems }: ProductHeroProps) {
+  const youtubeId = product.heroVideoUrl ? extractYouTubeId(product.heroVideoUrl) : null;
+  const [playing, setPlaying] = useState(false);
+
   return (
     <section className="bg-dark relative overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 lg:pb-24 border-b border-white/5">
       {/* Dynamic Background Gradients */}
@@ -147,7 +161,40 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
 
                 {/* Content Area */}
                 <div className="relative w-full h-[calc(100%-2rem)] bg-dark/50 p-1 flex mt-0">
-                  {product.heroImage ? (
+                  {youtubeId ? (
+                    /* YouTube Embed — click-to-play */
+                    playing ? (
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`}
+                        title={`${product.name} video`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full rounded-b-xl border-0"
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setPlaying(true)}
+                        className="relative w-full h-full group cursor-pointer rounded-b-xl overflow-hidden"
+                      >
+                        {/* YouTube Thumbnail */}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
+                          alt={`${product.name} video thumbnail`}
+                          className="w-full h-full object-cover"
+                        />
+                        {/* Dark overlay */}
+                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
+                        {/* Play button */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-2xl">
+                            <Play className="w-7 h-7 sm:w-8 sm:h-8 text-dark fill-dark ml-1" />
+                          </div>
+                        </div>
+                      </button>
+                    )
+                  ) : product.heroImage ? (
                     /\.(mp4|webm)$/i.test(product.heroImage) ? (
                       <video src={product.heroImage} autoPlay loop muted playsInline className="w-full h-full object-cover object-top rounded-b-xl" />
                     ) : /\.(svg|gif)$/i.test(product.heroImage) ? (
@@ -181,7 +228,7 @@ export default function ProductHero({ product, breadcrumbItems }: ProductHeroPro
                     </div>
                   )}
                   {/* Subtle glare effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+                  {!playing && <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none rounded-b-xl" />}
                 </div>
               </div>
               

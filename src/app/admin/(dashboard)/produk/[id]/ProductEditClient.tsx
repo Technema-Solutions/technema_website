@@ -83,6 +83,7 @@ export default function ProductEditClient({
   const [saving, setSaving] = useState(false);
   const [logo, setLogo] = useState(product.logo || "");
   const [heroImage, setHeroImage] = useState(product.heroImage || "");
+  const [heroVideoUrl, setHeroVideoUrl] = useState(product.heroVideoUrl || "");
   const [icon, setIcon] = useState(product.icon);
 
   // Item counts for tab badges
@@ -111,6 +112,7 @@ export default function ProductEditClient({
         icon: form.get("icon") as string,
         logo: logo || undefined,
         heroImage: heroImage || null,
+        heroVideoUrl: heroVideoUrl || null,
         category: form.get("category") as string,
         isPublished: form.get("isPublished") === "on",
         metaTitle: (form.get("metaTitle") as string) || null,
@@ -203,6 +205,17 @@ export default function ProductEditClient({
 
           <FormField label="Hero Image">
             <ImageUpload value={heroImage} onChange={setHeroImage} label="Upload gambar hero (ditampilkan di sisi kanan halaman produk)" />
+          </FormField>
+
+          <FormField label="YouTube Video URL (opsional)">
+            <input
+              type="url"
+              value={heroVideoUrl}
+              onChange={(e) => setHeroVideoUrl(e.target.value)}
+              placeholder="https://www.youtube.com/watch?v=..."
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-brand focus:ring-1 focus:ring-brand"
+            />
+            <p className="text-xs text-gray-500 mt-1">Jika diisi, video YouTube akan ditampilkan di hero menggantikan gambar.</p>
           </FormField>
 
           <FormField label="Related Product Slugs (pisahkan koma)">

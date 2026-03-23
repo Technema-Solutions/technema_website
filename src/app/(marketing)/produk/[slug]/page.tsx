@@ -76,6 +76,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     icon: product.icon,
     logo: product.logo ?? undefined,
     heroImage: product.heroImage ?? undefined,
+    heroVideoUrl: product.heroVideoUrl ?? undefined,
     category: product.category as "pos" | "analytics" | "document-management" | "ai",
     href: `/produk/${product.slug}`,
     features: product.features as string[],
