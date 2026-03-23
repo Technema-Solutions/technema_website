@@ -1,6 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { headers } from "next/headers";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function submitContactForm(data: {
   name: string;
@@ -10,6 +12,13 @@ export async function submitContactForm(data: {
   message: string;
 }): Promise<{ success: true } | { success: false; error: string }> {
   try {
+    // Rate limit: 3 submissions per 10 minutes per IP
+    const headersList = await headers();
+    const ip = headersList.get("x-forwarded-for") || "unknown";
+    if (!checkRateLimit(`contact:${ip}`, 3, 10 * 60 * 1000)) {
+      return { success: false, error: "Terlalu banyak pengiriman. Silakan coba lagi nanti." };
+    }
+
     // Validate required fields
     if (!data.name || !data.name.trim()) {
       return { success: false, error: "Nama wajib diisi" };

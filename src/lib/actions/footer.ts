@@ -2,10 +2,12 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 // ── Footer Columns ──
 
 export async function getAdminFooterColumns() {
+  await requireAdmin();
   return prisma.footerColumn.findMany({
     orderBy: { sortOrder: "asc" },
     include: {
@@ -17,6 +19,7 @@ export async function getAdminFooterColumns() {
 }
 
 export async function createFooterColumn(data: { title: string }) {
+  await requireAdmin();
   const count = await prisma.footerColumn.count();
   const column = await prisma.footerColumn.create({
     data: {
@@ -29,6 +32,7 @@ export async function createFooterColumn(data: { title: string }) {
 }
 
 export async function deleteFooterColumn(id: string) {
+  await requireAdmin();
   await prisma.footerColumn.delete({ where: { id } });
   revalidatePath("/", "layout");
 }
@@ -40,6 +44,7 @@ export async function createFooterLink(data: {
   label: string;
   href: string;
 }) {
+  await requireAdmin();
   const count = await prisma.footerLink.count({
     where: { columnId: data.columnId },
   });
@@ -60,11 +65,13 @@ export async function updateFooterLink(
     href?: string;
   }
 ) {
+  await requireAdmin();
   await prisma.footerLink.update({ where: { id }, data });
   revalidatePath("/", "layout");
 }
 
 export async function deleteFooterLink(id: string) {
+  await requireAdmin();
   await prisma.footerLink.delete({ where: { id } });
   revalidatePath("/", "layout");
 }
@@ -72,6 +79,7 @@ export async function deleteFooterLink(id: string) {
 // ── Social Links ──
 
 export async function getAdminSocialLinks() {
+  await requireAdmin();
   return prisma.socialLink.findMany({
     orderBy: { sortOrder: "asc" },
   });
@@ -82,6 +90,7 @@ export async function createSocialLink(data: {
   href: string;
   icon: string;
 }) {
+  await requireAdmin();
   const count = await prisma.socialLink.count();
   const link = await prisma.socialLink.create({
     data: {
@@ -101,11 +110,13 @@ export async function updateSocialLink(
     icon?: string;
   }
 ) {
+  await requireAdmin();
   await prisma.socialLink.update({ where: { id }, data });
   revalidatePath("/", "layout");
 }
 
 export async function deleteSocialLink(id: string) {
+  await requireAdmin();
   await prisma.socialLink.delete({ where: { id } });
   revalidatePath("/", "layout");
 }

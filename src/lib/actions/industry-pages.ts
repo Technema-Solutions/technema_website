@@ -3,8 +3,10 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import slugify from "slugify";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getAdminIndustryPages() {
+  await requireAdmin();
   return prisma.industryPage.findMany({
     orderBy: { sortOrder: "asc" },
     select: {
@@ -20,6 +22,7 @@ export async function getAdminIndustryPages() {
 }
 
 export async function getAdminIndustryPage(id: string) {
+  await requireAdmin();
   return prisma.industryPage.findUnique({
     where: { id },
     include: {
@@ -35,6 +38,7 @@ export async function getAdminIndustryPage(id: string) {
 }
 
 export async function toggleIndustryPagePublish(id: string, isPublished: boolean) {
+  await requireAdmin();
   await prisma.industryPage.update({
     where: { id },
     data: { isPublished },
@@ -43,6 +47,7 @@ export async function toggleIndustryPagePublish(id: string, isPublished: boolean
 }
 
 export async function deleteIndustryPage(id: string) {
+  await requireAdmin();
   await prisma.industryPage.delete({ where: { id } });
   revalidatePath("/", "layout");
 }
@@ -55,6 +60,7 @@ export async function createIndustryPage(data: {
   heroHighlight: string;
   heroDescription: string;
 }) {
+  await requireAdmin();
   const slug = slugify(data.name, { lower: true, strict: true });
   const count = await prisma.industryPage.count();
   const page = await prisma.industryPage.create({
@@ -90,6 +96,7 @@ export async function updateIndustryPage(
     caseStudyResults?: { value: string; label: string }[];
   }
 ) {
+  await requireAdmin();
   await prisma.industryPage.update({ where: { id }, data });
   revalidatePath("/", "layout");
 }
@@ -100,6 +107,7 @@ export async function saveIndustryChallenges(
   industryPageId: string,
   items: { icon: string; title: string; description: string }[]
 ) {
+  await requireAdmin();
   await prisma.industryChallenge.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industryChallenge.create({
@@ -113,6 +121,7 @@ export async function saveIndustrySolutions(
   industryPageId: string,
   items: { icon: string; title: string; description: string; features: string[]; image?: string }[]
 ) {
+  await requireAdmin();
   await prisma.industrySolutionItem.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industrySolutionItem.create({
@@ -134,6 +143,7 @@ export async function saveIndustryProcessSteps(
   industryPageId: string,
   items: { icon: string; title: string; description: string }[]
 ) {
+  await requireAdmin();
   await prisma.industryProcessStep.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industryProcessStep.create({
@@ -147,6 +157,7 @@ export async function saveIndustryFeatures(
   industryPageId: string,
   items: { icon: string; title: string; description: string }[]
 ) {
+  await requireAdmin();
   await prisma.industryFeatureItem.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industryFeatureItem.create({
@@ -160,6 +171,7 @@ export async function saveIndustryStats(
   industryPageId: string,
   items: { value: number; suffix: string; label: string; icon: string }[]
 ) {
+  await requireAdmin();
   await prisma.industryStatItem.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industryStatItem.create({
@@ -173,6 +185,7 @@ export async function saveIndustryFaqs(
   industryPageId: string,
   items: { question: string; answer: string }[]
 ) {
+  await requireAdmin();
   await prisma.industryFaqItem.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industryFaqItem.create({
@@ -186,6 +199,7 @@ export async function saveIndustryTestimonials(
   industryPageId: string,
   items: { name: string; role: string; company: string; content: string }[]
 ) {
+  await requireAdmin();
   await prisma.industryTestimonial.deleteMany({ where: { industryPageId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.industryTestimonial.create({

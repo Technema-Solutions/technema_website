@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import type { Metadata } from "next";
+import sanitizeHtml from "sanitize-html";
 import Container from "@/components/ui/Container";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { StickyTableOfContents, CollapsibleTableOfContents } from "@/components/ui/TableOfContents";
@@ -194,7 +195,20 @@ export default async function ArticleDetailPage({ params }: PageProps) {
               {isHtml ? (
                 /* New HTML format from Tiptap */
                 <div
-                  dangerouslySetInnerHTML={{ __html: body as string }}
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtml(body as string, {
+                      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+                        "img", "h1", "h2", "h3", "iframe", "figure", "figcaption",
+                      ]),
+                      allowedAttributes: {
+                        ...sanitizeHtml.defaults.allowedAttributes,
+                        img: ["src", "alt", "width", "height", "class", "loading"],
+                        iframe: ["src", "width", "height", "allowfullscreen", "frameborder", "allow"],
+                        "*": ["id", "class", "style"],
+                      },
+                      allowedIframeHostnames: ["www.youtube.com", "www.youtube-nocookie.com"],
+                    }),
+                  }}
                   className={
                     "article-body " +
                     "[&_h2]:font-heading [&_h2]:text-[22px] sm:[&_h2]:text-[26px] [&_h2]:font-bold [&_h2]:text-dark [&_h2]:leading-[1.35] [&_h2]:mb-4 [&_h2]:mt-8 [&_h2]:scroll-mt-24 sm:[&_h2]:scroll-mt-28 " +

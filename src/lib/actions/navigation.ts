@@ -2,10 +2,12 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 // ── Navigation Links ──
 
 export async function getAdminNavigationLinks() {
+  await requireAdmin();
   return prisma.navigationLink.findMany({
     orderBy: { sortOrder: "asc" },
   });
@@ -16,6 +18,7 @@ export async function createNavigationLink(data: {
   href: string;
   megaMenu?: string;
 }) {
+  await requireAdmin();
   const count = await prisma.navigationLink.count();
   const link = await prisma.navigationLink.create({
     data: {
@@ -35,16 +38,19 @@ export async function updateNavigationLink(
     megaMenu?: string | null;
   }
 ) {
+  await requireAdmin();
   await prisma.navigationLink.update({ where: { id }, data });
   revalidatePath("/", "layout");
 }
 
 export async function deleteNavigationLink(id: string) {
+  await requireAdmin();
   await prisma.navigationLink.delete({ where: { id } });
   revalidatePath("/", "layout");
 }
 
 export async function reorderNavigationLinks(ids: string[]) {
+  await requireAdmin();
   for (let i = 0; i < ids.length; i++) {
     await prisma.navigationLink.update({
       where: { id: ids[i] },
@@ -57,6 +63,7 @@ export async function reorderNavigationLinks(ids: string[]) {
 // ── Industries ──
 
 export async function getAdminIndustries() {
+  await requireAdmin();
   return prisma.industry.findMany({
     orderBy: { sortOrder: "asc" },
   });
@@ -67,6 +74,7 @@ export async function createIndustry(data: {
   icon: string;
   href?: string;
 }) {
+  await requireAdmin();
   const count = await prisma.industry.count();
   const industry = await prisma.industry.create({
     data: {
@@ -86,16 +94,19 @@ export async function updateIndustry(
     href?: string;
   }
 ) {
+  await requireAdmin();
   await prisma.industry.update({ where: { id }, data });
   revalidatePath("/", "layout");
 }
 
 export async function deleteIndustry(id: string) {
+  await requireAdmin();
   await prisma.industry.delete({ where: { id } });
   revalidatePath("/", "layout");
 }
 
 export async function reorderIndustries(ids: string[]) {
+  await requireAdmin();
   for (let i = 0; i < ids.length; i++) {
     await prisma.industry.update({
       where: { id: ids[i] },

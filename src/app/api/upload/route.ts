@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile, mkdir, unlink } from "fs/promises";
 import path from "path";
 import sharp from "sharp";
+import { auth } from "@/lib/auth";
 import { createMediaRecord } from "@/lib/actions/media";
 import { prisma } from "@/lib/prisma";
 
@@ -20,6 +21,11 @@ const MAX_SIZE = 20 * 1024 * 1024; // 20MB
 
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const formData = await request.formData();
     const file = formData.get("file");
 
@@ -118,6 +124,11 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    const session = await auth();
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { url } = await request.json();
 
     if (!url || typeof url !== "string") {
@@ -135,8 +146,18 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
+    // Prevent path traversal — validate resolved path stays within uploads dir
+    const resolved = path.resolve(process.cwd(), "public", url);
+    const uploadsDir = path.resolve(process.cwd(), "public/uploads");
+    if (!resolved.startsWith(uploadsDir)) {
+      return NextResponse.json(
+        { error: "Invalid file path" },
+        { status: 400 }
+      );
+    }
+
     // Delete file from disk
-    const filePath = path.join(process.cwd(), "public", url);
+    const filePath = resolved;
     try {
       await unlink(filePath);
     } catch {

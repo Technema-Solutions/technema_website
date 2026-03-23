@@ -1,4 +1,13 @@
+import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
+
+const securityHeaders: Record<string, string> = {
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "X-XSS-Protection": "1; mode=block",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+};
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
@@ -16,8 +25,15 @@ export default auth((req) => {
   if (pathname === "/admin/login" && req.auth) {
     return Response.redirect(new URL("/admin", req.url));
   }
+
+  // Apply security headers to all responses
+  const response = NextResponse.next();
+  for (const [key, value] of Object.entries(securityHeaders)) {
+    response.headers.set(key, value);
+  }
+  return response;
 });
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/((?!_next/static|_next/image|favicon.ico|uploads/).*)"],
 };

@@ -3,8 +3,10 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import slugify from "slugify";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getAdminBlogPosts() {
+  await requireAdmin();
   return prisma.blogPost.findMany({
     orderBy: { publishedAt: "desc" },
     select: {
@@ -20,6 +22,7 @@ export async function getAdminBlogPosts() {
 }
 
 export async function getAdminBlogPost(id: string) {
+  await requireAdmin();
   return prisma.blogPost.findUnique({ where: { id } });
 }
 
@@ -38,6 +41,7 @@ export async function createBlogPost(data: {
   metaTitle?: string | null;
   metaDescription?: string | null;
 }) {
+  await requireAdmin();
   const slug = data.slug || slugify(data.title, { lower: true, strict: true });
   const { slug: _slug, ...rest } = data;
   const post = await prisma.blogPost.create({
@@ -68,6 +72,7 @@ export async function updateBlogPost(
     metaDescription?: string | null;
   }
 ) {
+  await requireAdmin();
   const updateData: Record<string, unknown> = { ...data };
   if (data.title) {
     updateData.slug = slugify(data.title, { lower: true, strict: true });
@@ -78,11 +83,13 @@ export async function updateBlogPost(
 }
 
 export async function deleteBlogPost(id: string) {
+  await requireAdmin();
   await prisma.blogPost.delete({ where: { id } });
   revalidatePath("/", "layout");
 }
 
 export async function toggleBlogPostPublish(id: string, isPublished: boolean) {
+  await requireAdmin();
   await prisma.blogPost.update({
     where: { id },
     data: {

@@ -2,8 +2,10 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getAdminSiteSettings() {
+  await requireAdmin();
   return prisma.siteSettings.findFirst({
     where: { id: "default" },
   });
@@ -23,6 +25,7 @@ export async function updateSiteSettings(data: {
   heroTypingWords?: string[];
   heroVideoUrl?: string;
 }) {
+  await requireAdmin();
   await prisma.siteSettings.upsert({
     where: { id: "default" },
     update: data,

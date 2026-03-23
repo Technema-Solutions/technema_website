@@ -3,8 +3,10 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import slugify from "slugify";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function getAdminProducts() {
+  await requireAdmin();
   return prisma.product.findMany({
     orderBy: { sortOrder: "asc" },
     select: {
@@ -20,6 +22,7 @@ export async function getAdminProducts() {
 }
 
 export async function getAdminProduct(id: string) {
+  await requireAdmin();
   return prisma.product.findUnique({
     where: { id },
     include: {
@@ -37,6 +40,7 @@ export async function getAdminProduct(id: string) {
 }
 
 export async function toggleProductPublish(id: string, isPublished: boolean) {
+  await requireAdmin();
   await prisma.product.update({
     where: { id },
     data: { isPublished },
@@ -45,6 +49,7 @@ export async function toggleProductPublish(id: string, isPublished: boolean) {
 }
 
 export async function deleteProduct(id: string) {
+  await requireAdmin();
   await prisma.product.delete({ where: { id } });
   revalidatePath("/", "layout");
 }
@@ -58,6 +63,7 @@ export async function createProduct(data: {
   logo?: string;
   heroImage?: string;
 }) {
+  await requireAdmin();
   const slug = slugify(data.name, { lower: true, strict: true });
   const count = await prisma.product.count();
   const product = await prisma.product.create({
@@ -88,6 +94,7 @@ export async function updateProduct(
     relatedSlugs?: string[];
   }
 ) {
+  await requireAdmin();
   await prisma.product.update({ where: { id }, data });
   revalidatePath("/", "layout");
 }
@@ -98,6 +105,7 @@ export async function saveProductFeatureHighlights(
   productId: string,
   items: { icon: string; title: string; description: string; image?: string }[]
 ) {
+  await requireAdmin();
   await prisma.productFeatureHighlight.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productFeatureHighlight.create({
@@ -111,6 +119,7 @@ export async function saveProductCapabilities(
   productId: string,
   items: { icon: string; title: string; description: string }[]
 ) {
+  await requireAdmin();
   await prisma.productCapability.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productCapability.create({
@@ -124,6 +133,7 @@ export async function saveProductSteps(
   productId: string,
   items: { step: number; icon: string; title: string; description: string }[]
 ) {
+  await requireAdmin();
   await prisma.productStep.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productStep.create({
@@ -137,6 +147,7 @@ export async function saveProductUseCases(
   productId: string,
   items: { icon: string; title: string; description: string }[]
 ) {
+  await requireAdmin();
   await prisma.productUseCase.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productUseCase.create({
@@ -150,6 +161,7 @@ export async function saveProductStats(
   productId: string,
   items: { value: string; label: string }[]
 ) {
+  await requireAdmin();
   await prisma.productStat.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productStat.create({
@@ -173,6 +185,7 @@ export async function saveProductPricingPlans(
     ctaHref: string;
   }[]
 ) {
+  await requireAdmin();
   await prisma.productPricingPlan.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productPricingPlan.create({
@@ -192,6 +205,7 @@ export async function saveProductTestimonials(
     content: string;
   }[]
 ) {
+  await requireAdmin();
   await prisma.productTestimonial.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productTestimonial.create({
@@ -205,6 +219,7 @@ export async function saveProductIntegrations(
   productId: string,
   items: { name: string; logo?: string; icon?: string }[]
 ) {
+  await requireAdmin();
   await prisma.productIntegration.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productIntegration.create({
@@ -218,6 +233,7 @@ export async function saveProductFaqs(
   productId: string,
   items: { question: string; answer: string }[]
 ) {
+  await requireAdmin();
   await prisma.productFaq.deleteMany({ where: { productId } });
   for (let i = 0; i < items.length; i++) {
     await prisma.productFaq.create({
