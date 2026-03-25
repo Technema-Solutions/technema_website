@@ -5,18 +5,13 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import slugify from "slugify";
 import { createBlogPost } from "@/lib/actions/blog";
+import { calcReadTime } from "@/lib/utils";
 import FormField from "@/components/admin/ui/FormField";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
 import RichTextEditor from "@/components/admin/ui/RichTextEditor";
 
 const inputClass =
   "w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#3D7EAA] focus:outline-none focus:ring-1 focus:ring-[#3D7EAA]";
-
-function calcReadTime(html: string): string {
-  const text = html.replace(/<[^>]*>/g, "").trim();
-  const words = text.split(/\s+/).filter(Boolean).length;
-  return `${Math.max(1, Math.ceil(words / 200))} min`;
-}
 
 export default function NewArtikelPage() {
   const router = useRouter();

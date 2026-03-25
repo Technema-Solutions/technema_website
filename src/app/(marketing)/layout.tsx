@@ -39,7 +39,7 @@ export default async function MarketingLayout({
         navLinks={navLinks.map((l) => ({ label: l.label, href: l.href, megaMenu: l.megaMenu }))}
         megaMenuProducts={megaMenuProducts}
         megaMenuIndustries={industryPages.map((i) => ({ name: i.name, icon: i.icon, href: `/industri/${i.slug}`, tagline: i.tagline }))}
-        contactPhone={CONTACT_PHONE}
+        contactPhone={siteSettings?.contactPhone || CONTACT_PHONE}
       />
       <main>{children}</main>
       {siteSettings?.gaTrackingId && (

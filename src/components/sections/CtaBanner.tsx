@@ -1,8 +1,11 @@
 import Container from "@/components/ui/Container";
 import { Icons } from "@/components/ui/Icons";
-import { CONTACT_PHONE } from "@/lib/constants";
 
-export default function CtaBanner() {
+interface CtaBannerProps {
+  contactPhone?: string;
+}
+
+export default function CtaBanner({ contactPhone = "" }: CtaBannerProps) {
   return (
     <section className="overflow-hidden px-4 sm:px-8 lg:px-[50px]">
       <div
@@ -42,12 +45,12 @@ export default function CtaBanner() {
 
             {/* Right - Phone button */}
             <a
-              href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
+              href={`tel:${contactPhone.replace(/\s/g, "")}`}
               className="flex items-center gap-3 bg-white/15 hover:bg-white/25 transition-colors rounded-full px-7 py-3 no-underline"
             >
               <span className="text-white">{Icons.phone}</span>
               <span className="text-white font-heading text-[18px] font-bold">
-                {CONTACT_PHONE}
+                {contactPhone}
               </span>
             </a>
           </div>

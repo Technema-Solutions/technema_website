@@ -78,7 +78,7 @@ export default async function Home() {
       <Testimonials testimonials={testimonials} />
       <AppointmentBooking />
       <BlogArticles blogPosts={blogPosts} />
-      <CtaBanner />
+      <CtaBanner contactPhone={siteSettings?.contactPhone || ""} />
     </>
   );
 }

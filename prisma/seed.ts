@@ -513,13 +513,15 @@ async function seedProducts() {
     data: {
       slug: "arsip-pintar",
       name: "Arsip Pintar",
-      tagline: "Sistem pengarsipan digital dan manajemen dokumen yang cerdas",
+      tagline: "Kelola Arsip Lebih Cerdas dengan Kekuatan AI",
       description:
-        "Arsip Pintar mengubah cara organisasi Anda mengelola dokumen. Dengan teknologi AI dan penyimpanan cloud yang aman, temukan dokumen apa pun dalam hitungan detik — bukan menit. Cocok untuk perusahaan yang ingin beralih dari arsip fisik ke digital tanpa repot.",
+        "Arsip Pintar adalah platform manajemen dokumen berbasis cloud yang dilengkapi Kecerdasan Buatan (AI), dirancang khusus untuk instansi pemerintah dan perusahaan di Indonesia. Dengan Smart OCR, AI Chat Assistant, dan sistem keamanan berlapis (NIP + OTP), Arsip Pintar mengubah pencarian dokumen dari berjam-jam menjadi hitungan detik. Kelola, amankan, dan akses arsip digital Anda dari mana saja — dengan kontrol akses penuh dan audit trail yang mendukung kepatuhan regulasi.",
       features: [
-        "Pengarsipan otomatis",
-        "Pencarian teks lengkap",
-        "Penyimpanan cloud aman",
+        "AI Chat Assistant",
+        "Smart OCR",
+        "Manajemen Dokumen Terpusat",
+        "Keamanan Berlapis (NIP + OTP)",
+        "Audit Trail & Pelacakan Aktivitas",
       ],
       icon: "FolderOpen",
       logo: "/images/product_logo/arsip_pintar.png",
@@ -533,28 +535,28 @@ async function seedProducts() {
   // Feature Highlights
   const arsipFeatures = [
     {
-      icon: "Search",
-      title: "Pencarian Cerdas Full-Text",
+      icon: "Bot",
+      title: "AI Chat Assistant",
       description:
-        "Temukan dokumen apa pun dalam hitungan detik dengan mesin pencari full-text yang didukung AI. Cari berdasarkan judul, isi dokumen, metadata, atau bahkan teks di dalam gambar berkat teknologi OCR bawaan.",
+        "Asisten cerdas untuk arsip Anda. Ajukan pertanyaan dalam bahasa sehari-hari, dapatkan jawaban beserta sumber dokumennya. Analisis dokumen otomatis, pencarian kontekstual berdasarkan isi dan makna, serta ringkasan instan dokumen panjang dalam hitungan detik.",
+    },
+    {
+      icon: "ScanLine",
+      title: "Smart OCR Berakurasi Tinggi",
+      description:
+        "Otomatis membaca dan mengekstraksi teks dari berbagai format: scan, gambar, PDF, dan foto. Memahami layout kompleks termasuk chart, diagram, dan tabel. Hasil langsung siap digunakan untuk pencarian dan indeksasi.",
+    },
+    {
+      icon: "FolderOpen",
+      title: "Manajemen Dokumen Terpusat",
+      description:
+        "Platform intuitif untuk mengelola seluruh siklus hidup dokumen digital. Upload mudah dengan drag & drop, organisasi fleksibel dengan folder dan tag, preview langsung tanpa unduh, serta bulk operations untuk kelola banyak dokumen sekaligus.",
     },
     {
       icon: "ShieldCheck",
-      title: "Keamanan & Enkripsi Berlapis",
+      title: "Keamanan Berlapis Standar Enterprise",
       description:
-        "Setiap dokumen dienkripsi saat transit dan saat disimpan. Kontrol akses berbasis peran memastikan hanya orang yang berwenang yang bisa melihat, mengedit, atau menghapus dokumen sensitif.",
-    },
-    {
-      icon: "Cloud",
-      title: "Penyimpanan Cloud Tanpa Batas",
-      description:
-        "Simpan jutaan dokumen tanpa khawatir kehabisan ruang. Infrastruktur cloud kami skalabel secara otomatis seiring pertumbuhan arsip Anda, dengan backup harian ke multiple data center.",
-    },
-    {
-      icon: "GitBranch",
-      title: "Workflow & Approval Otomatis",
-      description:
-        "Buat alur kerja persetujuan dokumen yang sesuai dengan struktur organisasi Anda. Notifikasi otomatis, tracking status, dan audit trail lengkap untuk setiap dokumen.",
+        "Dirancang memenuhi standar keamanan informasi instansi pemerintah dan swasta. Autentikasi ganda dengan NIP + OTP, Role-Based Access Control (RBAC) berdasarkan jabatan, izin granular hingga level dokumen individual, dan session management otomatis.",
     },
   ];
   for (let i = 0; i < arsipFeatures.length; i++) {
@@ -565,18 +567,18 @@ async function seedProducts() {
 
   // Capabilities
   const arsipCapabilities = [
-    { icon: "FileText", title: "Arsip Digital", description: "Konversi dokumen fisik ke digital dalam sekejap" },
-    { icon: "Search", title: "OCR Scanning", description: "Ekstraksi teks otomatis dari gambar dan PDF scan" },
-    { icon: "Tags", title: "Auto-Tagging", description: "Kategorisasi dokumen otomatis dengan AI" },
-    { icon: "Clock", title: "Version History", description: "Lacak setiap perubahan dengan riwayat versi lengkap" },
-    { icon: "Users", title: "Kolaborasi Tim", description: "Edit dan komentar dokumen secara real-time bersama tim" },
-    { icon: "Lock", title: "Kontrol Akses", description: "Atur siapa yang bisa lihat, edit, atau hapus dokumen" },
-    { icon: "Download", title: "Ekspor Massal", description: "Unduh banyak dokumen sekaligus dalam berbagai format" },
-    { icon: "Bell", title: "Notifikasi Pintar", description: "Pengingat otomatis untuk dokumen yang perlu ditindaklanjuti" },
-    { icon: "BarChart3", title: "Laporan & Analitik", description: "Dashboard penggunaan dan statistik arsip real-time" },
-    { icon: "Smartphone", title: "Akses Mobile", description: "Kelola arsip dari mana saja via aplikasi mobile" },
-    { icon: "RefreshCw", title: "Sinkronisasi", description: "Sinkronisasi otomatis lintas perangkat dan tim" },
-    { icon: "Trash2", title: "Retensi Otomatis", description: "Hapus otomatis dokumen sesuai kebijakan retensi" },
+    { icon: "Bot", title: "AI Chat Assistant", description: "Tanya jawab tentang isi dokumen dalam bahasa natural, seperti chatting biasa" },
+    { icon: "ScanLine", title: "Smart OCR", description: "Ekstraksi teks otomatis dari scan, gambar, PDF, chart, dan tabel" },
+    { icon: "Search", title: "Pencarian Cerdas", description: "Temukan dokumen dalam hitungan detik berdasarkan isi, bukan sekadar nama file" },
+    { icon: "Upload", title: "Upload & Organisasi", description: "Drag & drop dokumen ke dalam folder dan tag yang fleksibel" },
+    { icon: "Users", title: "Kontrol Hak Akses (RBAC)", description: "Atur hak akses berdasarkan jabatan: Kepala Bidang, Kepala Seksi, hingga Staf" },
+    { icon: "ClipboardList", title: "Audit Trail Lengkap", description: "Log aktivitas siapa melakukan apa, kapan, dan dari mana secara real-time" },
+    { icon: "KeyRound", title: "Autentikasi NIP + OTP", description: "Login aman tanpa password — verifikasi ganda dengan NIP dan kode OTP via email" },
+    { icon: "Eye", title: "Preview Dokumen", description: "Lihat isi dokumen langsung di browser tanpa perlu mengunduh" },
+    { icon: "Layers", title: "Bulk Operations", description: "Kelola banyak dokumen sekaligus: pindah folder, ubah tag, atau hapus massal" },
+    { icon: "Filter", title: "Filter & Kategori", description: "Filter berdasarkan tahun, jenis dokumen, kategori, atau unit kerja" },
+    { icon: "Globe", title: "Akses dari Mana Saja", description: "Akses arsip dari kantor atau rumah melalui browser — cukup koneksi internet" },
+    { icon: "FileBarChart", title: "Laporan Siap Pakai", description: "Laporan audit dan statistik penggunaan komprehensif untuk kebutuhan pemeriksaan" },
   ];
   for (let i = 0; i < arsipCapabilities.length; i++) {
     await prisma.productCapability.create({
@@ -586,10 +588,10 @@ async function seedProducts() {
 
   // How It Works
   const arsipSteps = [
-    { step: 1, icon: "Upload", title: "Unggah Dokumen", description: "Upload dokumen fisik atau digital ke platform. Mendukung PDF, gambar, Word, Excel, dan 50+ format lainnya." },
-    { step: 2, icon: "Cpu", title: "Pemrosesan AI", description: "Sistem AI kami secara otomatis mengekstrak teks, mengkategorikan, dan menandai setiap dokumen." },
-    { step: 3, icon: "FolderOpen", title: "Organisasi Otomatis", description: "Dokumen tersusun rapi dalam folder dan kategori yang bisa dikustomisasi sesuai kebutuhan." },
-    { step: 4, icon: "Search", title: "Cari & Temukan", description: "Gunakan pencarian cerdas untuk menemukan dokumen apa pun dalam hitungan detik." },
+    { step: 1, icon: "KeyRound", title: "Login Aman dengan OTP", description: "Masukkan NIP Anda, terima kode OTP via email, dan langsung masuk ke sistem. Tidak perlu mengingat password — lebih aman dan praktis." },
+    { step: 2, icon: "Upload", title: "Upload Dokumen", description: "Drag & drop dokumen PDF, Word, scan KTP, akta, surat, dan berbagai format lainnya ke dalam folder yang Anda buat sendiri." },
+    { step: 3, icon: "Cpu", title: "AI Memproses Otomatis", description: "Smart OCR mengekstrak teks dari dokumen, AI mengindeks dan mengkategorikan secara otomatis. Hasilnya langsung bisa dicari." },
+    { step: 4, icon: "Bot", title: "Cari & Tanya AI Chat", description: "Temukan dokumen dalam 10 detik dengan pencarian cerdas, atau tanya AI Chat: \"Berikan poin penting dari surat edaran sekda 2025?\" — AI menjawab beserta sumber dokumennya." },
   ];
   for (let i = 0; i < arsipSteps.length; i++) {
     await prisma.productStep.create({
@@ -599,10 +601,10 @@ async function seedProducts() {
 
   // Use Cases
   const arsipUseCases = [
-    { icon: "Building2", title: "Instansi Pemerintah", description: "Digitalisasi arsip surat menyurat, SK, dan dokumen regulasi dengan compliance penuh." },
-    { icon: "Scale", title: "Kantor Hukum", description: "Kelola ribuan dokumen perkara, kontrak, dan surat kuasa dengan pencarian instan." },
-    { icon: "GraduationCap", title: "Institusi Pendidikan", description: "Arsip data mahasiswa, transkrip, ijazah, dan dokumen akademik secara digital." },
-    { icon: "Landmark", title: "Perbankan & Keuangan", description: "Penyimpanan dokumen KYC, kontrak kredit, dan laporan audit yang aman dan terenkripsi." },
+    { icon: "Building2", title: "Pemerintah Daerah", description: "Digitalisasi arsip aset daerah, PKS, SPK, surat edaran, dan dokumen regulasi. Mendukung kepatuhan terhadap regulasi pengelolaan arsip pemerintah." },
+    { icon: "Scale", title: "Kantor Hukum", description: "Kelola ribuan dokumen perkara, kontrak, NDA, dan surat kuasa. Tanya AI Chat untuk mencari klausul spesifik atau perbedaan antar kontrak dalam hitungan detik." },
+    { icon: "GraduationCap", title: "Institusi Pendidikan", description: "Arsip data mahasiswa, transkrip, ijazah, dan dokumen akademik secara digital dengan kontrol akses per fakultas dan jurusan." },
+    { icon: "Landmark", title: "BUMN & Perusahaan Swasta", description: "Manajemen dokumen korporat, compliance audit, dan pengelolaan kontrak vendor dengan audit trail lengkap dan hak akses terkontrol." },
   ];
   for (let i = 0; i < arsipUseCases.length; i++) {
     await prisma.productUseCase.create({
@@ -612,9 +614,9 @@ async function seedProducts() {
 
   // Impact Stats
   const arsipStats = [
-    { value: "90%", label: "Lebih Cepat Mencari Dokumen" },
-    { value: "70%", label: "Hemat Ruang Penyimpanan Fisik" },
-    { value: "99.9%", label: "Uptime & Ketersediaan Data" },
+    { value: "10 Detik", label: "Rata-rata Waktu Pencarian Dokumen" },
+    { value: "100%", label: "Jejak Audit Digital Tercatat" },
+    { value: "99.9%", label: "Uptime & Ketersediaan Sistem" },
   ];
   for (let i = 0; i < arsipStats.length; i++) {
     await prisma.productStat.create({
@@ -624,9 +626,9 @@ async function seedProducts() {
 
   // Pricing Plans
   const arsipPricing = [
-    { name: "Starter", price: "499.000", currency: "Rp", period: "/bulan", description: "Cocok untuk tim kecil dan UMKM yang baru mulai digitalisasi", features: ["Hingga 10.000 dokumen", "3 pengguna", "Pencarian full-text", "Penyimpanan 50 GB", "Dukungan email"], ctaLabel: "Mulai Gratis", ctaHref: "/kontak", isPopular: false },
-    { name: "Professional", price: "1.499.000", currency: "Rp", period: "/bulan", description: "Untuk perusahaan menengah dengan kebutuhan arsip yang lebih besar", features: ["Dokumen tak terbatas", "20 pengguna", "OCR & auto-tagging AI", "Penyimpanan 500 GB", "Workflow approval", "API access", "Dukungan prioritas"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: true },
-    { name: "Enterprise", price: null, currency: "Rp", period: "/bulan", description: "Solusi khusus untuk organisasi besar dengan kebutuhan compliance", features: ["Semua fitur Professional", "Pengguna tak terbatas", "Penyimpanan tak terbatas", "SSO & LDAP integration", "Dedicated account manager", "SLA 99.9%", "On-premise option"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
+    { name: "Starter", price: "499.000", currency: "Rp", period: "/bulan", description: "Cocok untuk unit kerja kecil yang baru memulai digitalisasi arsip", features: ["Hingga 10.000 dokumen", "10 pengguna", "Pencarian cerdas full-text", "Smart OCR dasar", "Penyimpanan 50 GB", "Autentikasi NIP + OTP", "Dukungan email"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: false },
+    { name: "Professional", price: "2.499.000", currency: "Rp", period: "/bulan", description: "Untuk instansi menengah yang membutuhkan AI Chat dan fitur lengkap", features: ["Dokumen tak terbatas", "50 pengguna", "AI Chat Assistant", "Smart OCR lanjutan (tabel & chart)", "Penyimpanan 500 GB", "RBAC & izin granular", "Audit trail lengkap", "API access", "Dukungan prioritas"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: true },
+    { name: "Enterprise", price: null, currency: "Rp", period: "/bulan", description: "Solusi khusus untuk organisasi besar dengan kebutuhan compliance dan kustomisasi penuh", features: ["Semua fitur Professional", "Pengguna tak terbatas", "Penyimpanan tak terbatas", "Kustomisasi sesuai kebijakan instansi", "On-premise option", "Dedicated account manager", "SLA 99.9%", "Pelatihan & pendampingan tim"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
   ];
   for (let i = 0; i < arsipPricing.length; i++) {
     await prisma.productPricingPlan.create({
@@ -635,16 +637,16 @@ async function seedProducts() {
   }
 
   // Testimonials
-  await prisma.productTestimonial.create({ data: { productId: arsipPintar.id, name: "Dr. Rina Hartono", role: "Kepala Bagian Tata Usaha", company: "Dinas Pendidikan DKI Jakarta", content: "Arsip Pintar mengubah total cara kami mengelola surat menyurat. Dulu butuh 30 menit mencari satu dokumen, sekarang cukup 10 detik. Luar biasa!", sortOrder: 0 } });
-  await prisma.productTestimonial.create({ data: { productId: arsipPintar.id, name: "Ahmad Faisal, SH", role: "Managing Partner", company: "Faisal & Rekan Law Firm", content: "Dengan ribuan dokumen perkara yang harus dikelola, Arsip Pintar benar-benar menyelamatkan produktivitas tim kami. Fitur pencarian OCR-nya sangat akurat.", sortOrder: 1 } });
+  await prisma.productTestimonial.create({ data: { productId: arsipPintar.id, name: "Ir. Budi Santoso, M.Si", role: "Kepala Bidang Aset Daerah", company: "BKAD Kabupaten Berau", content: "Arsip Pintar mengubah total cara kami mengelola dokumen aset daerah. Dulu petugas bisa menghabiskan berjam-jam mencari satu dokumen PKS, sekarang cukup 10 detik. Fitur AI Chat-nya luar biasa — pegawai baru tinggal tanya, tidak perlu selalu tanya senior.", sortOrder: 0 } });
+  await prisma.productTestimonial.create({ data: { productId: arsipPintar.id, name: "Ahmad Faisal, SH", role: "Managing Partner", company: "Faisal & Rekan Law Firm", content: "Dengan ribuan dokumen perkara yang harus dikelola, Arsip Pintar benar-benar menyelamatkan produktivitas tim kami. Fitur AI Chat bisa langsung menjawab pertanyaan seperti 'apa perbedaan kontrak vendor A dan B?' beserta sumber dokumennya.", sortOrder: 1 } });
 
   // Integrations
   const arsipIntegrations = [
-    { name: "Google Drive", icon: "Cloud" },
-    { name: "Microsoft 365", icon: "FileText" },
-    { name: "Dropbox", icon: "HardDrive" },
-    { name: "Slack", icon: "MessageSquare" },
-    { name: "SAP", icon: "Database" },
+    { name: "Scanner & Pemindai", icon: "ScanLine" },
+    { name: "Email (OTP & Notifikasi)", icon: "Mail" },
+    { name: "Microsoft Office", icon: "FileText" },
+    { name: "PDF Reader", icon: "FileText" },
+    { name: "Cloud Storage", icon: "Cloud" },
     { name: "REST API", icon: "Code" },
   ];
   for (let i = 0; i < arsipIntegrations.length; i++) {
@@ -655,12 +657,12 @@ async function seedProducts() {
 
   // FAQs
   const arsipFaqs = [
-    { question: "Apakah Arsip Pintar bisa memindai dokumen fisik?", answer: "Ya, Arsip Pintar mendukung pemindaian langsung dari scanner yang terhubung ke komputer Anda. Sistem OCR kami akan secara otomatis mengekstrak teks dari hasil scan sehingga bisa dicari." },
-    { question: "Bagaimana keamanan data dokumen saya?", answer: "Semua dokumen dienkripsi menggunakan AES-256 saat disimpan dan TLS 1.3 saat ditransfer. Kami juga menyediakan backup harian ke multiple data center di Indonesia." },
-    { question: "Berapa lama proses migrasi dari sistem lama?", answer: "Proses migrasi biasanya memakan waktu 1-4 minggu tergantung volume dokumen. Tim kami akan mendampingi seluruh proses migrasi tanpa biaya tambahan." },
-    { question: "Apakah bisa diakses dari perangkat mobile?", answer: "Ya, Arsip Pintar memiliki aplikasi web responsive yang bisa diakses dari smartphone dan tablet. Aplikasi native untuk iOS dan Android juga tersedia untuk paket Professional ke atas." },
-    { question: "Apakah ada batasan ukuran file?", answer: "Untuk paket Starter, batas ukuran per file adalah 100 MB. Untuk Professional dan Enterprise, batasnya 1 GB per file. Format yang didukung meliputi PDF, Word, Excel, gambar, dan 50+ format lainnya." },
-    { question: "Bagaimana jika saya ingin berhenti berlangganan?", answer: "Anda bisa mengekspor semua dokumen Anda dalam format asli kapan saja. Tidak ada lock-in contract — Anda bisa berhenti kapan saja dengan pemberitahuan 30 hari." },
+    { question: "Apa itu Arsip Pintar?", answer: "Arsip Pintar adalah sistem penyimpanan dokumen digital yang dilengkapi Kecerdasan Buatan (AI). Bayangkan seperti Google Drive, tapi khusus untuk dokumen instansi Anda — private, tidak di server luar, dan dilengkapi asisten AI yang hafal semua isi dokumen." },
+    { question: "Bagaimana sistem keamanan Arsip Pintar?", answer: "Arsip Pintar menggunakan autentikasi ganda NIP + OTP (One-Time Password) yang dikirim ke email terdaftar. Tidak ada password yang perlu diingat — hanya pegawai yang punya akses email terdaftar yang bisa masuk. Ditambah dengan Role-Based Access Control (RBAC) dan izin granular per dokumen." },
+    { question: "Apa yang bisa dilakukan AI Chat Assistant?", answer: "AI Chat bisa menjawab pertanyaan tentang isi dokumen dalam bahasa sehari-hari. Contoh: \"Berikan poin penting dari surat edaran sekda 2025?\", \"Cari dokumen hibah aset dari PT XYZ\", atau \"Klausul mana yang perlu direvisi dari kontrak berdasarkan PP 71/2019?\". AI akan mencari di semua dokumen dan memberikan jawaban beserta sumber dokumennya." },
+    { question: "Apakah bisa diakses dari luar kantor?", answer: "Ya, Arsip Pintar berbasis cloud dan bisa diakses dari mana saja — kantor maupun rumah — cukup menggunakan browser dan koneksi internet. Tetap aman karena dilindungi sistem OTP." },
+    { question: "Berapa lama proses implementasi?", answer: "Implementasi dasar bisa dilakukan dalam 1-2 minggu. Untuk migrasi dokumen dari sistem lama, biasanya memakan waktu 2-4 minggu tergantung volume. Tim Technema Solutions akan mendampingi seluruh proses tanpa biaya tambahan." },
+    { question: "Apakah data tetap milik instansi kami?", answer: "Ya, 100% data tetap milik instansi Anda. Kami juga menyediakan opsi on-premise (server di lokasi Anda) untuk paket Enterprise. Anda bisa mengekspor semua dokumen dalam format asli kapan saja." },
   ];
   for (let i = 0; i < arsipFaqs.length; i++) {
     await prisma.productFaq.create({
@@ -673,9 +675,15 @@ async function seedProducts() {
     data: {
       slug: "databot",
       name: "Databot",
-      tagline: "Platform analitik data dan chatbot berbasis kecerdasan buatan",
-      description: "Databot mengubah data mentah bisnis Anda menjadi insight yang actionable. Dengan AI yang bisa Anda ajak bicara, cukup tanyakan apa yang ingin Anda ketahui — Databot akan menyajikan jawabannya dalam bentuk grafik, tabel, atau laporan otomatis.",
-      features: ["Insight berbasis AI", "Laporan otomatis", "Dasbor real-time"],
+      tagline: "Tanya Database Anda dalam Bahasa Sehari-hari — AI yang Menjawab dengan Data",
+      description: "Databot adalah platform AI database chat yang mengubah pertanyaan bahasa natural menjadi SQL query secara otomatis. Cukup ketik pertanyaan dalam bahasa Indonesia atau Inggris — Databot akan generate SQL, eksekusi query ke database Anda, dan tampilkan hasilnya dalam bentuk tabel, chart interaktif, dan ringkasan otomatis. Mendukung PostgreSQL, MySQL, dan Snowflake, dengan pilihan multi-LLM (OpenAI, Anthropic, Gemini, Ollama). Tanya database langsung dari web, WhatsApp, atau Telegram.",
+      features: [
+        "AI Chat Database",
+        "Multi-Database Support",
+        "Visualisasi Otomatis",
+        "AI Training Center",
+        "Integrasi WhatsApp & Telegram",
+      ],
       icon: "Bot",
       logo: "/images/product_logo/databot.png",
       category: "ai",
@@ -687,10 +695,10 @@ async function seedProducts() {
 
   // Databot Feature Highlights
   const databotFeatures = [
-    { icon: "MessageCircle", title: "Chatbot Analitik AI", description: "Tanyakan apa saja tentang data bisnis Anda dalam bahasa natural. 'Berapa penjualan bulan ini?' atau 'Produk mana yang paling laris?' — Databot langsung menjawab dengan visualisasi yang informatif." },
-    { icon: "BarChart3", title: "Dashboard Real-Time", description: "Dashboard interaktif yang update otomatis setiap menit. Pantau KPI bisnis, tren penjualan, performa tim, dan metrik penting lainnya dalam satu layar." },
-    { icon: "FileBarChart", title: "Laporan Otomatis Terjadwal", description: "Atur jadwal pembuatan laporan — harian, mingguan, atau bulanan. Databot akan generate dan kirim laporan ke email Anda tanpa perlu intervensi manual." },
-    { icon: "Sparkles", title: "Prediksi & Anomaly Detection", description: "AI Databot tidak hanya melihat masa lalu — tapi juga memprediksi tren masa depan dan mendeteksi anomali sebelum menjadi masalah besar bagi bisnis Anda." },
+    { icon: "Bot", title: "AI Chat Database", description: "Tanya database Anda dalam bahasa sehari-hari — 'Berapa total penjualan bulan ini?' atau 'Produk mana yang paling laris di cabang Jakarta?' — Databot secara otomatis generate SQL, eksekusi query, dan tampilkan hasil dalam tabel, chart interaktif, dan ringkasan bahasa Indonesia. Streaming real-time." },
+    { icon: "Database", title: "Multi-Database & Multi-LLM", description: "Hubungkan PostgreSQL, MySQL, atau Snowflake. Pilih AI engine sesuai kebutuhan: OpenAI GPT-4o, Anthropic Claude, Google Gemini, atau Ollama untuk model lokal. Setiap workspace bisa menggunakan LLM yang berbeda." },
+    { icon: "BarChart3", title: "Visualisasi & Ringkasan Otomatis", description: "Setiap hasil query otomatis divisualisasikan dalam chart interaktif (Plotly.js) dan diringkas dalam bahasa Indonesia. Tanpa perlu membuat grafik manual — AI memilih jenis chart yang paling tepat untuk data Anda." },
+    { icon: "GraduationCap", title: "AI Training Center", description: "Latih AI agar semakin akurat dengan 4 cara: upload DDL schema tabel, tambahkan dokumentasi bisnis, berikan contoh pasangan pertanyaan-SQL, atau auto-ingest langsung dari database. Semakin dilatih, semakin pintar." },
   ];
   for (let i = 0; i < databotFeatures.length; i++) {
     await prisma.productFeatureHighlight.create({ data: { ...databotFeatures[i], productId: databot.id, sortOrder: i } });
@@ -698,18 +706,18 @@ async function seedProducts() {
 
   // Databot Capabilities
   const databotCaps = [
-    { icon: "MessageCircle", title: "Natural Language Query", description: "Tanya data pakai bahasa sehari-hari" },
-    { icon: "BarChart3", title: "Dashboard Builder", description: "Buat dashboard kustom drag-and-drop" },
-    { icon: "PieChart", title: "Visualisasi Otomatis", description: "Chart dan grafik yang dipilih AI secara cerdas" },
-    { icon: "FileBarChart", title: "Scheduled Reports", description: "Laporan otomatis ke email terjadwal" },
-    { icon: "TrendingUp", title: "Forecasting", description: "Prediksi tren penjualan dan performa" },
-    { icon: "AlertTriangle", title: "Anomaly Detection", description: "Deteksi dini data yang tidak wajar" },
-    { icon: "Database", title: "Multi-Source", description: "Hubungkan berbagai sumber data sekaligus" },
-    { icon: "Share2", title: "Share & Embed", description: "Bagikan dashboard via link atau embed" },
-    { icon: "Lock", title: "Data Governance", description: "Kontrol akses data per tim atau departemen" },
-    { icon: "Zap", title: "Real-Time Sync", description: "Sinkronisasi data setiap menit" },
-    { icon: "Download", title: "Export Fleksibel", description: "Export ke PDF, Excel, CSV, atau API" },
-    { icon: "Webhook", title: "Webhook & Alert", description: "Notifikasi otomatis saat threshold tercapai" },
+    { icon: "Bot", title: "AI Chat Database", description: "Tanya database dalam bahasa natural, AI auto-generate dan eksekusi SQL" },
+    { icon: "Database", title: "Multi-Database", description: "Dukungan PostgreSQL, MySQL, dan Snowflake" },
+    { icon: "Sparkles", title: "Multi-LLM Provider", description: "Pilih OpenAI, Anthropic, Google Gemini, atau Ollama lokal" },
+    { icon: "BarChart3", title: "Visualisasi Otomatis", description: "Chart interaktif Plotly yang dipilih AI secara cerdas" },
+    { icon: "GraduationCap", title: "AI Training Center", description: "Latih AI dengan schema, dokumentasi, contoh SQL, atau auto-ingest" },
+    { icon: "Users", title: "Workspace Multi-User", description: "Multi-tenant dengan role Admin, Member, dan Viewer" },
+    { icon: "MessageCircle", title: "Integrasi WhatsApp", description: "Tanya database langsung dari WhatsApp Business" },
+    { icon: "Send", title: "Integrasi Telegram", description: "Query database via Telegram Bot" },
+    { icon: "ShieldCheck", title: "SQL Guardrails", description: "Blokir otomatis query berbahaya — hanya SELECT yang diizinkan" },
+    { icon: "Zap", title: "Query Cache", description: "Hasil query di-cache Redis untuk respons <1 detik" },
+    { icon: "BarChart3", title: "Analytics Dashboard", description: "Statistik total queries, success rate, dan aktivitas terkini" },
+    { icon: "Lock", title: "Role & Permissions", description: "RBAC per workspace dengan enkripsi kredensial database" },
   ];
   for (let i = 0; i < databotCaps.length; i++) {
     await prisma.productCapability.create({ data: { ...databotCaps[i], productId: databot.id, sortOrder: i } });
@@ -717,10 +725,10 @@ async function seedProducts() {
 
   // Databot Steps
   const databotSteps = [
-    { step: 1, icon: "Database", title: "Hubungkan Data", description: "Integrasikan database, spreadsheet, atau API bisnis Anda. Databot mendukung MySQL, PostgreSQL, Google Sheets, dan 20+ sumber data lainnya." },
-    { step: 2, icon: "Cpu", title: "AI Memproses", description: "Databot secara otomatis menganalisis struktur data, menemukan pola, dan membangun model prediktif." },
-    { step: 3, icon: "MessageCircle", title: "Tanya & Jawab", description: "Ajukan pertanyaan dalam bahasa natural. 'Bagaimana tren penjualan Q3?' — Databot langsung menjawab dengan visualisasi." },
-    { step: 4, icon: "Bell", title: "Insight Proaktif", description: "Databot mengirim alert otomatis saat menemukan anomali atau peluang baru dalam data Anda." },
+    { step: 1, icon: "Database", title: "Hubungkan Database", description: "Koneksikan database PostgreSQL, MySQL, atau Snowflake Anda. Kredensial dienkripsi dengan Fernet — aman tersimpan." },
+    { step: 2, icon: "GraduationCap", title: "Latih AI Anda", description: "Upload DDL schema tabel, tambahkan dokumentasi bisnis, berikan contoh Q&A SQL, atau gunakan auto-ingest untuk mengekstrak schema langsung dari database." },
+    { step: 3, icon: "Bot", title: "Tanya dalam Bahasa Natural", description: "Ketik pertanyaan dalam bahasa Indonesia atau Inggris — 'Berapa revenue bulan lalu per cabang?' — Databot auto-generate SQL, eksekusi, dan tampilkan hasilnya." },
+    { step: 4, icon: "BarChart3", title: "Lihat Visualisasi & Ringkasan", description: "Hasil query ditampilkan dalam tabel data, chart interaktif otomatis, dan ringkasan bahasa Indonesia. Bisa juga tanya langsung via WhatsApp atau Telegram." },
   ];
   for (let i = 0; i < databotSteps.length; i++) {
     await prisma.productStep.create({ data: { ...databotSteps[i], productId: databot.id, sortOrder: i } });
@@ -728,10 +736,10 @@ async function seedProducts() {
 
   // Databot Use Cases
   const databotUseCases = [
-    { icon: "ShoppingCart", title: "E-Commerce & Ritel", description: "Analisis pola pembelian, prediksi stok, dan optimasi harga secara otomatis." },
-    { icon: "Landmark", title: "Keuangan & Perbankan", description: "Monitoring risiko real-time, deteksi fraud, dan laporan compliance otomatis." },
-    { icon: "HeartPulse", title: "Kesehatan", description: "Analisis data pasien, prediksi kebutuhan obat, dan optimasi jadwal tenaga medis." },
-    { icon: "Factory", title: "Manufaktur", description: "Pantau efisiensi produksi, prediksi maintenance, dan optimasi supply chain." },
+    { icon: "TrendingUp", title: "Bisnis & Manajemen", description: "Tanya langsung data penjualan, revenue, dan KPI bisnis tanpa perlu keahlian SQL. Pemilik bisnis bisa ambil keputusan lebih cepat berdasarkan data real-time." },
+    { icon: "Calculator", title: "Tim Keuangan", description: "Query laporan keuangan, arus kas, hutang piutang, dan analisis biaya via chat. Hasilnya langsung dalam bentuk tabel dan chart yang siap dipresentasikan." },
+    { icon: "Package", title: "Operasional", description: "Pantau stok barang, status pesanan, dan performa operasional. Bisa tanya langsung dari WhatsApp kapan saja tanpa harus buka laptop." },
+    { icon: "BarChart3", title: "Data Team", description: "Kurangi backlog query request dari tim bisnis. Dengan Databot, stakeholder bisa self-service analytics — data team fokus ke analisis yang lebih strategis." },
   ];
   for (let i = 0; i < databotUseCases.length; i++) {
     await prisma.productUseCase.create({ data: { ...databotUseCases[i], productId: databot.id, sortOrder: i } });
@@ -739,39 +747,40 @@ async function seedProducts() {
 
   // Databot Stats, Pricing, Testimonials, Integrations, FAQs
   const databotStats = [
-    { value: "3x", label: "Lebih Cepat Mengambil Keputusan" },
-    { value: "50%", label: "Hemat Waktu Pembuatan Laporan" },
-    { value: "25%", label: "Peningkatan Revenue Rata-Rata" },
+    { value: "<1 Detik", label: "Waktu Respons Query (Cache Hit)" },
+    { value: "3", label: "Database Didukung (PostgreSQL, MySQL, Snowflake)" },
+    { value: "4", label: "Cara Melatih AI Anda" },
   ];
   for (let i = 0; i < databotStats.length; i++) {
     await prisma.productStat.create({ data: { ...databotStats[i], productId: databot.id, sortOrder: i } });
   }
 
   const databotPricing = [
-    { name: "Starter", price: "799.000", currency: "Rp", period: "/bulan", description: "Untuk tim kecil yang ingin mulai memanfaatkan data", features: ["1 data source", "3 pengguna", "5 dashboard", "Chatbot AI basic", "Laporan mingguan", "Dukungan email"], ctaLabel: "Mulai Gratis", ctaHref: "/kontak", isPopular: false },
-    { name: "Professional", price: "2.499.000", currency: "Rp", period: "/bulan", description: "Untuk perusahaan yang serius dengan analitik data", features: ["10 data source", "20 pengguna", "Dashboard tak terbatas", "Chatbot AI advanced", "Forecasting & anomaly detection", "Scheduled reports", "API access", "Dukungan prioritas"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: true },
-    { name: "Enterprise", price: null, currency: "Rp", period: "/bulan", description: "Solusi analitik penuh untuk organisasi enterprise", features: ["Semua fitur Professional", "Data source tak terbatas", "Pengguna tak terbatas", "Custom AI model training", "On-premise deployment", "Dedicated support engineer", "SLA 99.9%"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
+    { name: "Starter", price: null, currency: "Rp", period: "", description: "Untuk tim kecil yang ingin mulai tanya database tanpa SQL", features: ["1 workspace", "1 database connection", "AI Chat Database", "Visualisasi otomatis", "AI Training (schema & docs)", "Query cache", "3 pengguna", "Dukungan email"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
+    { name: "Professional", price: null, currency: "Rp", period: "", description: "Untuk perusahaan yang butuh multi-workspace dan integrasi messaging", features: ["Multi-workspace", "Multi-database connection", "Multi-LLM provider", "Integrasi WhatsApp & Telegram", "AI Training lengkap (4 cara)", "RBAC per workspace", "Analytics dashboard", "20 pengguna", "Dukungan prioritas"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: true },
+    { name: "Enterprise", price: null, currency: "Rp", period: "", description: "Solusi on-premise dengan kustomisasi penuh untuk organisasi besar", features: ["Semua fitur Professional", "On-premise deployment", "Pengguna tak terbatas", "Workspace tak terbatas", "Custom LLM (Ollama lokal)", "Dedicated support engineer", "Pelatihan tim", "SLA 99.9%"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
   ];
   for (let i = 0; i < databotPricing.length; i++) {
     await prisma.productPricingPlan.create({ data: { ...databotPricing[i], productId: databot.id, sortOrder: i } });
   }
 
-  await prisma.productTestimonial.create({ data: { productId: databot.id, name: "Budi Santoso", role: "Head of Business Intelligence", company: "PT. Retail Nusantara", content: "Databot mengubah cara tim BI kami bekerja. Dulu butuh 3 hari untuk membuat laporan bulanan, sekarang cukup 2 jam. AI chatbot-nya luar biasa intuitif.", sortOrder: 0 } });
-  await prisma.productTestimonial.create({ data: { productId: databot.id, name: "Lisa Permata", role: "CFO", company: "Fintech Sejahtera", content: "Fitur anomaly detection Databot menyelamatkan kami dari potensi fraud senilai ratusan juta. ROI-nya terasa langsung di bulan pertama.", sortOrder: 1 } });
+  await prisma.productTestimonial.create({ data: { productId: databot.id, name: "Budi Santoso", role: "Head of Business Intelligence", company: "PT. Retail Nusantara", content: "Databot mengubah cara tim BI kami bekerja. Manajer cabang sekarang bisa tanya langsung 'berapa penjualan hari ini per kategori?' tanpa harus request ke tim data. Query backlog kami turun drastis.", sortOrder: 0 } });
+  await prisma.productTestimonial.create({ data: { productId: databot.id, name: "Lisa Permata", role: "CFO", company: "PT. Sejahtera Group", content: "Saya bisa tanya laporan keuangan langsung dari WhatsApp saat sedang di luar kantor. Databot langsung jawab dengan data dan chart yang siap pakai. Pengambilan keputusan jadi jauh lebih cepat.", sortOrder: 1 } });
 
   const databotIntegrations = [
-    { name: "MySQL", icon: "Database" }, { name: "PostgreSQL", icon: "Database" }, { name: "Google Sheets", icon: "FileSpreadsheet" }, { name: "Microsoft Excel", icon: "FileSpreadsheet" }, { name: "REST API", icon: "Code" }, { name: "Zapier", icon: "Zap" },
+    { name: "PostgreSQL", icon: "Database" }, { name: "MySQL", icon: "Database" }, { name: "Snowflake", icon: "Database" }, { name: "WhatsApp", icon: "MessageCircle" }, { name: "Telegram", icon: "Send" }, { name: "Multi-LLM (OpenAI, Anthropic, Gemini, Ollama)", icon: "Brain" },
   ];
   for (let i = 0; i < databotIntegrations.length; i++) {
     await prisma.productIntegration.create({ data: { ...databotIntegrations[i], productId: databot.id, sortOrder: i } });
   }
 
   const databotFaqs = [
-    { question: "Apakah saya perlu keahlian teknis untuk menggunakan Databot?", answer: "Tidak. Databot dirancang untuk pengguna bisnis non-teknis. Anda cukup mengetik pertanyaan dalam bahasa Indonesia atau Inggris, dan Databot akan menyajikan jawabannya dalam bentuk yang mudah dipahami." },
-    { question: "Data apa saja yang bisa dihubungkan?", answer: "Databot mendukung database SQL (MySQL, PostgreSQL, SQL Server), spreadsheet (Google Sheets, Excel), layanan cloud (AWS, GCP), dan API custom. Tim kami juga bisa membantu integrasi dengan sistem yang belum didukung." },
-    { question: "Seberapa akurat prediksi AI Databot?", answer: "Akurasi prediksi tergantung pada kualitas dan volume data. Dengan data yang cukup (minimal 6 bulan data historis), model forecasting kami mencapai akurasi 85-95% untuk prediksi jangka pendek." },
-    { question: "Apakah data saya aman?", answer: "Sangat aman. Semua data dienkripsi end-to-end, disimpan di data center bersertifikasi ISO 27001 di Indonesia. Kami tidak pernah menggunakan data klien untuk melatih model AI." },
-    { question: "Bisa diintegrasikan dengan BI tools yang sudah ada?", answer: "Ya. Databot bisa berjalan berdampingan dengan tools seperti Tableau, Power BI, atau Metabase. Anda juga bisa embed dashboard Databot ke aplikasi internal via iframe atau API." },
+    { question: "Apa itu Databot?", answer: "Databot adalah platform AI database chat yang memungkinkan Anda bertanya ke database menggunakan bahasa sehari-hari (Indonesia atau Inggris). AI akan otomatis mengubah pertanyaan Anda menjadi SQL query, mengeksekusinya, dan menampilkan hasilnya lengkap dengan visualisasi chart dan ringkasan — tanpa perlu menulis kode SQL sama sekali." },
+    { question: "Database apa saja yang didukung?", answer: "Saat ini Databot mendukung tiga database: PostgreSQL, MySQL, dan Snowflake. Anda bisa menghubungkan satu atau lebih database ke workspace Anda dan bertanya lintas sumber data." },
+    { question: "Apakah data saya aman?", answer: "Sangat aman. Databot menerapkan SQL Guardrails yang memblokir query berbahaya seperti DROP, DELETE, INSERT — hanya query READ-ONLY yang dieksekusi. Kredensial database dienkripsi dengan Fernet encryption, autentikasi menggunakan JWT, dan akses dikontrol melalui sistem RBAC (Admin, Member, Viewer) per workspace." },
+    { question: "Bisa diakses dari WhatsApp atau Telegram?", answer: "Ya. Databot memiliki integrasi langsung dengan WhatsApp dan Telegram. Anda bisa mengirim pertanyaan tentang data Anda langsung dari aplikasi chat tersebut dan mendapatkan jawaban beserta ringkasannya secara real-time." },
+    { question: "Apakah perlu keahlian SQL untuk menggunakan Databot?", answer: "Tidak perlu sama sekali. Cukup ketik pertanyaan dalam bahasa natural seperti 'Berapa total penjualan bulan ini per kategori?' dan Databot akan otomatis generate SQL, eksekusi, dan tampilkan hasilnya dalam tabel, chart, serta ringkasan yang mudah dipahami." },
+    { question: "LLM (AI model) apa yang digunakan?", answer: "Databot mendukung multi-LLM provider: OpenAI (GPT-4o), Anthropic (Claude), Google Gemini, dan Ollama untuk deployment lokal. Anda bisa memilih provider sesuai kebutuhan dan preferensi di setiap workspace." },
   ];
   for (let i = 0; i < databotFaqs.length; i++) {
     await prisma.productFaq.create({ data: { ...databotFaqs[i], productId: databot.id, sortOrder: i } });
@@ -782,9 +791,16 @@ async function seedProducts() {
     data: {
       slug: "risto-pos",
       name: "Risto POS",
-      tagline: "Sistem point-of-sale restoran yang dirancang khusus untuk F&B",
-      description: "Risto POS adalah sistem kasir yang dibangun khusus untuk restoran, kafe, dan bisnis F&B. Dari manajemen meja hingga kitchen display, dari split bill hingga laporan penjualan real-time — semua dalam satu platform yang mudah digunakan.",
-      features: ["Manajemen meja", "Tampilan dapur", "Kustomisasi menu"],
+      tagline: "Tingkatkan Profitabilitas Bisnis F&B Anda — Bayar 1x Seumur Hidup!",
+      description: "Risto POS adalah sistem Point of Sale (POS) berbasis cloud yang dirancang khusus untuk bisnis makanan dan minuman (F&B). Dengan 26 fitur komprehensif, Risto POS membantu Anda mengelola seluruh aspek bisnis — mulai dari pemesanan, pembayaran, inventaris, hingga laporan keuangan — dengan mudah dan efisien. Tersedia di Google Playstore dan dapat diakses dari HP, tablet, laptop, ataupun komputer. Cukup bayar 1x seumur hidup, tanpa biaya langganan bulanan.",
+      features: [
+        "Dasbor Global & Multi Outlet",
+        "Manajemen Meja & Menu",
+        "Point of Sale & Order Tracking",
+        "8 Laporan Keuangan",
+        "SDM & Penggajian",
+        "Unlimited User",
+      ],
       icon: "Coffee",
       logo: "/images/product_logo/risto_pos.png",
       category: "pos",
@@ -796,10 +812,10 @@ async function seedProducts() {
 
   // Risto POS Feature Highlights
   const ristoFeatures = [
-    { icon: "LayoutGrid", title: "Manajemen Meja Visual", description: "Lihat status semua meja secara real-time dalam tampilan visual drag-and-drop. Ketahui meja mana yang kosong, terisi, atau menunggu pembayaran. Sempurna untuk restoran dengan banyak lantai atau area." },
-    { icon: "ChefHat", title: "Kitchen Display System (KDS)", description: "Pesanan langsung muncul di layar dapur saat dikirim dari meja. Prioritas pesanan otomatis, timer memasak, dan notifikasi saat makanan siap diantar. Eliminasi kertas bon dari dapur Anda." },
-    { icon: "UtensilsCrossed", title: "Menu Builder Fleksibel", description: "Buat dan kelola menu dengan mudah — termasuk variasi (ukuran, topping, level pedas), paket combo, menu seasonal, dan happy hour pricing. Perubahan langsung aktif di semua terminal." },
-    { icon: "Receipt", title: "Split Bill & Multi-Payment", description: "Bagi tagihan per orang, per item, atau persentase. Terima pembayaran campuran — tunai + QRIS + kartu kredit dalam satu transaksi. Semua tercatat otomatis." },
+    { icon: "Store", title: "Dasbor Global & Multi Outlet", description: "Pantau kinerja bisnis secara keseluruhan dan per outlet dengan dasbor yang komprehensif. Kontrol semua cabang restoran dalam 1 akun dan 1 login — tanpa perlu berganti aplikasi. Dapat menggunakan lebih dari 1 outlet dalam satu aplikasi." },
+    { icon: "UtensilsCrossed", title: "Modul Menu & Manajemen Meja", description: "Buat, edit, dan kategorikan menu restoran dengan mudah. Atur tata letak meja secara visual, alokasikan meja untuk pelanggan, dan pantau status setiap meja secara real-time." },
+    { icon: "ShoppingCart", title: "Point of Sale & Order Tracking", description: "Proses transaksi penjualan dengan cepat dan akurat, termasuk split bill. Lacak status pesanan pelanggan dari pemesanan hingga penyajian, dan lihat riwayat lengkap setiap transaksi." },
+    { icon: "FileBarChart", title: "8 Laporan Keuangan & SDM", description: "Dapatkan laporan keuangan komprehensif untuk menganalisis kinerja bisnis F&B Anda. Dilengkapi modul SDM & Penggajian untuk mengelola karyawan, absensi, gaji, dan penggajian dalam satu platform." },
   ];
   for (let i = 0; i < ristoFeatures.length; i++) {
     await prisma.productFeatureHighlight.create({ data: { ...ristoFeatures[i], productId: ristoPOS.id, sortOrder: i } });
@@ -807,78 +823,80 @@ async function seedProducts() {
 
   // Risto POS Capabilities
   const ristoCaps = [
-    { icon: "LayoutGrid", title: "Floor Plan Visual", description: "Layout meja drag-and-drop multi-lantai" },
-    { icon: "ChefHat", title: "Kitchen Display", description: "Order langsung ke layar dapur" },
-    { icon: "UtensilsCrossed", title: "Menu Management", description: "Menu, variasi, combo, dan seasonal pricing" },
-    { icon: "Receipt", title: "Split Bill", description: "Bagi tagihan per orang atau per item" },
-    { icon: "CreditCard", title: "Multi-Payment", description: "Cash, QRIS, kartu kredit dalam satu transaksi" },
-    { icon: "Users", title: "Staff Management", description: "Absensi, shift, dan hak akses per role" },
-    { icon: "Package", title: "Inventory Tracking", description: "Stok bahan baku real-time dengan alert" },
-    { icon: "Truck", title: "Supplier Management", description: "Kelola pesanan dan hutang ke supplier" },
-    { icon: "BarChart3", title: "Sales Analytics", description: "Laporan penjualan, item terlaris, jam sibuk" },
-    { icon: "Percent", title: "Promo & Diskon", description: "Kupon, happy hour, dan program loyalty" },
-    { icon: "Smartphone", title: "Waiter App", description: "Ambil pesanan dari tablet atau smartphone" },
-    { icon: "Printer", title: "Auto-Print", description: "Cetak otomatis ke printer kasir dan dapur" },
+    { icon: "LayoutGrid", title: "Dasbor Global & Outlet", description: "Pantau bisnis keseluruhan dan per outlet dengan mudah" },
+    { icon: "UtensilsCrossed", title: "Modul Menu", description: "Buat, edit, dan kategorikan menu restoran Anda" },
+    { icon: "LayoutGrid", title: "Manajemen Meja", description: "Atur tata letak meja, alokasikan, dan pantau status real-time" },
+    { icon: "ShoppingCart", title: "Point of Sale (POS)", description: "Proses transaksi penjualan cepat dan akurat, termasuk split bill" },
+    { icon: "ClipboardList", title: "Pencatatan Pesanan", description: "Lacak status pesanan dari pemesanan hingga penyajian" },
+    { icon: "Clock", title: "Riwayat Pesanan", description: "Lihat riwayat pesanan pelanggan secara lengkap" },
+    { icon: "Users", title: "Pelanggan & Pemasok", description: "Kelola data pelanggan dan pemasok, serta catat riwayat" },
+    { icon: "Package", title: "Modul Pembelian & Beban", description: "Catat pembelian bahan baku dan kelola beban operasional" },
+    { icon: "UserCog", title: "SDM & Penggajian", description: "Kelola karyawan, absensi, gaji, dan penggajian" },
+    { icon: "FileBarChart", title: "8 Laporan Keuangan", description: "Laporan keuangan komprehensif untuk analisis bisnis F&B" },
+    { icon: "ShieldCheck", title: "Role & Permissions", description: "Atur hak akses pengguna berdasarkan peran di restoran" },
+    { icon: "UserPlus", title: "Unlimited User", description: "Buat akun pengguna sebanyak apapun tanpa biaya tambahan" },
   ];
   for (let i = 0; i < ristoCaps.length; i++) {
     await prisma.productCapability.create({ data: { ...ristoCaps[i], productId: ristoPOS.id, sortOrder: i } });
   }
 
   const ristoSteps = [
-    { step: 1, icon: "Settings", title: "Setup Menu & Meja", description: "Masukkan menu restoran Anda dan atur layout meja. Tim kami akan membantu setup awal agar semuanya siap dalam 1 hari." },
-    { step: 2, icon: "Smartphone", title: "Ambil Pesanan", description: "Pelayan mengambil pesanan dari tablet atau smartphone. Pesanan otomatis masuk ke kitchen display dan printer." },
-    { step: 3, icon: "ChefHat", title: "Dapur Terima Order", description: "Dapur melihat pesanan di layar KDS dengan prioritas dan timer. Tandai selesai saat makanan siap diantar." },
-    { step: 4, icon: "CreditCard", title: "Pembayaran Mudah", description: "Proses pembayaran cepat dengan split bill dan multi-payment. Laporan penjualan otomatis ter-generate." },
+    { step: 1, icon: "Download", title: "Download & Pilih Paket", description: "Download Risto POS melalui Google Playstore atau akses web technemasolutions.co.id. Pilih paket yang sesuai kebutuhan bisnis F&B Anda — cukup bayar 1x seumur hidup." },
+    { step: 2, icon: "MessageCircle", title: "Aktivasi & Pelatihan", description: "Customer Service akan menghubungi via WhatsApp untuk memberikan akses akun Risto POS Anda. Jadwal pelatihan diatur melalui Online Meeting atau Video Tutorial." },
+    { step: 3, icon: "Settings", title: "Setup Menu & Meja", description: "Masukkan menu restoran, atur tata letak meja, buat akun pengguna unlimited, dan atur Role & Permissions sesuai peran karyawan." },
+    { step: 4, icon: "Rocket", title: "Mulai Berjualan", description: "Langsung gunakan semua fitur Risto POS untuk kelola bisnis F&B Anda dari HP, tablet, atau komputer. Dapatkan FREE Maintenance dan support 13/7." },
   ];
   for (let i = 0; i < ristoSteps.length; i++) {
     await prisma.productStep.create({ data: { ...ristoSteps[i], productId: ristoPOS.id, sortOrder: i } });
   }
 
   const ristoUseCases = [
-    { icon: "Coffee", title: "Kafe & Coffee Shop", description: "Operasi cepat dengan antrian yang efisien, menu customizable, dan program loyalty pelanggan." },
-    { icon: "UtensilsCrossed", title: "Restoran Full-Service", description: "Manajemen meja, kitchen display, dan split bill untuk pengalaman dining yang mulus." },
-    { icon: "Flame", title: "Restoran Cepat Saji", description: "Kecepatan transaksi tinggi dengan antrian counter dan self-service kiosk." },
-    { icon: "Wine", title: "Bar & Lounge", description: "Tab management, happy hour pricing, dan inventory tracking untuk minuman." },
+    { icon: "UtensilsCrossed", title: "Restoran & Rumah Makan", description: "Kelola pemesanan, manajemen meja, pencatatan pesanan, dan laporan keuangan restoran Anda secara lengkap dalam satu platform." },
+    { icon: "Coffee", title: "Kafe & Coffee Shop", description: "Proses transaksi cepat, kelola menu minuman dan makanan, serta pantau performa bisnis kafe dari mana saja via HP atau tablet." },
+    { icon: "Store", title: "Franchise & Multi Outlet F&B", description: "Kontrol semua cabang restoran dalam 1 akun dan 1 login. Dasbor Global memungkinkan pemilik memantau semua outlet secara real-time." },
+    { icon: "Truck", title: "Catering & Cloud Kitchen", description: "Pencatatan pesanan terorganisir, manajemen pelanggan & pemasok, serta modul pembelian untuk kelola bahan baku dan beban operasional." },
   ];
   for (let i = 0; i < ristoUseCases.length; i++) {
     await prisma.productUseCase.create({ data: { ...ristoUseCases[i], productId: ristoPOS.id, sortOrder: i } });
   }
 
   const ristoStats = [
-    { value: "40%", label: "Lebih Cepat Waktu Pelayanan" },
-    { value: "25%", label: "Peningkatan Table Turnover" },
-    { value: "95%", label: "Akurasi Pesanan" },
+    { value: "26", label: "Fitur Komprehensif untuk F&B" },
+    { value: "8", label: "Laporan Keuangan Tersedia" },
+    { value: "1x", label: "Bayar Seumur Hidup" },
   ];
   for (let i = 0; i < ristoStats.length; i++) {
     await prisma.productStat.create({ data: { ...ristoStats[i], productId: ristoPOS.id, sortOrder: i } });
   }
 
   const ristoPricing = [
-    { name: "Starter", price: "349.000", currency: "Rp", period: "/bulan", description: "Untuk kafe kecil dan food stall dengan 1 outlet", features: ["1 terminal", "Menu management", "Pembayaran cash & QRIS", "Laporan harian", "Dukungan email"], ctaLabel: "Mulai Gratis", ctaHref: "/kontak", isPopular: false },
-    { name: "Professional", price: "899.000", currency: "Rp", period: "/bulan", description: "Untuk restoran dan kafe dengan kebutuhan lengkap", features: ["5 terminal", "Kitchen Display System", "Manajemen meja", "Split bill & multi-payment", "Inventory tracking", "Staff management", "Laporan analytics", "Dukungan prioritas"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: true },
-    { name: "Enterprise", price: null, currency: "Rp", period: "/bulan", description: "Untuk chain restoran dan franchise multi-outlet", features: ["Semua fitur Professional", "Terminal tak terbatas", "Multi-outlet dashboard", "Central menu management", "Custom integration", "Dedicated account manager", "SLA 99.9%"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
+    { name: "Dasar", price: "3.750.000", currency: "Rp", period: "/lifetime", description: "Bayar 1x seumur hidup — cocok untuk restoran kecil dan kafe", features: ["Dashboard Global & Outlet", "Modul Menu", "Table Management", "Point of Sale (POS)", "Order Tracking & History", "Modul Pelanggan", "8 Laporan Keuangan", "Role & Permissions", "Unlimited User", "Support 13/7"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: false },
+    { name: "Standar", price: "4.600.000", currency: "Rp", period: "/lifetime", description: "Bayar 1x seumur hidup — untuk restoran yang butuh modul pembelian dan SDM", features: ["Semua fitur Dasar", "Modul Pemasok", "Modul Pembelian", "Modul Beban", "SDM & Penggajian", "Support 13/7"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: true },
+    { name: "Premium", price: "5.560.000", currency: "Rp", period: "/lifetime", description: "Bayar 1x seumur hidup — solusi lengkap dengan integrasi online food dan order mandiri", features: ["Semua fitur Standar", "Import/Integrasi Data Online Food", "Order Mandiri", "FREE Maintenance", "Support 13/7"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: false },
+    { name: "On-Premise", price: "7.500.000", currency: "Rp", period: "/tahun", description: "Server dan domain sendiri — dikelola oleh tim Technema", features: ["Semua fitur Premium", "Server & domain sendiri", "Dikelola tim Technema", "Nama domain dapat diganti", "Support 13/7"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
   ];
   for (let i = 0; i < ristoPricing.length; i++) {
     await prisma.productPricingPlan.create({ data: { ...ristoPricing[i], productId: ristoPOS.id, sortOrder: i } });
   }
 
-  await prisma.productTestimonial.create({ data: { productId: ristoPOS.id, name: "Chef Arman", role: "Owner & Head Chef", company: "Warung Nusantara", content: "Kitchen Display System dari Risto POS menghilangkan semua kekacauan kertas bon di dapur kami. Pesanan lebih terorganisir dan waktu memasak berkurang 30%.", sortOrder: 0 } });
-  await prisma.productTestimonial.create({ data: { productId: ristoPOS.id, name: "Dewi Anggraini", role: "Operations Manager", company: "Kopi Kenangan Lokal", content: "Sejak pakai Risto POS, table turnover kami naik 25%. Fitur manajemen meja dan split bill sangat membantu di jam-jam sibuk.", sortOrder: 1 } });
+  await prisma.productTestimonial.create({ data: { productId: ristoPOS.id, name: "Chef Arman", role: "Owner & Head Chef", company: "Warung Nusantara (3 Cabang)", content: "Dengan Risto POS, saya bisa kontrol 3 cabang warung dari 1 akun saja. Modul menu sangat mudah digunakan, dan laporan keuangan membantu saya mengambil keputusan lebih cepat. Yang paling penting — bayar 1x dan tidak ada biaya bulanan!", sortOrder: 0 } });
+  await prisma.productTestimonial.create({ data: { productId: ristoPOS.id, name: "Dewi Anggraini", role: "Pemilik", company: "Kopi Kenangan Lokal", content: "Risto POS sangat cocok untuk bisnis kafe kami. Fitur manajemen meja, order tracking, dan split bill sangat membantu di jam-jam sibuk. Tim support juga responsif — available 13/7 tanpa biaya tambahan.", sortOrder: 1 } });
 
   const ristoIntegrations = [
-    { name: "GoPay", icon: "Smartphone" }, { name: "OVO", icon: "Smartphone" }, { name: "DANA", icon: "Smartphone" }, { name: "QRIS", icon: "QrCode" }, { name: "GrabFood", icon: "Bike" }, { name: "GoFood", icon: "Bike" },
+    { name: "Google Playstore", icon: "Smartphone" }, { name: "Browser Web", icon: "Globe" }, { name: "HP & Tablet", icon: "Smartphone" }, { name: "Laptop & Komputer", icon: "Monitor" }, { name: "Online Food Platform", icon: "ShoppingCart" }, { name: "Printer Struk", icon: "Printer" },
   ];
   for (let i = 0; i < ristoIntegrations.length; i++) {
     await prisma.productIntegration.create({ data: { ...ristoIntegrations[i], productId: ristoPOS.id, sortOrder: i } });
   }
 
   const ristoFaqs = [
-    { question: "Apakah Risto POS bisa dipakai offline?", answer: "Ya! Risto POS bisa beroperasi penuh saat internet mati. Semua transaksi tersimpan di perangkat lokal dan otomatis sync ke cloud saat koneksi pulih. Anda tidak akan kehilangan satu transaksi pun." },
-    { question: "Perangkat apa saja yang dibutuhkan?", answer: "Risto POS berjalan di tablet Android, iPad, atau laptop/PC. Untuk kitchen display, kami rekomendasikan tablet 10 inch. Printer kasir thermal 80mm kompatibel dengan semua merek populer." },
-    { question: "Berapa lama proses setup?", answer: "Setup dasar bisa selesai dalam 1 hari. Tim kami akan datang ke lokasi untuk instalasi, input menu, atur layout meja, dan training staff. Untuk chain restoran, biasanya 3-5 hari per outlet." },
-    { question: "Apakah bisa integrasi dengan food delivery platform?", answer: "Ya, Risto POS terintegrasi dengan GrabFood, GoFood, dan ShopeeFood. Pesanan delivery otomatis masuk ke sistem POS dan kitchen display tanpa input manual." },
-    { question: "Bagaimana jika perangkat rusak?", answer: "Data Anda aman di cloud. Cukup login di perangkat baru dan semua data langsung tersedia. Untuk paket Professional ke atas, kami sediakan perangkat pengganti dalam 24 jam." },
-    { question: "Apakah ada biaya setup awal?", answer: "Tidak ada biaya setup untuk paket Starter dan Professional. Untuk Enterprise, biaya setup disesuaikan dengan jumlah outlet dan kebutuhan kustomisasi." },
+    { question: "Apa itu Risto POS?", answer: "Risto POS adalah sistem Point of Sale (POS) berbasis cloud yang dirancang khusus untuk bisnis makanan dan minuman (F&B). Dengan 26 fitur komprehensif, Risto POS membantu mengelola seluruh aspek bisnis mulai dari pemesanan, pembayaran, inventaris, hingga laporan keuangan." },
+    { question: "Apakah harus bayar langganan bulanan?", answer: "Tidak! Pembayaran Risto POS dilakukan HANYA 1x Seumur Hidup dan tidak ada biaya bulanan aplikasi. Mulai dari Rp 3.750.000 per outlet. Di tahun ke-2 dan seterusnya, hanya perlu membayar Rp 350.000/tahun untuk biaya pemeliharaan server." },
+    { question: "Bisa diakses dari perangkat apa saja?", answer: "Risto POS dapat diakses dari handphone, tablet, laptop, ataupun komputer. Tersedia juga di Google Playstore. Cukup gunakan browser untuk mengakses dari perangkat apapun." },
+    { question: "Apakah bisa Multi Outlet?", answer: "Ya! Risto POS mendukung Multi Outlet — Anda dapat menggunakan lebih dari 1 outlet di dalam 1 aplikasi dan 1 login. Ini berbeda dengan kompetitor seperti Moka dan Majoo yang tidak menyediakan fitur ini." },
+    { question: "Apakah bisa integrasi dengan platform online food?", answer: "Ya, pada paket Premium tersedia fitur Import/Integrasi Data Online Food yang memungkinkan data dari platform delivery online terintegrasi ke dalam sistem Risto POS Anda." },
+    { question: "Bagaimana cara mendapatkan Risto POS?", answer: "Cukup akses web technemasolutions.co.id dan pilih paket yang diinginkan. Customer Service kami akan menghubungi via WhatsApp untuk memberikan akses akun dan mengatur jadwal pelatihan melalui Online Meeting atau Video Tutorial." },
+    { question: "Apakah ada support setelah pembelian?", answer: "Ya, setiap pelanggan Risto POS mendapatkan support 13/7 dan FREE Maintenance tanpa biaya tambahan. Tim kami siap membantu troubleshooting dan pelatihan penggunaan." },
   ];
   for (let i = 0; i < ristoFaqs.length; i++) {
     await prisma.productFaq.create({ data: { ...ristoFaqs[i], productId: ristoPOS.id, sortOrder: i } });
@@ -889,9 +907,15 @@ async function seedProducts() {
     data: {
       slug: "pos-solutions",
       name: "POS Solutions",
-      tagline: "Platform POS ritel lengkap untuk toko modern",
-      description: "POS Solutions adalah platform point-of-sale yang dirancang untuk bisnis ritel modern. Dari toko kecil hingga jaringan multi-cabang, kelola inventaris, penjualan, dan pelanggan dalam satu sistem terintegrasi dengan berbagai payment gateway.",
-      features: ["Pelacakan inventaris", "Dukungan multi-toko", "Integrasi pembayaran"],
+      tagline: "Bayar Sekali, Pakai Berkali-kali!",
+      description: "POS Solutions adalah aplikasi point-of-sale berbasis website dari Technema Solutions yang mendukung seluruh kegiatan keuangan dan operasional bisnis Anda. Dengan 40+ fitur lengkap, fitur Multi Outlet untuk mengontrol semua cabang dalam 1 akun, kasir mode offline, serta 21 laporan keuangan — kelola bisnis Anda kapan saja dan di mana saja melalui HP, tablet, laptop, ataupun komputer. Cukup bayar 1x, tanpa biaya langganan.",
+      features: [
+        "Multi Outlet",
+        "Kasir Mode Offline",
+        "21 Laporan Keuangan",
+        "40+ Fitur Lengkap",
+        "Akses Multi-Perangkat",
+      ],
       icon: "Monitor",
       logo: "/images/product_logo/pos_solutions.png",
       category: "pos",
@@ -902,92 +926,99 @@ async function seedProducts() {
   });
 
   const posFeatures = [
-    { icon: "Package", title: "Inventory Management Real-Time", description: "Pantau stok barang di semua cabang secara real-time. Notifikasi otomatis saat stok menipis, auto-reorder ke supplier, dan barcode scanning untuk penerimaan barang yang cepat dan akurat." },
-    { icon: "Store", title: "Multi-Store Dashboard", description: "Kelola banyak toko dari satu dashboard. Bandingkan performa antar cabang, transfer stok antar toko, dan terapkan promo serentak di semua outlet dengan sekali klik." },
-    { icon: "CreditCard", title: "Integrasi Payment Gateway Lengkap", description: "Terima pembayaran dari semua metode — tunai, kartu debit/kredit, e-wallet (GoPay, OVO, DANA), QRIS, dan cicilan. Semua tercatat otomatis di laporan keuangan." },
-    { icon: "UserCheck", title: "CRM & Program Loyalty", description: "Kenali pelanggan Anda lebih baik. Sistem membership, poin reward, birthday voucher, dan analisis customer behavior untuk strategi marketing yang lebih efektif." },
+    { icon: "Store", title: "Multi Outlet dalam 1 Akun", description: "Mudah mengontrol semua cabang bisnis Anda dalam 1 akun yang sama, tanpa perlu berpindah ke akun cabang lain. Setiap cabang bisnis akan terintegrasi satu sama lain — pantau perkembangan bisnis di semua cabang secara real-time." },
+    { icon: "ShoppingCart", title: "Penjualan & Kasir Mode Offline", description: "Catat penjualan dengan mudah dan cepat menggunakan perangkat apapun, mulai dari HP, tablet, ataupun komputer. Meskipun berbasis web, terdapat fitur kasir mode offline yang memaksimalkan kinerja kasir tanpa terhubung ke internet — dan owner tetap bisa monitoring." },
+    { icon: "FileBarChart", title: "21 Laporan Keuangan Lengkap", description: "Dapatkan akses instan ke lebih dari 21 laporan keuangan yang membantu Anda menganalisis kinerja bisnis dengan mudah. Dari statistik keuangan komprehensif hingga laporan penjualan, pembelian, stok, dan laba rugi." },
+    { icon: "Settings", title: "Dapat Dikustomisasi", description: "POS Solutions dapat dikustomisasi berdasarkan kebutuhan bisnis Anda. Mulai dari koneksi ke Giro, penambahan fitur khusus, hingga penyesuaian tampilan sesuai branding toko Anda." },
   ];
   for (let i = 0; i < posFeatures.length; i++) {
     await prisma.productFeatureHighlight.create({ data: { ...posFeatures[i], productId: posSolutions.id, sortOrder: i } });
   }
 
   const posCaps = [
-    { icon: "Package", title: "Inventory Real-Time", description: "Stok akurat di semua cabang setiap saat" },
-    { icon: "Store", title: "Multi-Store", description: "Kelola banyak toko dalam satu platform" },
-    { icon: "CreditCard", title: "Payment Gateway", description: "Semua metode pembayaran terintegrasi" },
-    { icon: "UserCheck", title: "CRM & Loyalty", description: "Membership, poin, dan voucher pelanggan" },
-    { icon: "Barcode", title: "Barcode & SKU", description: "Scan barcode untuk transaksi dan stok" },
-    { icon: "ArrowLeftRight", title: "Transfer Stok", description: "Kirim stok antar cabang dengan mudah" },
-    { icon: "Truck", title: "Purchase Order", description: "Auto-reorder ke supplier saat stok menipis" },
-    { icon: "BarChart3", title: "Sales Report", description: "Laporan penjualan harian hingga tahunan" },
-    { icon: "Users", title: "Staff Management", description: "Absensi, komisi, dan hak akses per karyawan" },
-    { icon: "Percent", title: "Promo Engine", description: "Diskon, bundle, dan promo flash sale" },
-    { icon: "FileText", title: "Accounting Integration", description: "Export ke Jurnal, Accurate, atau Xero" },
-    { icon: "Globe", title: "E-Commerce Sync", description: "Sinkronisasi stok dengan toko online" },
+    { icon: "Store", title: "Multi Outlet", description: "Kontrol semua cabang bisnis dalam 1 akun sekaligus" },
+    { icon: "BarChart3", title: "Statistik Keuangan", description: "Statistik keuangan komprehensif untuk pantau bisnis di semua cabang" },
+    { icon: "ShoppingCart", title: "Penjualan", description: "Catat penjualan dengan mudah dari perangkat apapun" },
+    { icon: "Package", title: "Pembelian", description: "Proses pembelian cepat dan efisien dalam satu platform" },
+    { icon: "FileText", title: "Penawaran", description: "Buat dan kirim penawaran ke pelanggan lengkap dengan rincian produk dan harga" },
+    { icon: "ClipboardList", title: "Penyesuaian Stok", description: "Lakukan penyesuaian stok cepat dan akurat agar inventaris selalu up-to-date" },
+    { icon: "FileBarChart", title: "Laporan Keuangan", description: "Akses instan ke 21 laporan keuangan untuk analisis bisnis" },
+    { icon: "RotateCcw", title: "Pencatatan Retur", description: "Kelola proses retur dengan mudah dan perbarui stok secara otomatis" },
+    { icon: "Users", title: "Pelanggan & Pemasok", description: "Catat dan kelola informasi pelanggan dan pemasok dengan mudah" },
+    { icon: "FolderKanban", title: "Manajemen Proyek", description: "Kelola perencanaan dan pelaksanaan proyek, lacak kemajuan dan sumber daya" },
+    { icon: "UserCog", title: "Manajemen Akses Akun", description: "Kelola akses dan izin pengguna dengan profil unik untuk keamanan" },
+    { icon: "Calculator", title: "Modul Akuntansi", description: "Pencatatan dan pelaporan keuangan komprehensif, kelola transaksi dan arus kas" },
   ];
   for (let i = 0; i < posCaps.length; i++) {
     await prisma.productCapability.create({ data: { ...posCaps[i], productId: posSolutions.id, sortOrder: i } });
   }
 
   const posSteps = [
-    { step: 1, icon: "Upload", title: "Input Produk & Stok", description: "Masukkan katalog produk via spreadsheet atau barcode scanning. Tim kami bantu migrasi data dari sistem lama Anda." },
-    { step: 2, icon: "Store", title: "Atur Cabang & Staff", description: "Tambahkan toko, atur hak akses karyawan, dan hubungkan perangkat POS. Setup multi-cabang bisa selesai dalam 1 hari." },
-    { step: 3, icon: "ShoppingBag", title: "Mulai Berjualan", description: "Scan barcode, proses pembayaran, dan cetak struk dalam hitungan detik. Stok otomatis berkurang di semua channel." },
-    { step: 4, icon: "BarChart3", title: "Analisis & Grow", description: "Gunakan laporan dan insight untuk optimasi stok, identifikasi produk terlaris, dan rencanakan strategi pertumbuhan." },
+    { step: 1, icon: "CreditCard", title: "Bayar Sekali", description: "Pilih paket yang sesuai kebutuhan bisnis Anda (Dasar, Standar, atau Premium). Bayar 1 kali saja per outlet — tanpa biaya langganan bulanan." },
+    { step: 2, icon: "Store", title: "Setup Outlet & Pengguna", description: "Tambahkan outlet, buat akun pengguna unlimited, dan atur hak akses sesuai peran karyawan. Aplikasi langsung bisa digunakan via browser." },
+    { step: 3, icon: "ShoppingCart", title: "Mulai Berjualan", description: "Catat penjualan dari HP, tablet, atau komputer. Fitur kasir mode offline memastikan transaksi tetap berjalan meski tanpa internet." },
+    { step: 4, icon: "BarChart3", title: "Pantau & Kembangkan", description: "Gunakan 21 laporan keuangan untuk menganalisis performa bisnis. Pantau semua cabang secara real-time dari 1 akun." },
   ];
   for (let i = 0; i < posSteps.length; i++) {
     await prisma.productStep.create({ data: { ...posSteps[i], productId: posSolutions.id, sortOrder: i } });
   }
 
   const posUseCases = [
-    { icon: "ShoppingBag", title: "Fashion & Apparel", description: "Kelola variasi ukuran & warna, seasonal collection, dan program membership pelanggan setia." },
-    { icon: "Pill", title: "Apotek & Toko Kesehatan", description: "Tracking batch number, expiry date, dan integrasi dengan sistem resep elektronik." },
-    { icon: "ShoppingCart", title: "Minimarket & Supermarket", description: "High-volume scanning, manajemen supplier, dan promo otomatis berbasis data." },
-    { icon: "Wrench", title: "Toko Bangunan & Hardware", description: "Manajemen produk ribuan SKU, penjualan satuan dan grosir, serta kredit pelanggan." },
+    { icon: "ShoppingCart", title: "Minimarket", description: "Meskipun berbasis web, terdapat fitur kasir mode offline yang memaksimalkan kinerja kasir tanpa terhubung ke internet, dan owner tetap bisa monitoring." },
+    { icon: "Wind", title: "Vape Store", description: "Dapat dibuka melalui handphone, tablet, ataupun komputer sehingga pengguna bisa lebih fleksibel untuk melakukan pencatatan transaksi." },
+    { icon: "Pill", title: "Apotek", description: "Memudahkan untuk mengontrol stok di mana saja dan kapan saja karena berbasis web. Dapatkan notifikasi untuk obat yang sudah hampir kehabisan stok." },
+    { icon: "Settings", title: "Toko Sparepart", description: "Kontrol semua cabang toko sparepart Anda dengan hanya 1 akun POS Solutions tanpa ribet berganti akun. Dengan fitur Multi Outlet, pemilik dapat mengontrol semua toko sekaligus." },
   ];
   for (let i = 0; i < posUseCases.length; i++) {
     await prisma.productUseCase.create({ data: { ...posUseCases[i], productId: posSolutions.id, sortOrder: i } });
   }
 
   const posStats = [
-    { value: "60%", label: "Lebih Efisien Kelola Inventaris" },
-    { value: "35%", label: "Peningkatan Repeat Customer" },
-    { value: "100+", label: "Payment Method Terintegrasi" },
+    { value: "40+", label: "Fitur Lengkap untuk Bisnis Anda" },
+    { value: "21", label: "Laporan Keuangan Tersedia" },
+    { value: "100%", label: "Kepercayaan Pelanggan" },
   ];
   for (let i = 0; i < posStats.length; i++) {
     await prisma.productStat.create({ data: { ...posStats[i], productId: posSolutions.id, sortOrder: i } });
   }
 
   const posPricing = [
-    { name: "Starter", price: "299.000", currency: "Rp", period: "/bulan", description: "Untuk toko tunggal dengan kebutuhan POS dasar", features: ["1 outlet", "1 terminal", "Inventory management", "Pembayaran cash & QRIS", "Laporan dasar", "Dukungan email"], ctaLabel: "Mulai Gratis", ctaHref: "/kontak", isPopular: false },
-    { name: "Professional", price: "699.000", currency: "Rp", period: "/bulan", description: "Untuk bisnis ritel dengan kebutuhan multi-channel", features: ["3 outlet", "5 terminal per outlet", "CRM & loyalty program", "Multi-payment gateway", "E-commerce sync", "Purchase order automation", "Advanced analytics", "Dukungan prioritas"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: true },
-    { name: "Enterprise", price: null, currency: "Rp", period: "/bulan", description: "Untuk chain ritel dan franchise berskala besar", features: ["Semua fitur Professional", "Outlet tak terbatas", "Terminal tak terbatas", "Custom integration", "White-label option", "Dedicated account manager", "SLA 99.9%"], ctaLabel: "Hubungi Kami", ctaHref: "/kontak", isPopular: false },
+    { name: "Dasar", price: "3.000.000", currency: "Rp", period: "/outlet", description: "Bayar 1x — cocok untuk toko tunggal dengan kebutuhan POS dasar", features: ["Statistik Keuangan", "Penjualan & Kasir Offline", "Pembelian", "Laporan Keuangan", "Pelanggan & Pemasok", "Akun Pengguna Unlimited", "Manajemen Akses Akun", "Support 10/7"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: false },
+    { name: "Standar", price: "4.750.000", currency: "Rp", period: "/outlet", description: "Bayar 1x — untuk bisnis yang butuh fitur stok dan retur lebih lengkap", features: ["Semua fitur Dasar", "Penawaran", "Penyesuaian Stok", "Pencatatan Retur", "Multi Outlet", "Support 10/7"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: true },
+    { name: "Premium", price: "7.500.000", currency: "Rp", period: "/outlet", description: "Bayar 1x — solusi lengkap dengan semua 15 fitur untuk bisnis besar", features: ["Semua fitur Standar", "Manajemen Proyek", "Modul Akuntansi", "Notifikasi E-mail", "SDM & Penggajian", "Kustomisasi", "Support 10/7"], ctaLabel: "Mulai Sekarang", ctaHref: "/kontak", isPopular: false },
   ];
   for (let i = 0; i < posPricing.length; i++) {
     await prisma.productPricingPlan.create({ data: { ...posPricing[i], productId: posSolutions.id, sortOrder: i } });
   }
 
-  await prisma.productTestimonial.create({ data: { productId: posSolutions.id, name: "Hendra Wijaya", role: "Owner", company: "Fashion Hub (12 Cabang)", content: "POS Solutions menyatukan 12 cabang kami dalam satu dashboard. Transfer stok antar toko jadi mudah dan laporan penjualan real-time membantu kami buat keputusan lebih cepat.", sortOrder: 0 } });
-  await prisma.productTestimonial.create({ data: { productId: posSolutions.id, name: "Apt. Sari Indah", role: "Pemilik", company: "Apotek Sehat Selalu", content: "Fitur tracking expiry date dan batch number sangat critical untuk apotek. Sejak pakai POS Solutions, kami zero waste untuk obat kadaluarsa.", sortOrder: 1 } });
+  await prisma.productTestimonial.create({ data: { productId: posSolutions.id, name: "Hendra Wijaya", role: "Pemilik", company: "Toko Sparepart Motor (3 Cabang)", content: "Dengan fitur Multi Outlet, saya bisa kontrol semua 3 cabang toko sparepart dari 1 akun saja. Tidak perlu ribet berganti akun. Stok semua cabang terpantau real-time dari HP.", sortOrder: 0 } });
+  await prisma.productTestimonial.create({ data: { productId: posSolutions.id, name: "Apt. Sari Indah", role: "Pemilik", company: "Apotek Sehat Selalu", content: "POS Solutions sangat membantu mengontrol stok obat di apotek kami. Notifikasi stok yang hampir habis membuat kami tidak pernah kehabisan obat penting. Dan yang terbaik — bayar 1x tanpa langganan!", sortOrder: 1 } });
 
   const posIntegrations = [
-    { name: "Tokopedia", icon: "ShoppingCart" }, { name: "Shopee", icon: "ShoppingCart" }, { name: "Jurnal", icon: "FileText" }, { name: "Accurate", icon: "FileText" }, { name: "QRIS", icon: "QrCode" }, { name: "Midtrans", icon: "CreditCard" },
+    { name: "Browser (Chrome, Firefox, Safari)", icon: "Globe" }, { name: "HP & Tablet", icon: "Smartphone" }, { name: "Laptop & Komputer", icon: "Monitor" }, { name: "Printer Struk", icon: "Printer" }, { name: "Barcode Scanner", icon: "ScanLine" }, { name: "E-mail Notifikasi", icon: "Mail" },
   ];
   for (let i = 0; i < posIntegrations.length; i++) {
     await prisma.productIntegration.create({ data: { ...posIntegrations[i], productId: posSolutions.id, sortOrder: i } });
   }
 
   const posFaqs = [
-    { question: "Apakah POS Solutions cocok untuk toko kecil?", answer: "Sangat cocok! Paket Starter kami dirancang khusus untuk toko kecil dengan 1 outlet. Anda bisa mulai dengan fitur dasar dan upgrade seiring pertumbuhan bisnis." },
-    { question: "Bagaimana cara sinkronisasi dengan toko online?", answer: "POS Solutions terintegrasi langsung dengan Tokopedia, Shopee, dan Lazada. Stok otomatis terupdate di semua channel saat ada penjualan — baik di toko fisik maupun online." },
-    { question: "Apakah bisa tracking stok per batch dan expiry?", answer: "Ya, fitur batch tracking dan expiry date alert tersedia di semua paket. Sangat penting untuk apotek, toko kosmetik, dan bisnis yang menjual produk dengan masa kadaluarsa." },
-    { question: "Berapa biaya per transaksi?", answer: "Tidak ada biaya per transaksi dari POS Solutions. Anda hanya bayar biaya langganan bulanan. Biaya payment gateway (QRIS, kartu kredit) mengikuti tarif masing-masing provider." },
-    { question: "Apakah bisa import data dari sistem POS lama?", answer: "Ya, tim kami akan membantu migrasi data produk, pelanggan, dan riwayat transaksi dari sistem lama Anda. Proses migrasi biasanya selesai dalam 1-3 hari." },
-    { question: "Bagaimana jika internet mati?", answer: "POS Solutions bisa beroperasi offline. Transaksi dicatat secara lokal dan otomatis sync ke cloud saat internet pulih. Fitur offline tersedia di semua paket." },
+    { question: "Apa itu POS Solutions?", answer: "POS Solutions adalah aplikasi point-of-sale berbasis website dari Technema Solutions. Fitur yang ada di dalamnya mendukung seluruh kegiatan keuangan dan operasional bisnis dari berbagai lini, dengan 40+ fitur dan 21 laporan keuangan." },
+    { question: "Apakah harus bayar langganan bulanan?", answer: "Tidak! POS Solutions menggunakan sistem bayar sekali, pakai berkali-kali. Cukup 1x bayar per outlet, tanpa biaya langganan bulanan. Harga mulai dari Rp 3.000.000/outlet." },
+    { question: "Bagaimana jika internet mati?", answer: "POS Solutions memiliki fitur kasir mode offline. Kasir tetap bisa melakukan transaksi tanpa terhubung ke internet, dan data akan otomatis tersinkronisasi saat koneksi internet pulih. Owner tetap bisa monitoring." },
+    { question: "Bisa diakses dari perangkat apa saja?", answer: "POS Solutions berbasis web sehingga bisa dibuka melalui handphone, tablet, laptop, ataupun komputer menggunakan browser. Tidak perlu install aplikasi khusus." },
+    { question: "Apa itu fitur Multi Outlet?", answer: "Fitur Multi Outlet memungkinkan Anda mengontrol semua cabang bisnis dalam 1 akun sekaligus, tanpa perlu login ke akun cabang bisnis lainnya. Setiap cabang terintegrasi dan stok bisa dipantau secara real-time." },
+    { question: "Apakah POS Solutions bisa dikustomisasi?", answer: "Ya, POS Solutions dapat dikustomisasi berdasarkan kebutuhan pelanggan. Contoh: koneksi ke Giro, penambahan fitur khusus, dan penyesuaian lainnya. Hubungi tim kami untuk konsultasi." },
+    { question: "Bagaimana dengan support?", answer: "Setiap pelanggan POS Solutions mendapatkan support penuh 10/7 tanpa dipungut biaya apapun. Tim kami siap membantu setup, pelatihan, dan troubleshooting." },
   ];
   for (let i = 0; i < posFaqs.length; i++) {
     await prisma.productFaq.create({ data: { ...posFaqs[i], productId: posSolutions.id, sortOrder: i } });
   }
+}
+
+function calcSeedReadTime(sections: { heading: string; content: string }[]): string {
+  const allText = sections.map((s) => `${s.heading} ${s.content}`).join(" ");
+  const words = allText.split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.ceil(words / 200))} menit baca`;
 }
 
 async function seedBlogPosts() {
@@ -1005,7 +1036,8 @@ async function seedBlogPosts() {
   ];
 
   for (const post of posts) {
-    await prisma.blogPost.create({ data: post });
+    const body = post.body as { heading: string; content: string }[];
+    await prisma.blogPost.create({ data: { ...post, readTime: calcSeedReadTime(body) } });
   }
 
   // ── Industry Pages ──
