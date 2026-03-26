@@ -40,6 +40,7 @@ export default async function MarketingLayout({
         megaMenuProducts={megaMenuProducts}
         megaMenuIndustries={industryPages.map((i) => ({ name: i.name, icon: i.icon, href: `/industri/${i.slug}`, tagline: i.tagline }))}
         contactPhone={siteSettings?.contactPhone || CONTACT_PHONE}
+        logo={siteSettings?.logo || ""}
       />
       <main>{children}</main>
       {siteSettings?.gaTrackingId && (
@@ -49,6 +50,7 @@ export default async function MarketingLayout({
       <Footer
         siteName={siteSettings?.siteName ?? SITE_NAME}
         companyTagline={companyTagline}
+        logo={siteSettings?.logo || ""}
         footerColumns={footerColumns.map((c) => ({
           id: c.id,
           title: c.title,

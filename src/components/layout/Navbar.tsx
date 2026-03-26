@@ -43,6 +43,7 @@ interface NavbarProps {
   megaMenuProducts: MegaMenuProductItem[];
   megaMenuIndustries: IndustryItem[];
   contactPhone: string;
+  logo?: string;
 }
 
 function isLinkActive(href: string, pathname: string): boolean {
@@ -52,7 +53,7 @@ function isLinkActive(href: string, pathname: string): boolean {
   return false;
 }
 
-export default function Navbar({ navLinks, megaMenuProducts, megaMenuIndustries, contactPhone }: NavbarProps) {
+export default function Navbar({ navLinks, megaMenuProducts, megaMenuIndustries, contactPhone, logo }: NavbarProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
@@ -93,7 +94,7 @@ export default function Navbar({ navLinks, megaMenuProducts, megaMenuIndustries,
     )}>
       {/* Logo */}
       <div className="flex items-center gap-[10px]">
-        <Image src="/images/logo_technema.png" alt="Technema Solutions" width={34} height={34} className="w-[34px] h-[34px] object-contain" />
+        {logo && <Image src={logo} alt="Technema Solutions" width={34} height={34} className="w-[34px] h-[34px] object-contain" />}
         <span className="font-heading text-[22px] font-bold tracking-[-0.5px]">
           <span className="text-dark hidden md:inline">Technema</span>
           <span className="text-dark md:hidden">Technema Solutions</span>

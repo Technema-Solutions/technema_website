@@ -25,9 +25,10 @@ interface FooterProps {
   companyTagline: string;
   footerColumns: FooterColumnItem[];
   socialLinks: SocialLinkItem[];
+  logo?: string;
 }
 
-export default function Footer({ siteName, companyTagline, footerColumns, socialLinks }: FooterProps) {
+export default function Footer({ siteName, companyTagline, footerColumns, socialLinks, logo }: FooterProps) {
   return (
     <footer className="bg-dark pt-20 pb-0 relative overflow-hidden">
       {/* Circuit pattern overlay */}
@@ -69,7 +70,7 @@ export default function Footer({ siteName, companyTagline, footerColumns, social
           {/* Logo + Description + Social */}
           <div>
             <div className="flex items-center gap-2 mb-5">
-              <Image src="/images/logo_technema.png" alt="Technema Solutions" width={34} height={34} className="w-[34px] h-[34px] object-contain" />
+              {logo && <Image src={logo} alt="Technema Solutions" width={34} height={34} className="w-[34px] h-[34px] object-contain" />}
               <span className="font-heading text-[20px] font-bold">
                 <span className="text-white">Technema Solutions</span>
               </span>
