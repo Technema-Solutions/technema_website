@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} - Solusi Teknologi Inovatif`,
     description: SITE_DESCRIPTION,
   },
+  verification: {
+    google: "PfJekubYV8bfRg_TVXH0YI1tDQhnB_FEoLUjcaPhjJg",
+  },
 };
 
 export default function RootLayout({

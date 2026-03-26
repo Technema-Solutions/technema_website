@@ -298,12 +298,6 @@ function IndustriesMegaMenu({ industries }: { industries: IndustryItem[] }) {
             Solusi teknologi yang disesuaikan untuk berbagai sektor guna mendorong transformasi digital.
           </p>
         </div>
-        <a
-          href="#industries"
-          className="inline-flex items-center gap-2 mt-6 text-[13px] font-bold text-brand-light uppercase tracking-wider hover:text-white transition-colors"
-        >
-          Lihat Semua Industri <ArrowRight className="w-4 h-4" />
-        </a>
       </div>
     </div>
   );

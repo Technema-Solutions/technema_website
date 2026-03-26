@@ -176,15 +176,15 @@ export default function ProjectsGallery({ projects }: { projects: ProjectItem[] 
             loop={true}
             onSwiper={(swiper) => { swiperRef.current = swiper; }}
             breakpoints={{
-              768: { slidesPerView: 1.5 },
-              1024: { slidesPerView: 2.3 },
+              768: { slidesPerView: 1 },
+              1024: { slidesPerView: 1.2 },
             }}
           >
             {projects.map((project) => (
               <SwiperSlide key={project.id}>
-                <div className="group flex flex-col rounded-2xl bg-[#0E3452] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+                <div className="group flex flex-col md:flex-row rounded-2xl bg-[#0E3452] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
                   {/* Image area */}
-                  <div className="relative w-full aspect-square overflow-hidden">
+                  <div className="relative w-full md:w-1/2 aspect-square overflow-hidden">
                     {/* Brand accent bar */}
                     <div className="absolute top-0 left-6 z-10 w-[50px] h-[4px] bg-brand rounded-b-sm" />
 
@@ -201,7 +201,7 @@ export default function ProjectsGallery({ projects }: { projects: ProjectItem[] 
                   </div>
 
                   {/* Info panel */}
-                  <div className="h-[200px] p-5 lg:p-7 flex flex-col">
+                  <div className="relative w-full md:w-1/2 p-5 lg:p-7 flex flex-col justify-start overflow-hidden">
                     {/* Category badge */}
                     <span className="self-start rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-light">
                       {project.category}
@@ -216,9 +216,12 @@ export default function ProjectsGallery({ projects }: { projects: ProjectItem[] 
                     </h3>
 
                     {/* Description */}
-                    <p className="mt-2 text-sm leading-relaxed text-gray-400 line-clamp-5">
+                    <p className="mt-2 text-sm leading-relaxed text-gray-400">
                       {project.description}
                     </p>
+
+                    {/* Fade gradient at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0E3452] to-transparent pointer-events-none" />
                   </div>
                 </div>
               </SwiperSlide>

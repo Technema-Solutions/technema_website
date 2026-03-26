@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { writeFile, mkdir, unlink } from "fs/promises";
 import path from "path";
-import sharp from "sharp";
+
 import { auth } from "@/lib/auth";
 import { createMediaRecord } from "@/lib/actions/media";
 import { prisma } from "@/lib/prisma";
@@ -68,13 +68,10 @@ export async function POST(request: NextRequest) {
     const uniqueFilename = `${timestamp}-${safeName}${ext}`;
 
     // Create upload directory
-    const uploadDir = path.join(
-      process.cwd(),
-      "public",
-      "uploads",
-      String(year),
-      month
-    );
+    // Use UPLOAD_DIR env for persistent storage (VPS), fallback to public/uploads (dev)
+    const baseUploadDir =
+      process.env.UPLOAD_DIR || path.join(process.cwd(), "public", "uploads");
+    const uploadDir = path.join(baseUploadDir, String(year), month);
     await mkdir(uploadDir, { recursive: true });
 
     // Write file to disk
@@ -88,11 +85,12 @@ export async function POST(request: NextRequest) {
 
     if (file.type !== "image/svg+xml" && !file.type.startsWith("video/")) {
       try {
+        const sharp = (await import("sharp")).default;
         const metadata = await sharp(buffer).metadata();
         width = metadata.width;
         height = metadata.height;
       } catch {
-        // If sharp fails, continue without dimensions
+        // Sharp not available or failed — continue without dimensions
       }
     }
 
@@ -147,9 +145,13 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Prevent path traversal — validate resolved path stays within uploads dir
-    const resolved = path.resolve(process.cwd(), "public", url);
-    const uploadsDir = path.resolve(process.cwd(), "public/uploads");
-    if (!resolved.startsWith(uploadsDir)) {
+    const baseUploadDir =
+      process.env.UPLOAD_DIR || path.join(process.cwd(), "public", "uploads");
+    // url is like "/uploads/2026/03/file.png" — strip leading "/uploads/" to get relative path
+    const relativePath = url.replace(/^\/uploads\//, "");
+    const resolved = path.resolve(baseUploadDir, relativePath);
+    const resolvedBase = path.resolve(baseUploadDir);
+    if (!resolved.startsWith(resolvedBase)) {
       return NextResponse.json(
         { error: "Invalid file path" },
         { status: 400 }

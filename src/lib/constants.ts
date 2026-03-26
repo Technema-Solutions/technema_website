@@ -1,7 +1,7 @@
 export const SITE_NAME = "Technema Solutions";
 export const SITE_DESCRIPTION =
   "Technema Solutions adalah perusahaan layanan TI terdepan yang menyediakan solusi teknologi inovatif untuk bisnis modern.";
-export const SITE_URL = "https://technema.com";
+export const SITE_URL = "https://technemasolutions.co.id";
 export const CONTACT_PHONE = "+1 (800) 843-5466";
 export const CONTACT_EMAIL = "info@technema.com";
 export const CONTACT_ADDRESS = "Jl. Teknologi No. 42, Jakarta Selatan, DKI Jakarta 12870";
