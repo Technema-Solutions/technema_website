@@ -6,20 +6,9 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeIn from "@/components/ui/FadeIn";
-import {
-  Workflow, LayoutDashboard, Lock, Zap,
-  CheckCircle, ChevronDown,
-  GraduationCap, Monitor, MessageSquare, ShoppingBag, Package, Globe, FileSearch, Network, Users,
-  Bot, KeyRound, Wallet,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { CheckCircle, ChevronDown } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import type { IndustrySolution } from "@/data/industries";
-
-const iconMap: Record<string, LucideIcon> = {
-  Workflow, LayoutDashboard, Lock, Zap,
-  GraduationCap, Monitor, MessageSquare, ShoppingBag, Package, Globe, FileSearch, Network, Users,
-  Bot, KeyRound, Wallet,
-};
 
 interface Props {
   industryName: string;
@@ -32,7 +21,7 @@ export default function IndustrySolutions({ industryName, solutions }: Props) {
   if (solutions.length === 0) return null;
 
   const activeSolution = solutions[activeIndex];
-  const ActiveIcon = iconMap[activeSolution.icon];
+  const ActiveIcon = getLucideIcon(activeSolution.icon);
 
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-[#F8FAFB]">
@@ -50,7 +39,7 @@ export default function IndustrySolutions({ industryName, solutions }: Props) {
           <FadeIn className="flex-1 min-w-0">
             <div className="space-y-3">
               {solutions.map((sol, i) => {
-                const Icon = iconMap[sol.icon];
+                const Icon = getLucideIcon(sol.icon);
                 const isActive = i === activeIndex;
                 const num = String(i + 1).padStart(2, "0");
 

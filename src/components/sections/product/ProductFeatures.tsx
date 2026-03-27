@@ -1,21 +1,16 @@
 "use client";
 
-import * as LucideIcons from "lucide-react";
 import Image from "next/image";
 import FadeIn from "@/components/ui/FadeIn";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { DotGrid } from "@/components/ui/SvgDecorations";
+import { getLucideIcon } from "@/lib/icons";
 import type { ProductFeatureHighlight } from "@/types";
 
 interface ProductFeaturesProps {
   features: ProductFeatureHighlight[];
   productName: string;
-}
-
-function getIcon(name: string) {
-  const icons = LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>>;
-  return icons[name] || LucideIcons.Star;
 }
 
 export default function ProductFeatures({ features, productName }: ProductFeaturesProps) {
@@ -43,7 +38,7 @@ export default function ProductFeatures({ features, productName }: ProductFeatur
 
         <div className="space-y-24 sm:space-y-32">
           {features.map((feature, index) => {
-            const Icon = getIcon(feature.icon);
+            const Icon = getLucideIcon(feature.icon);
             const isReversed = index % 2 !== 0;
 
             return (

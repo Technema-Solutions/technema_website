@@ -1,13 +1,9 @@
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeIn from "@/components/ui/FadeIn";
-import { ArrowRight, HeartPulse, GraduationCap, ShoppingCart, Landmark, Factory, Building2, Truck, Zap } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import { getIndustryPages } from "@/lib/data";
-
-const iconMap: Record<string, LucideIcon> = {
-  HeartPulse, GraduationCap, ShoppingCart, Landmark, Factory, Building2, Truck, Zap,
-};
 
 interface Props {
   currentSlug: string;
@@ -31,7 +27,7 @@ export default async function RelatedIndustries({ currentSlug }: Props) {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {others.map((industry, i) => {
-            const Icon = iconMap[industry.icon];
+            const Icon = getLucideIcon(industry.icon);
             return (
               <FadeIn key={industry.slug} delay={i * 0.1}>
                 <a

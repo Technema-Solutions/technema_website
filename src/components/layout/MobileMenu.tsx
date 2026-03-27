@@ -2,20 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import {
-  X, ChevronDown,
-  HeartPulse, Landmark, Factory, GraduationCap,
-  ShoppingCart, Truck, Building2, Zap,
-} from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { getLucideIcon } from "@/lib/icons";
 import Button from "@/components/ui/Button";
-import type { LucideIcon } from "lucide-react";
-
-const iconMap: Record<string, LucideIcon> = {
-  HeartPulse, Landmark, Factory, GraduationCap,
-  ShoppingCart, Truck, Building2, Zap,
-};
 
 function isLinkActive(href: string, pathname: string): boolean {
   if (href.startsWith("/")) {
@@ -164,7 +155,7 @@ export default function MobileMenu({ isOpen, onClose, pathname, navLinks, megaMe
                               ))}
                             {link.megaMenu === "industries" &&
                               megaMenuIndustries.map((industry) => {
-                                const Icon = iconMap[industry.icon];
+                                const Icon = getLucideIcon(industry.icon);
                                 return (
                                   <a
                                     key={industry.name}

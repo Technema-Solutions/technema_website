@@ -4,19 +4,10 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import {
-  HeartPulse, Landmark, Factory, GraduationCap,
-  ShoppingCart, Truck, Building2, Zap,
-  ArrowRight, ChevronDown,
-} from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getLucideIcon } from "@/lib/icons";
 import MobileMenu from "./MobileMenu";
-import type { LucideIcon } from "lucide-react";
-
-const iconMap: Record<string, LucideIcon> = {
-  HeartPulse, Landmark, Factory, GraduationCap,
-  ShoppingCart, Truck, Building2, Zap,
-};
 
 interface NavLinkItem {
   label: string;
@@ -263,7 +254,7 @@ function IndustriesMegaMenu({ industries }: { industries: IndustryItem[] }) {
       {/* Industries Grid */}
       <div className="flex-1 grid grid-cols-2 gap-3">
         {industries.map((industry) => {
-          const Icon = iconMap[industry.icon];
+          const Icon = getLucideIcon(industry.icon);
           return (
             <a
               key={industry.name}

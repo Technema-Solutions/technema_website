@@ -3,19 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import Container from "@/components/ui/Container";
-import {
-  Building2, Database, Activity, Headphones,
-  Users, TrendingUp, Clock, ShoppingCart, FileText, Search, Shield,
-  Globe2,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import type { IndustryStat } from "@/data/industries";
-
-const iconMap: Record<string, LucideIcon> = {
-  Building2, Database, Activity, Headphones,
-  Users, TrendingUp, Clock, ShoppingCart, FileText, Search, Shield,
-  Globe2,
-};
 
 function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: string; inView: boolean }) {
   const [display, setDisplay] = useState(0);
@@ -67,7 +56,7 @@ export default function IndustryStats({ stats }: Props) {
       <Container>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
           {stats.map((stat, i) => {
-            const Icon = iconMap[stat.icon];
+            const Icon = getLucideIcon(stat.icon);
             return (
               <div
                 key={stat.label}

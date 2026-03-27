@@ -1,19 +1,8 @@
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeIn from "@/components/ui/FadeIn";
-import {
-  Database, ClipboardList, ShieldAlert, GitBranch,
-  Server, BookOpen, Store, Building,
-  Users, BarChart, Package, TrendingDown, FolderSearch, Clock,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import type { IndustryChallenge } from "@/data/industries";
-
-const iconMap: Record<string, LucideIcon> = {
-  Database, ClipboardList, ShieldAlert, GitBranch,
-  Server, BookOpen, Store, Building,
-  Users, BarChart, Package, TrendingDown, FolderSearch, Clock,
-};
 
 interface Props {
   industryName: string;
@@ -47,7 +36,7 @@ export default function IndustryChallenges({ industryName, challenges }: Props) 
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {challenges.map((item, i) => {
-            const Icon = iconMap[item.icon];
+            const Icon = getLucideIcon(item.icon);
             const num = String(i + 1).padStart(2, "0");
             return (
               <FadeIn key={item.title} delay={i * 0.1}>

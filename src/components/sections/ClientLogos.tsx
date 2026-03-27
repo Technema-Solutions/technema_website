@@ -1,16 +1,11 @@
 import Image from "next/image";
-import { ArrowUpRight, Monitor, Star, Hexagon } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 
 interface ClientItem {
   name: string;
   icon: string;
   logo?: string | null;
 }
-
-const iconMap: Record<string, LucideIcon> = {
-  ArrowUpRight, Monitor, Star, Hexagon,
-};
 
 function LogoItem({ client }: { client: ClientItem }) {
   if (client.logo) {
@@ -30,7 +25,7 @@ function LogoItem({ client }: { client: ClientItem }) {
     );
   }
 
-  const Icon = client.icon ? iconMap[client.icon] : null;
+  const Icon = client.icon ? getLucideIcon(client.icon) : null;
   return (
     <div className="flex shrink-0 items-center gap-2 px-3 sm:px-4 opacity-40 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0">
       {Icon && <Icon className="w-5 h-5 text-dark" />}

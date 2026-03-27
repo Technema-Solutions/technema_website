@@ -1,5 +1,4 @@
-import { Users, TrendingUp, Headset, ShieldCheck } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import FadeIn from "@/components/ui/FadeIn";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -8,10 +7,6 @@ interface WhyChooseItem {
   title: string;
   description: string;
 }
-
-const iconMap: Record<string, LucideIcon> = {
-  Users, TrendingUp, Headset, ShieldCheck,
-};
 
 export default function WhyChooseUs({ whyChooseItems }: { whyChooseItems: WhyChooseItem[] }) {
   return (
@@ -28,7 +23,7 @@ export default function WhyChooseUs({ whyChooseItems }: { whyChooseItems: WhyCho
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {whyChooseItems.map((item, i) => {
-            const Icon = iconMap[item.icon];
+            const Icon = getLucideIcon(item.icon);
             return (
               <FadeIn key={item.title} delay={i * 0.1}>
                 <div className="relative bg-light-brand rounded-[16px] p-8 text-center h-full group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">

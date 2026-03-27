@@ -3,14 +3,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import SectionTag from "@/components/ui/SectionTag";
 import Button from "@/components/ui/Button";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import {
-  HeartPulse, GraduationCap, ShoppingCart, Landmark,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
-const iconMap: Record<string, LucideIcon> = {
-  HeartPulse, GraduationCap, ShoppingCart, Landmark,
-};
+import { getLucideIcon } from "@/lib/icons";
 
 interface IndustryHeroProps {
   name: string;
@@ -21,7 +14,7 @@ interface IndustryHeroProps {
 }
 
 export default function IndustryHero({ name, icon, heading, highlight, description }: IndustryHeroProps) {
-  const Icon = iconMap[icon];
+  const Icon = getLucideIcon(icon);
 
   const renderHeading = () => {
     const idx = heading.indexOf(highlight);

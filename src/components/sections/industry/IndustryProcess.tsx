@@ -1,18 +1,9 @@
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeIn from "@/components/ui/FadeIn";
-import {
-  Search, PenTool, Code, BarChart3,
-  ArrowRight,
-  ClipboardList, Settings, Users, Upload, Presentation,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import type { IndustryProcessStep } from "@/data/industries";
-
-const iconMap: Record<string, LucideIcon> = {
-  Search, PenTool, Code, BarChart3,
-  ClipboardList, Settings, Users, Upload, Presentation,
-};
 
 interface Props {
   steps: IndustryProcessStep[];
@@ -37,7 +28,7 @@ export default function IndustryProcess({ steps }: Props) {
           <div className="hidden lg:block absolute top-[60px] left-[12.5%] right-[12.5%] h-[2px] bg-gradient-to-r from-brand/20 via-brand/40 to-brand/20 z-0" />
 
           {steps.map((step, i) => {
-            const Icon = iconMap[step.icon];
+            const Icon = getLucideIcon(step.icon);
             return (
               <FadeIn key={step.title} delay={i * 0.12}>
                 <div className="relative text-center group">

@@ -1,21 +1,8 @@
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeIn from "@/components/ui/FadeIn";
-import {
-  Database, FileCode, LayoutDashboard, ArrowLeftRight,
-  FileBarChart, ShieldCheck,
-  BookOpen, Users, ClipboardCheck, Smartphone, CreditCard, GitBranch, Cloud, Lock, Search,
-  Bot, KeyRound, FolderOpen, Eye, Globe2,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import type { IndustryFeature } from "@/data/industries";
-
-const iconMap: Record<string, LucideIcon> = {
-  Database, FileCode, LayoutDashboard, ArrowLeftRight,
-  FileBarChart, ShieldCheck,
-  BookOpen, Users, ClipboardCheck, Smartphone, CreditCard, GitBranch, Cloud, Lock, Search,
-  Bot, KeyRound, FolderOpen, Eye, Globe2,
-};
 
 interface Props {
   features: IndustryFeature[];
@@ -37,7 +24,7 @@ export default function IndustryFeatures({ features }: Props) {
 
         <div className="space-y-0">
           {features.map((feat, i) => {
-            const Icon = iconMap[feat.icon];
+            const Icon = getLucideIcon(feat.icon);
             const isEven = i % 2 === 1;
             const isLast = i === features.length - 1;
 

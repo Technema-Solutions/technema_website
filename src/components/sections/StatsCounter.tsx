@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FolderCheck, Users, Award, ShieldCheck } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import { useInView } from "@/hooks/useInView";
 import Container from "@/components/ui/Container";
 interface StatItem {
@@ -11,10 +10,6 @@ interface StatItem {
   label: string;
   icon: string;
 }
-
-const iconMap: Record<string, LucideIcon> = {
-  FolderCheck, Users, Award, ShieldCheck,
-};
 
 function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: string; inView: boolean }) {
   const [display, setDisplay] = useState(0);
@@ -64,7 +59,7 @@ export default function StatsCounter({ stats }: { stats: StatItem[] }) {
       <Container>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 relative z-10">
           {stats.map((stat, i) => {
-            const Icon = iconMap[stat.icon];
+            const Icon = getLucideIcon(stat.icon);
             return (
               <div
                 key={stat.label}

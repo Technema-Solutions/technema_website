@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { ClipboardList, Palette, Smartphone, Code } from "lucide-react";
+import { getLucideIcon } from "@/lib/icons";
 import FadeIn from "@/components/ui/FadeIn";
 import Container from "@/components/ui/Container";
 import SectionTag from "@/components/ui/SectionTag";
@@ -8,11 +8,6 @@ interface ProcessStepItem {
   title: string;
   description: string;
 }
-import type { LucideIcon } from "lucide-react";
-
-const iconMap: Record<string, LucideIcon> = {
-  ClipboardList, Palette, Smartphone, Code,
-};
 
 /* Circuit board decorative SVG pattern */
 function CircuitPattern() {
@@ -125,7 +120,7 @@ export default function WorkingProcess({ processSteps }: { processSteps: Process
         {/* Process Steps */}
         <div className="relative z-10 flex flex-col gap-4 sm:grid sm:grid-cols-2 sm:gap-6 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:gap-0 items-stretch">
           {processSteps.map((step, index) => {
-            const Icon = iconMap[step.icon];
+            const Icon = getLucideIcon(step.icon);
             return (
               <Fragment key={step.title}>
                 <FadeIn delay={index * 0.12}>
