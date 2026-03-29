@@ -2,11 +2,11 @@ import dynamic from "next/dynamic";
 import SectionTag from "@/components/ui/SectionTag";
 import TypingText from "@/components/ui/TypingText";
 import HeroCta from "@/components/sections/HeroCta";
+import HeroDecorations from "@/components/sections/HeroDecorations";
 import { cn } from "@/lib/utils";
 
-// Code-split heavy components to reduce initial JS bundle
+// Code-split heavy client component (framer-motion, hidden on mobile)
 const HeroVisual = dynamic(() => import("@/components/sections/HeroVisual"));
-const HeroDecorations = dynamic(() => import("@/components/sections/HeroDecorations"));
 
 interface HeroSectionProps {
     heading?: string;
