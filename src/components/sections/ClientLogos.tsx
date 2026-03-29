@@ -16,6 +16,8 @@ function LogoItem({ client }: { client: ClientItem }) {
           alt={client.name}
           width={200}
           height={64}
+          sizes="200px"
+          loading="lazy"
           className="h-16 w-auto object-contain"
         />
         <span className="whitespace-nowrap font-heading text-sm font-bold text-dark tracking-wider uppercase">

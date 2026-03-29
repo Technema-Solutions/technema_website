@@ -8,20 +8,27 @@ interface TypingTextProps {
 
 export default function TypingText({ words }: TypingTextProps) {
   const [wordIndex, setWordIndex] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(words[0] || "");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [animationStarted, setAnimationStarted] = useState(false);
+
+  // Delay typing animation start by 2s so it doesn't compete with LCP
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimationStarted(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
+    if (!animationStarted) return;
+
     const currentWord = words[wordIndex];
 
     if (!isDeleting && text === currentWord) {
-      // Pause after typing complete
       const timeout = setTimeout(() => setIsDeleting(true), 2000);
       return () => clearTimeout(timeout);
     }
 
     if (isDeleting && text === "") {
-      // Move to next word
       setIsDeleting(false);
       setWordIndex((prev) => (prev + 1) % words.length);
       const timeout = setTimeout(() => {}, 500);
@@ -38,7 +45,7 @@ export default function TypingText({ words }: TypingTextProps) {
     }, speed);
 
     return () => clearTimeout(timeout);
-  }, [text, isDeleting, wordIndex, words]);
+  }, [text, isDeleting, wordIndex, words, animationStarted]);
 
   return (
     <span className="text-brand-light">

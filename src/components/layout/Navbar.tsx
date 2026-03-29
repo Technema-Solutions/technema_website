@@ -85,7 +85,7 @@ export default function Navbar({ navLinks, megaMenuProducts, megaMenuIndustries,
     )}>
       {/* Logo */}
       <div className="flex items-center gap-[10px]">
-        {logo && <Image src={logo} alt="Technema Solutions" width={34} height={34} className="w-[34px] h-[34px] object-contain" />}
+        {logo && <Image src={logo} alt="Technema Solutions" width={34} height={34} priority className="w-[34px] h-[34px] object-contain" />}
         <span className="font-heading text-[22px] font-bold tracking-[-0.5px]">
           <span className="text-dark hidden md:inline">Technema</span>
           <span className="text-dark md:hidden">Technema Solutions</span>
