@@ -20,6 +20,14 @@ export async function updateSiteSettings(data: {
   contactEmail?: string;
   contactAddress?: string;
   contactMapEmbed?: string;
+  legalName?: string;
+  foundingYear?: string;
+  addressLocality?: string;
+  addressRegion?: string;
+  addressCountry?: string;
+  postalCode?: string;
+  latitude?: string;
+  longitude?: string;
   heroHeading?: string;
   heroSubheading?: string;
   heroTypingWords?: string[];

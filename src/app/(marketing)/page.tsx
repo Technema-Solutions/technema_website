@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesStrip from "@/components/sections/ServicesStrip";
 import ClientLogos from "@/components/sections/ClientLogos";
+import { FaqPageJsonLd } from "@/components/seo/JsonLd";
 import {
   getServices,
   getClients,
@@ -57,6 +58,7 @@ export default async function Home() {
 
   return (
     <>
+      <FaqPageJsonLd items={faqItems} />
       <HeroSection
         heading={siteSettings?.heroHeading || undefined}
         subheading={siteSettings?.heroSubheading || undefined}
@@ -78,7 +80,7 @@ export default async function Home() {
       <Testimonials testimonials={testimonials} />
       <AppointmentBooking />
       <BlogArticles blogPosts={blogPosts} />
-      <CtaBanner contactPhone={siteSettings?.contactPhone || ""} />
+      <CtaBanner contactPhone={siteSettings?.contactPhone || ""} bgClassName="bg-gray-bg" />
     </>
   );
 }

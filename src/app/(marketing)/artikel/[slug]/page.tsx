@@ -8,7 +8,11 @@ import { StickyTableOfContents, CollapsibleTableOfContents } from "@/components/
 import ShareButtons from "@/components/ui/ShareButtons";
 import { getBlogPostBySlug, getAllBlogSlugs, getRelatedPosts } from "@/lib/data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
-import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import {
+  JsonLdGraph,
+  buildArticleNode,
+  buildBreadcrumbNode,
+} from "@/components/seo/JsonLd";
 import RelatedArticlesCarousel from "@/components/sections/RelatedArticlesCarousel";
 
 interface PageProps {
@@ -109,20 +113,34 @@ export default async function ArticleDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <ArticleJsonLd
-        title={post.title}
-        description={post.metaDescription ?? post.excerpt}
-        image={articleImage ? (articleImage.startsWith("http") ? articleImage : `${SITE_URL}${articleImage}`) : undefined}
-        url={articleUrl}
-        author={post.author}
-        datePublished={post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined}
-      />
-      <BreadcrumbJsonLd
-        items={[
-          { name: "Beranda", url: SITE_URL },
-          { name: "Artikel", url: `${SITE_URL}/artikel` },
-          { name: post.category, url: `${SITE_URL}/artikel` },
-          { name: post.title, url: articleUrl },
+      <JsonLdGraph
+        nodes={[
+          buildArticleNode({
+            title: post.title,
+            description: post.metaDescription ?? post.excerpt,
+            images: articleImage
+              ? [
+                  articleImage.startsWith("http")
+                    ? articleImage
+                    : `${SITE_URL}${articleImage}`,
+                ]
+              : undefined,
+            url: articleUrl,
+            author: post.author,
+            datePublished: post.publishedAt
+              ? new Date(post.publishedAt).toISOString()
+              : undefined,
+            dateModified: post.updatedAt
+              ? new Date(post.updatedAt).toISOString()
+              : undefined,
+            section: post.category,
+          }),
+          buildBreadcrumbNode([
+            { name: "Beranda", url: SITE_URL },
+            { name: "Artikel", url: `${SITE_URL}/artikel` },
+            { name: post.category, url: `${SITE_URL}/artikel` },
+            { name: post.title, url: articleUrl },
+          ]),
         ]}
       />
     <section className="bg-white pt-16 sm:pt-20 lg:pt-28 pb-12 sm:pb-16 lg:pb-24">
@@ -189,6 +207,18 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                 className="object-cover"
               />
             </div>
+
+            {/* Ringkasan / Jawaban Singkat — direct-answer block for AI extraction */}
+            {post.excerpt && (
+              <div className="mb-8 rounded-2xl border border-brand/15 bg-light-brand/60 p-5 sm:p-6">
+                <p className="mb-1.5 text-[12px] font-semibold uppercase tracking-wider text-brand">
+                  Ringkasan
+                </p>
+                <p className="text-[16px] sm:text-[17px] leading-[1.7] text-dark font-medium">
+                  {post.excerpt}
+                </p>
+              </div>
+            )}
 
             {/* Article body */}
             <article>

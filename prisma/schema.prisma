@@ -30,12 +30,21 @@ model SiteSettings {
   id               String  @id @default("default")
   siteName         String  @default("Technema Solutions")
   siteDescription  String  @default("")
-  siteUrl          String  @default("https://technema.com")
+  siteUrl          String  @default("https://technemasolutions.co.id")
   logo             String  @default("/logo_technema.svg")
   contactPhone     String  @default("")
   contactEmail     String  @default("")
   contactAddress   String  @default("")
   contactMapEmbed  String  @default("")
+  // Entity / structured-data (GEO) fields
+  legalName        String  @default("PT. Cipta Inovasi Teknologi Unggul")
+  foundingYear     String  @default("")
+  addressLocality  String  @default("Kabupaten Berau")
+  addressRegion    String  @default("Kalimantan Timur")
+  addressCountry   String  @default("ID")
+  postalCode       String  @default("")
+  latitude         String  @default("")
+  longitude        String  @default("")
   // Hero section
   heroHeading      String  @default("")
   heroSubheading   String  @default("")
@@ -46,6 +55,44 @@ model SiteSettings {
   gscSiteUrl       String  @default("")   // Google Search Console verified site URL
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+// ============================================================
+// ABOUT PAGE (Singleton) — all /tentang-kami copy, admin-editable
+// ============================================================
+
+model AboutPage {
+  id                String  @id @default("default")
+  // Hero
+  heroBadge         String  @default("Tentang Kami")
+  heroHeading       String  @default("") // empty → falls back to SiteSettings.siteName
+  heroDescription   String  @default("") @db.Text
+  heroServiceNote   String  @default("Melayani seluruh Indonesia")
+  // Cerita Kami
+  storyLabel        String  @default("Cerita Kami")
+  storyHeading      String  @default("") @db.Text
+  storyBody         String  @default("") @db.Text // paragraphs split by blank line
+  // Visi
+  visionLabel       String  @default("Visi Kami")
+  visionHeading     String  @default("")
+  visionBody        String  @default("") @db.Text
+  // Section headings (data-driven sections)
+  expertiseLabel    String  @default("Bidang Keahlian")
+  expertiseHeading  String  @default("Apa saja yang kami kerjakan")
+  productsLabel     String  @default("Produk Kami")
+  productsHeading   String  @default("Solusi siap pakai buatan Technema")
+  industriesLabel   String  @default("Industri yang Kami Layani")
+  industriesHeading String  @default("Pengalaman lintas sektor")
+  // Lokasi & Area Layanan
+  locationHeading   String  @default("") @db.Text
+  locationBody      String  @default("") @db.Text
+  locationCtaLabel  String  @default("Hubungi Kami")
+  locationCtaHref   String  @default("/kontak")
+  // SEO
+  metaTitle         String  @default("Tentang Kami")
+  metaDescription   String  @default("") @db.Text // empty → falls back to heroDescription
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 // ============================================================

@@ -2,7 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieConsentBanner from "@/components/CookieConsent";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import { OrganizationJsonLd } from "@/components/seo/JsonLd";
+import { SiteIdentityJsonLd } from "@/components/seo/JsonLd";
 import { SITE_NAME, CONTACT_PHONE } from "@/lib/constants";
 import {
   getNavigationLinks,
@@ -34,7 +34,7 @@ export default async function MarketingLayout({
 
   return (
     <>
-      <OrganizationJsonLd />
+      <SiteIdentityJsonLd settings={siteSettings} socialLinks={socialLinks} />
       <Navbar
         navLinks={navLinks.map((l) => ({ label: l.label, href: l.href, megaMenu: l.megaMenu }))}
         megaMenuProducts={megaMenuProducts}

@@ -18,6 +18,14 @@ type SiteSettings = {
   contactEmail: string;
   contactAddress: string;
   contactMapEmbed: string;
+  legalName: string;
+  foundingYear: string;
+  addressLocality: string;
+  addressRegion: string;
+  addressCountry: string;
+  postalCode: string;
+  latitude: string;
+  longitude: string;
   heroHeading: string;
   heroSubheading: string;
   heroTypingWords: string[] | unknown;
@@ -55,6 +63,14 @@ export default function SettingsClient({
     contactPhone: settings?.contactPhone ?? "",
     contactAddress: settings?.contactAddress ?? "",
     contactMapEmbed: settings?.contactMapEmbed ?? "",
+    legalName: settings?.legalName ?? "",
+    foundingYear: settings?.foundingYear ?? "",
+    addressLocality: settings?.addressLocality ?? "",
+    addressRegion: settings?.addressRegion ?? "",
+    addressCountry: settings?.addressCountry ?? "",
+    postalCode: settings?.postalCode ?? "",
+    latitude: settings?.latitude ?? "",
+    longitude: settings?.longitude ?? "",
     heroHeading: settings?.heroHeading ?? "",
     heroSubheading: settings?.heroSubheading ?? "",
     heroTypingWords: typingWords.join(", "),
@@ -84,6 +100,14 @@ export default function SettingsClient({
         contactPhone: form.contactPhone,
         contactAddress: form.contactAddress,
         contactMapEmbed: form.contactMapEmbed,
+        legalName: form.legalName,
+        foundingYear: form.foundingYear,
+        addressLocality: form.addressLocality,
+        addressRegion: form.addressRegion,
+        addressCountry: form.addressCountry,
+        postalCode: form.postalCode,
+        latitude: form.latitude,
+        longitude: form.longitude,
         heroHeading: form.heroHeading,
         heroSubheading: form.heroSubheading,
         heroTypingWords: typingWordsArray,
@@ -139,7 +163,7 @@ export default function SettingsClient({
                 value={form.siteUrl}
                 onChange={(e) => update("siteUrl", e.target.value)}
                 className={inputClass}
-                placeholder="https://technema.com"
+                placeholder="https://technemasolutions.co.id"
               />
             </FormField>
             <div className="sm:col-span-2">
@@ -174,7 +198,7 @@ export default function SettingsClient({
                 value={form.contactEmail}
                 onChange={(e) => update("contactEmail", e.target.value)}
                 className={inputClass}
-                placeholder="info@technema.com"
+                placeholder="halo@technemasolutions.co.id"
               />
             </FormField>
             <FormField label="Telepon">
@@ -207,6 +231,91 @@ export default function SettingsClient({
                 />
               </FormField>
             </div>
+          </div>
+        </section>
+
+        {/* Entitas / Structured Data (GEO) */}
+        <section className="rounded-lg border border-gray-200 bg-white p-6">
+          <h2 className="mb-1 text-lg font-semibold text-gray-900">
+            Entitas Perusahaan (GEO / Structured Data)
+          </h2>
+          <p className="mb-4 text-xs text-gray-400">
+            Data ini dipakai untuk Organization schema (JSON-LD) agar mesin AI &amp;
+            Google mengenali entitas perusahaan dengan jelas. Isi selengkap mungkin.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <FormField label="Nama Badan Hukum (Legal Name)">
+              <input
+                type="text"
+                value={form.legalName}
+                onChange={(e) => update("legalName", e.target.value)}
+                className={inputClass}
+                placeholder="PT. Cipta Inovasi Teknologi Unggul"
+              />
+            </FormField>
+            <FormField label="Tahun Berdiri">
+              <input
+                type="text"
+                value={form.foundingYear}
+                onChange={(e) => update("foundingYear", e.target.value)}
+                className={inputClass}
+                placeholder="2021"
+              />
+            </FormField>
+            <FormField label="Kota / Kabupaten (addressLocality)">
+              <input
+                type="text"
+                value={form.addressLocality}
+                onChange={(e) => update("addressLocality", e.target.value)}
+                className={inputClass}
+                placeholder="Kabupaten Berau"
+              />
+            </FormField>
+            <FormField label="Provinsi (addressRegion)">
+              <input
+                type="text"
+                value={form.addressRegion}
+                onChange={(e) => update("addressRegion", e.target.value)}
+                className={inputClass}
+                placeholder="Kalimantan Timur"
+              />
+            </FormField>
+            <FormField label="Kode Negara (addressCountry)">
+              <input
+                type="text"
+                value={form.addressCountry}
+                onChange={(e) => update("addressCountry", e.target.value)}
+                className={inputClass}
+                placeholder="ID"
+              />
+            </FormField>
+            <FormField label="Kode Pos">
+              <input
+                type="text"
+                value={form.postalCode}
+                onChange={(e) => update("postalCode", e.target.value)}
+                className={inputClass}
+                placeholder="77311"
+              />
+            </FormField>
+            <FormField label="Latitude (opsional)">
+              <input
+                type="text"
+                value={form.latitude}
+                onChange={(e) => update("latitude", e.target.value)}
+                className={inputClass}
+                placeholder="2.1554"
+              />
+            </FormField>
+            <FormField label="Longitude (opsional)">
+              <input
+                type="text"
+                value={form.longitude}
+                onChange={(e) => update("longitude", e.target.value)}
+                className={inputClass}
+                placeholder="117.4823"
+              />
+            </FormField>
           </div>
         </section>
 
@@ -287,7 +396,7 @@ export default function SettingsClient({
                 value={form.gscSiteUrl}
                 onChange={(e) => update("gscSiteUrl", e.target.value)}
                 className={inputClass}
-                placeholder="https://technema.com"
+                placeholder="https://technemasolutions.co.id"
               />
             </FormField>
             <div className="sm:col-span-2">

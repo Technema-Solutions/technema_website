@@ -24,20 +24,34 @@ async function main() {
   // ── Site Settings ──
   await prisma.siteSettings.upsert({
     where: { id: "default" },
-    update: {},
+    // One-time correction of known-bad placeholder entity data (US phone/Jakarta
+    // address). Only entity/NAP fields are overwritten — content/hero fields are
+    // left untouched so admin edits are preserved on re-seed.
+    update: {
+      siteUrl: "https://technemasolutions.co.id",
+      contactPhone: "+6282254754398",
+      contactEmail: "halo@technemasolutions.co.id",
+      contactAddress: "Kabupaten Berau, Kalimantan Timur, Indonesia",
+      legalName: "PT. Cipta Inovasi Teknologi Unggul",
+      addressLocality: "Kabupaten Berau",
+      addressRegion: "Kalimantan Timur",
+      addressCountry: "ID",
+    },
     create: {
       id: "default",
       siteName: "Technema Solutions",
       siteDescription:
         "Technema Solutions adalah perusahaan layanan TI terdepan yang menyediakan solusi teknologi inovatif untuk bisnis modern.",
-      siteUrl: "https://technema.com",
+      siteUrl: "https://technemasolutions.co.id",
       logo: "/logo_technema.svg",
-      contactPhone: "+1 (800) 843-5466",
-      contactEmail: "info@technema.com",
-      contactAddress:
-        "Jl. Teknologi No. 42, Jakarta Selatan, DKI Jakarta 12870",
-      contactMapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2!2d106.82!3d-6.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTUnMzYuMCJTIDEwNsKwNDknMTIuMCJF!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid",
+      contactPhone: "+6282254754398",
+      contactEmail: "halo@technemasolutions.co.id",
+      contactAddress: "Kabupaten Berau, Kalimantan Timur, Indonesia",
+      contactMapEmbed: "",
+      legalName: "PT. Cipta Inovasi Teknologi Unggul",
+      addressLocality: "Kabupaten Berau",
+      addressRegion: "Kalimantan Timur",
+      addressCountry: "ID",
       heroHeading: "Solusi Teknologi Untuk Bisnis Yang Siap",
       heroSubheading:
         "Technema Solutions menghadirkan layanan TI terdepan yang dirancang khusus untuk membantu bisnis Anda bertransformasi, berinovasi, dan unggul di era digital.",
@@ -45,6 +59,43 @@ async function main() {
     },
   });
   console.log("✅ Site settings created");
+
+  // ── About Page (Singleton) ──
+  await prisma.aboutPage.upsert({
+    where: { id: "default" },
+    update: {},
+    create: {
+      id: "default",
+      heroBadge: "Tentang Kami",
+      heroHeading: "",
+      heroDescription:
+        "Technema Solutions (PT. Cipta Inovasi Teknologi Unggul) adalah perusahaan teknologi informasi asal Kabupaten Berau, Kalimantan Timur, yang membangun aplikasi web & mobile, mengintegrasikan AI, dan mendampingi transformasi digital bisnis serta instansi di Indonesia.",
+      heroServiceNote: "Melayani seluruh Indonesia",
+      storyLabel: "Cerita Kami",
+      storyHeading:
+        "Mitra teknologi untuk bisnis & instansi yang siap bertumbuh",
+      storyBody:
+        "Technema Solutions menghadirkan solusi TI inovatif untuk bisnis modern — dari aplikasi web & mobile hingga integrasi AI dan ERP.\n\nKami percaya teknologi yang tepat bukan soal fitur terbanyak, melainkan solusi yang benar-benar menyelesaikan masalah nyata — dari digitalisasi arsip, sistem kasir, integrasi data, hingga asisten berbasis AI. Setiap solusi kami rancang agar mudah digunakan, andal, dan tumbuh bersama kebutuhan Anda.",
+      visionLabel: "Visi Kami",
+      visionHeading: "",
+      visionBody:
+        "Menjadi mitra transformasi digital terpercaya yang membawa teknologi kelas perusahaan ke jangkauan bisnis dan instansi di seluruh Indonesia — termasuk daerah yang selama ini kurang terlayani.",
+      expertiseLabel: "Bidang Keahlian",
+      expertiseHeading: "Apa saja yang kami kerjakan",
+      productsLabel: "Produk Kami",
+      productsHeading: "Solusi siap pakai buatan Technema",
+      industriesLabel: "Industri yang Kami Layani",
+      industriesHeading: "Pengalaman lintas sektor",
+      locationHeading: "Berbasis di Kabupaten Berau, melayani Indonesia",
+      locationBody:
+        "Berkantor di Kabupaten Berau, Kalimantan Timur, kami bekerja dengan klien di berbagai kota secara remote maupun on-site — menghadirkan teknologi yang biasanya hanya tersedia di kota besar ke mana pun bisnis Anda berada.",
+      locationCtaLabel: "Hubungi Kami",
+      locationCtaHref: "/kontak",
+      metaTitle: "Tentang Kami",
+      metaDescription: "",
+    },
+  });
+  console.log("✅ About page seeded");
 
   // ── Services ──
   const servicesData = [
@@ -427,6 +478,7 @@ async function main() {
   });
   const col1Links = [
     { label: "Beranda", href: "/" },
+    { label: "Tentang Kami", href: "/tentang-kami" },
     { label: "Produk", href: "#products" },
     { label: "Artikel", href: "/artikel" },
     { label: "Hubungi Kami", href: "/kontak" },

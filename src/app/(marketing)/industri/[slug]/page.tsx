@@ -3,6 +3,12 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { getIndustryPageBySlug, getAllIndustryPageSlugs } from "@/lib/data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import {
+  JsonLdGraph,
+  buildServiceNode,
+  buildBreadcrumbNode,
+  buildFaqNode,
+} from "@/components/seo/JsonLd";
 
 import IndustryHero from "@/components/sections/industry/IndustryHero";
 
@@ -93,8 +99,31 @@ export default async function IndustryDetailPage({ params }: PageProps) {
     description: p.description,
   }));
 
+  const industryUrl = `${SITE_URL}/industri/${industry.slug}`;
+  const industrySchemaNodes = [
+    buildServiceNode({
+      name: `Solusi Digital ${industry.name}`,
+      description: industry.metaDescription || industry.heroDescription,
+      url: industryUrl,
+      serviceType: industry.name,
+    }),
+    buildBreadcrumbNode([
+      { name: "Beranda", url: SITE_URL },
+      { name: "Industri" },
+      { name: industry.name, url: industryUrl },
+    ]),
+  ];
+  if (industry.faqs.length > 0) {
+    industrySchemaNodes.push(
+      buildFaqNode(
+        industry.faqs.map((f) => ({ question: f.question, answer: f.answer }))
+      )
+    );
+  }
+
   return (
     <>
+      <JsonLdGraph nodes={industrySchemaNodes} />
       <IndustryHero
         name={industry.name}
         icon={industry.icon}

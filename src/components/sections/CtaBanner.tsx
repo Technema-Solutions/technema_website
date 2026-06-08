@@ -3,11 +3,17 @@ import { Icons } from "@/components/ui/Icons";
 
 interface CtaBannerProps {
   contactPhone?: string;
+  /** Background of the frame around the rounded card — should match the
+   *  background of the section directly above it. Defaults to white. */
+  bgClassName?: string;
 }
 
-export default function CtaBanner({ contactPhone = "" }: CtaBannerProps) {
+export default function CtaBanner({
+  contactPhone = "",
+  bgClassName = "bg-white",
+}: CtaBannerProps) {
   return (
-    <section className="overflow-hidden px-4 sm:px-8 lg:px-[50px]">
+    <section className={`overflow-hidden px-4 sm:px-8 lg:px-[50px] ${bgClassName}`}>
       <div
         className="bg-brand py-8"
         style={{ borderRadius: "40px 40px 0 0" }}

@@ -3,7 +3,12 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { getProductBySlug, getAllProductSlugs, getProducts } from "@/lib/data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
-import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import {
+  JsonLdGraph,
+  buildProductNode,
+  buildBreadcrumbNode,
+  buildFaqNode,
+} from "@/components/seo/JsonLd";
 
 import ProductHero from "@/components/sections/product/ProductHero";
 
@@ -159,22 +164,42 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   const productUrl = `${SITE_URL}/produk/${product.slug}`;
   const productImage = product.ogImage ?? product.heroImage ?? product.logo ?? undefined;
+  const toAbs = (img?: string | null) =>
+    img ? (img.startsWith("http") ? img : `${SITE_URL}${img}`) : undefined;
+  const productImageAbs = toAbs(productImage);
+  const screenshotAbs = toAbs(product.heroImage) ?? productImageAbs;
+
+  const schemaNodes = [
+    buildProductNode({
+      name: product.name,
+      description: product.description,
+      image: productImageAbs,
+      url: productUrl,
+      features: product.features as string[],
+      screenshot: screenshotAbs,
+      offers: product.pricingPlans.map((p) => ({
+        name: p.name,
+        price: p.price,
+        currency: p.currency,
+      })),
+    }),
+    buildBreadcrumbNode([
+      { name: "Beranda", url: SITE_URL },
+      { name: "Produk", url: `${SITE_URL}/#products` },
+      { name: product.name, url: productUrl },
+    ]),
+  ];
+  if (product.faqs.length > 0) {
+    schemaNodes.push(
+      buildFaqNode(
+        product.faqs.map((f) => ({ question: f.question, answer: f.answer }))
+      )
+    );
+  }
 
   return (
     <>
-      <ProductJsonLd
-        name={product.name}
-        description={product.description}
-        image={productImage ? (productImage.startsWith("http") ? productImage : `${SITE_URL}${productImage}`) : undefined}
-        url={productUrl}
-      />
-      <BreadcrumbJsonLd
-        items={[
-          { name: "Beranda", url: SITE_URL },
-          { name: "Produk", url: `${SITE_URL}/#products` },
-          { name: product.name, url: productUrl },
-        ]}
-      />
+      <JsonLdGraph nodes={schemaNodes} />
 
       {/* 1. Hero (breadcrumb included inside) */}
       <ProductHero

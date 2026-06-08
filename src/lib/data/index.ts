@@ -13,6 +13,15 @@ export const getSiteSettings = unstable_cache(
   { tags: ["site-settings"] }
 );
 
+// ── About Page (Singleton) ──
+export const getAboutPage = unstable_cache(
+  async () => {
+    return prisma.aboutPage.findFirst({ where: { id: "default" } });
+  },
+  ["about-page"],
+  { tags: ["about-page"] }
+);
+
 // ── Products ──
 export const getProducts = unstable_cache(
   async () => {
@@ -50,7 +59,7 @@ export const getAllProductSlugs = unstable_cache(
   async () => {
     return prisma.product.findMany({
       where: { isPublished: true },
-      select: { slug: true },
+      select: { slug: true, updatedAt: true },
     });
   },
   ["product-slugs"],
@@ -95,7 +104,7 @@ export const getAllBlogSlugs = unstable_cache(
   async () => {
     return prisma.blogPost.findMany({
       where: { isPublished: true },
-      select: { slug: true },
+      select: { slug: true, updatedAt: true },
     });
   },
   ["blog-slugs"],
@@ -296,7 +305,7 @@ export const getAllIndustryPageSlugs = unstable_cache(
   async () => {
     return prisma.industryPage.findMany({
       where: { isPublished: true },
-      select: { slug: true },
+      select: { slug: true, updatedAt: true },
     });
   },
   ["industry-page-slugs"],
@@ -335,5 +344,19 @@ export const getLegalPageBySlug = unstable_cache(
     }
   },
   ["legal-page-by-slug"],
+  { tags: ["legal-pages"] }
+);
+
+export const getAllLegalSlugs = unstable_cache(
+  async () => {
+    try {
+      return await prisma.legalPage.findMany({
+        select: { slug: true, updatedAt: true },
+      });
+    } catch {
+      return [];
+    }
+  },
+  ["legal-slugs"],
   { tags: ["legal-pages"] }
 );

@@ -26,6 +26,7 @@ import {
   Layers,
   LineChart,
   Scale,
+  Info,
 } from "lucide-react";
 
 const sidebarSections = [
@@ -48,6 +49,7 @@ const sidebarSections = [
   {
     title: "HALAMAN UTAMA",
     items: [
+      { label: "Tentang Kami", href: "/admin/tentang-kami", icon: Info },
       { label: "Layanan", href: "/admin/layanan", icon: Wrench },
       { label: "Testimoni", href: "/admin/testimoni", icon: MessageSquareQuote },
       { label: "Klien", href: "/admin/klien", icon: Users },
