@@ -50,4 +50,6 @@ next-env.d.ts
 .claude
 CLAUDE.md
 
-docs
+# Ignore docs/ (local drafts) but keep deployment docs tracked
+docs/*
+!docs/DEPLOYMENT.md
